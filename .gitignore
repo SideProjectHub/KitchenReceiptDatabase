@@ -1,3 +1,4 @@
 .env 
 .env.password
 .env.username
+backend/node_modules

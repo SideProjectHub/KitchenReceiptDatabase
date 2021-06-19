@@ -1,18 +1,24 @@
 {
   "name": "KitchenReceiptDatabase",
   "version": "1.0.0",
-  "description": "",
+  "description": "Holds the backend server handler for our app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SideProjectHub/KitchenReceiptDatabase.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "The SideProject Hub",
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "mongoose": "^5.12.14", 
+    "dotenv": "^10.0.0"
+  },
   "bugs": {
     "url": "https://github.com/SideProjectHub/KitchenReceiptDatabase/issues"
   },
