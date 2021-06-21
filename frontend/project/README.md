@@ -1,4 +1,4 @@
-# project
+# KitchenDatabase Frontend 
 
 A new Flutter project.
 
@@ -14,3 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## File System: 
+The file system we're using is adapted from *Chinmay Mourya* [blog](https://medium.com/flutter-community/flutter-scalable-folder-files-structure-8f860faafebd) which offers a scalable design for flutter apps. 
+##### Notes: 
+- If assests are needed, they are required to be placed in pubsec.yaml folder. 
+
