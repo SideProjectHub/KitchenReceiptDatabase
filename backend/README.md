@@ -16,3 +16,11 @@ In order to start the server run the following commands:
 The NodeJS server depends on the *.env* file listed in root folder to take in database connection address and any other private forms of data. 
 
 The *routes* folder also allows routes to be created in a modular fashion, and uses ExpressJS's Router library in order to connect them to *app.js*
+
+The *schema* folder adds schema validation on certain collections. This is done through mongoose. 
+
+### Docuementation: 
+
+- NodeJS: https://nodejs.dev/learn/introduction-to-nodejs
+- MongooseJS: https://mongoosejs.com/docs/guide.html
+- Javascript driver for mongodb: https://docs.mongodb.com/drivers/node/current/
