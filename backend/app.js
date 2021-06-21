@@ -15,6 +15,8 @@ const bodyParser = require('body-parser');
 
 //Example of running middleware on routes
 app.use('/', exampleRoute);
+
+//Middleware that parses req.body and turns it into json form
 app.use(bodyParser.json());
 
 //Connect to DB 
