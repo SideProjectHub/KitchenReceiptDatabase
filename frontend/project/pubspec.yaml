@@ -26,7 +26,6 @@ dependencies:
 
   # For radial mennu 
   vector_math: ^2.0.8
-  font_awesome_flutter: 8.4.0
 
 
   # The following adds the Cupertino Icons font to your application.

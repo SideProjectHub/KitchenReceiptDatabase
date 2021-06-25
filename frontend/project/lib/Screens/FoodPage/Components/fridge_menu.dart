@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FridgeMenu extends StatefulWidget {
   createState() => _FridgeMenuState();

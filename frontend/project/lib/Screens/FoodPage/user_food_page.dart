@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'Components/fridge_menu.dart';
+import 'Components/food_list.dart';
 
 class UserFoodPage extends StatefulWidget {
   const UserFoodPage({Key? key}) : super(key: key);
@@ -17,7 +20,14 @@ class _UserFoodPageState extends State<UserFoodPage> {
         title: Text("Hello World"),
       ),
       body: Center(
-        child: FridgeMenu(),
+        child: FoodList(
+          foods: <Food>[
+            Food(name: 'Eggs'),
+            Food(name: 'Flour'),
+            Food(name: 'Chocolate chips')
+          ],
+        ),
+        // child: FridgeMenu(),
       ),
     );
   }

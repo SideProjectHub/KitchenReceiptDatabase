@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /*Food List */
 /************************************************* */
 class FoodList extends StatefulWidget {
-  const FoodList({Key? key, required this.foods}) : super(key: key);
+  FoodList({Key? key, required this.foods}) : super(key: key);
 
   //Takes in list of foods
   List<Food> foods;
@@ -14,49 +14,65 @@ class FoodList extends StatefulWidget {
 
 class _FoodListState extends State<FoodList> {
   @override
-
-  void _handleFoodList(Food food){ 
-    setState(() { 
-      widget.foods.remove(food); 
+  void _handleFoodList(Food food) {
+    setState(() {
+      widget.foods.remove(food);
     });
   }
 
   Widget build(BuildContext context) {
     return Container(
-      children: [ 
-        //title here 
-        ListView( 
-          padding: EdgeInsets.symmetric(vertical: 8.0), 
-          children: widget.foods.map((Food food)) { 
-            return FoodListItem( 
-              food: food, 
-              onFoodListChange: _handleFoodList,
-            );
-          },
-        ), 
-      ],
+      child: Column(
+        //title here
+        children: [
+          ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            children: widget.foods.map((Food food) {
+              return FoodListItem(
+                food: food,
+                onFoodListChange: _handleFoodList,
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }
 
-typedef void FoodChanged(Food food); 
+typedef void FoodChanged(Food food);
 
 /*UI for each individual Food*/
 /************************************************* */
 class FoodListItem extends StatelessWidget {
   FoodListItem({
-    required this.food, 
+    required this.food,
     required this.onFoodListChange,
   }) : super(key: ObjectKey(food));
 
-  final Food food; 
-  final FoodChanged onFoodListChange; 
+  final Food food;
+  final FoodChanged onFoodListChange;
 
   @override
   Widget build(BuildContext context) {
-    return Listview( 
-      title: Text(product.name), 
-    ); 
+    return Stack(
+      overflow: Overflow.clip,
+      children: <Widget>[
+        Dismissible(
+            key: ObjectKey(food),
+            onDismissed: (direction) {
+              onFoodListChange(food);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('${food.name} deleted')));
+            },
+            child: Container(
+                child: ListTile(title: Text(food.name)),
+                decoration: new BoxDecoration(
+                    border: new Border(bottom: new BorderSide()))),
+            background: Container(color: Colors.red.withOpacity(0.5))),
+      ],
+    );
   }
 }
 
