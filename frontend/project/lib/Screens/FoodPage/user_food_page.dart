@@ -19,15 +19,19 @@ class _UserFoodPageState extends State<UserFoodPage> {
       appBar: AppBar(
         title: Text("Hello World"),
       ),
-      body: Center(
-        child: FoodList(
-          foods: <Food>[
-            Food(name: 'Eggs'),
-            Food(name: 'Flour'),
-            Food(name: 'Chocolate chips')
+      body: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            FridgeMenu(),
+            FoodList(foods: <Food>[
+              Food(name: 'Eggs'),
+              Food(name: 'Flour'),
+              Food(name: 'Chocolate chips')
+            ], category: "Fruits"),
           ],
         ),
-        // child: FridgeMenu(),
       ),
     );
   }

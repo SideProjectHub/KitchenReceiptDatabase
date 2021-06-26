@@ -19,7 +19,12 @@ class _FridgeMenuState extends State<FridgeMenu>
 
   @override
   Widget build(BuildContext context) {
-    return RadialAnimation(controller: controller);
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      width: double.infinity,
+      height: 300,
+      child: RadialAnimation(controller: controller),
+    );
   }
 }
 
@@ -33,7 +38,7 @@ class RadialAnimation extends StatelessWidget {
         ),
         translation = Tween<double>(
           begin: 0.0,
-          end: 150.0,
+          end: 125.0,
         ).animate(CurvedAnimation(
           parent: controller,
           curve: Curves.elasticOut,
@@ -70,14 +75,14 @@ class RadialAnimation extends StatelessWidget {
               scale: scale.value - 1.5,
               child: new IconButton(
                   icon: Image.asset('assets/images/opened_fridge.png'),
-                  iconSize: 100,
+                  iconSize: 75,
                   onPressed: _close),
             ),
             Transform.scale(
               scale: scale.value,
               child: new IconButton(
                   icon: Image.asset('assets/images/closed_fridge.PNG'),
-                  iconSize: 100,
+                  iconSize: 75,
                   onPressed: _open),
             ),
           ]);
@@ -99,7 +104,11 @@ class RadialAnimation extends StatelessWidget {
           shape: CircleBorder(),
         ),
         child: new IconButton(
-            icon: icon, iconSize: 50, color: Colors.white, onPressed: _close),
+          icon: icon,
+          iconSize: 30,
+          color: Colors.white,
+          onPressed: _close,
+        ),
       )),
     );
   }
@@ -109,7 +118,6 @@ class RadialAnimation extends StatelessWidget {
   }
 
   _close() {
-    print("Hello");
     controller.reverse();
   }
 }

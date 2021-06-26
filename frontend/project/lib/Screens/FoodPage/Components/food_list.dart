@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 /*Food List */
 /************************************************* */
 class FoodList extends StatefulWidget {
-  FoodList({Key? key, required this.foods}) : super(key: key);
+  FoodList({Key? key, required this.foods, required this.category})
+      : super(key: key);
 
   //Takes in list of foods
   List<Food> foods;
+  String category;
 
   @override
   _FoodListState createState() => _FoodListState();
@@ -22,9 +24,19 @@ class _FoodListState extends State<FoodList> {
 
   Widget build(BuildContext context) {
     return Container(
+      width: 600,
       child: Column(
         //title here
-        children: [
+        children: <Widget>[
+          Row(children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, left: 20),
+              child: Text(
+                '${widget.category}',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+              ),
+            )
+          ]),
           ListView(
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(vertical: 8.0),
