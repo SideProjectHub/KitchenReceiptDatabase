@@ -28,15 +28,25 @@ class _FoodListState extends State<FoodList> {
       child: Column(
         //title here
         children: <Widget>[
-          Row(children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 20),
-              child: Text(
-                '${widget.category}',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-              ),
-            )
-          ]),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(4), topRight: Radius.circular(4)),
+              shape: BoxShape.rectangle,
+              color: Colors.red,
+            ),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, left: 20),
+                  child: Text(
+                    '${widget.category}',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                  ),
+                ),
+              ],
+            ),
+          ),
           ListView(
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(vertical: 8.0),
