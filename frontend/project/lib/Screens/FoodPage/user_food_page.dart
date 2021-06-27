@@ -20,20 +20,30 @@ class _UserFoodPageState extends State<UserFoodPage> {
       appBar: AppBar(
         title: Text("Hello World"),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            FridgeMenu(),
-            FoodToolbar(),
-            FoodList(foods: <Food>[
-              Food(name: 'Eggs'),
-              Food(name: 'Flour'),
-              Food(name: 'Chocolate chips')
-            ], category: "Fruits"),
-          ],
-        ),
+      body: Stack(
+        children: [
+          FridgeMenu(),
+          DraggableScrollableSheet(
+            maxChildSize: 1.0,
+            initialChildSize: 0.4,
+            minChildSize: 0.4,
+            expand: true,
+            builder: (context, scrollController) => Container(
+              color: Colors.white70,
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  FoodToolbar(),
+                  FoodList(foods: <Food>[
+                    Food(name: 'Eggs'),
+                    Food(name: 'Flour'),
+                    Food(name: 'Chocolate chips')
+                  ], category: "Fruits"),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
