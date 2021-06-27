@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 /*Food List */
 /************************************************* */
@@ -24,7 +25,7 @@ class _FoodListState extends State<FoodList> {
 
   Widget build(BuildContext context) {
     return Container(
-      width: 600,
+      margin: const EdgeInsets.all(10.0),
       child: Column(
         //title here
         children: <Widget>[

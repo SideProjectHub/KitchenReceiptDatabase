@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'Components/fridge_menu.dart';
 import 'Components/food_list.dart';
+import 'Components/food_toolbar.dart';
 
 class UserFoodPage extends StatefulWidget {
   const UserFoodPage({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             FridgeMenu(),
+            FoodToolbar(),
             FoodList(foods: <Food>[
               Food(name: 'Eggs'),
               Food(name: 'Flour'),
