@@ -4,12 +4,17 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 /*Food List */
 /************************************************* */
 class FoodList extends StatefulWidget {
-  FoodList({Key? key, required this.foods, required this.category})
-      : super(key: key);
+  FoodList({
+    Key? key,
+    required this.foods,
+    required this.category,
+    required this.color,
+  }) : super(key: key);
 
   //Takes in list of foods
   List<Food> foods;
   String category;
+  Color color;
 
   @override
   _FoodListState createState() => _FoodListState();
@@ -34,7 +39,7 @@ class _FoodListState extends State<FoodList> {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(4), topRight: Radius.circular(4)),
               shape: BoxShape.rectangle,
-              color: Colors.red,
+              color: widget.color,
             ),
             child: Row(
               children: <Widget>[

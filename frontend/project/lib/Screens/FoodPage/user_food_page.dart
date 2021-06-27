@@ -8,6 +8,19 @@ import 'Components/food_toolbar.dart';
 class UserFoodPage extends StatefulWidget {
   const UserFoodPage({Key? key}) : super(key: key);
 
+  final List<Food> fruits = const <Food>[
+    const Food(name: 'Apples'),
+    const Food(name: 'Oranges'),
+    const Food(name: 'Bananas')
+  ];
+
+  final List<Food> veggies = const <Food>[
+    const Food(name: 'Lettece'),
+    const Food(name: 'Zucchini'),
+    const Food(name: 'Salad'),
+    const Food(name: 'something else')
+  ];
+
   @override
   _UserFoodPageState createState() => _UserFoodPageState();
 }
@@ -18,7 +31,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello World"),
+        title: Text("My Fridge"),
       ),
       body: Stack(
         children: [
@@ -34,11 +47,18 @@ class _UserFoodPageState extends State<UserFoodPage> {
                 controller: scrollController,
                 children: [
                   FoodToolbar(),
-                  FoodList(foods: <Food>[
-                    Food(name: 'Eggs'),
-                    Food(name: 'Flour'),
-                    Food(name: 'Chocolate chips')
-                  ], category: "Fruits"),
+                  FoodList(
+                      foods: widget.fruits,
+                      category: "Fruits",
+                      color: Colors.red),
+                  FoodList(
+                      foods: widget.veggies,
+                      category: "Veggies",
+                      color: Colors.green),
+                  FoodList(
+                      foods: widget.fruits,
+                      category: "Grains",
+                      color: Colors.yellow),
                 ],
               ),
             ),
