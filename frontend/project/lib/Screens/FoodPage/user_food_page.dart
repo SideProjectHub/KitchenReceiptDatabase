@@ -1,6 +1,8 @@
-import 'dart:html';
+import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'Components/fridge_menu.dart';
 import 'Components/food_list.dart';
 import 'Components/food_toolbar.dart';
@@ -26,6 +28,31 @@ class UserFoodPage extends StatefulWidget {
 }
 
 class _UserFoodPageState extends State<UserFoodPage> {
+  final _picker = ImagePicker(); //Intialize ImagePicker API
+
+  Future<void> getReceiptPic() async {
+    final PickedFile?  pickedFile=
+        await _picker.getIpickedFilemage(source: ImageSource.camera);
+
+    if (pickedFile.isEmpty) {
+      return;
+    }
+    if (pickedFile.file != null) {
+      setState(() => _handleImage(pickedFile));
+    } else {
+      _handleError(pickedFile.exception)
+    }
+  }
+
+  //@TODO
+  void _handleImage(PickedFile? file) {
+    return;
+  }
+
+  void _handleError(String? error){ 
+    print(error); 
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
