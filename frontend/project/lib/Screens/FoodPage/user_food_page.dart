@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'Components/fridge_menu.dart';
 import 'Components/food_list.dart';
 import 'Components/food_toolbar.dart';
+import 'Components/food_methods.dart';
 
 class UserFoodPage extends StatefulWidget {
   const UserFoodPage({Key? key}) : super(key: key);
@@ -28,31 +28,6 @@ class UserFoodPage extends StatefulWidget {
 }
 
 class _UserFoodPageState extends State<UserFoodPage> {
-  final _picker = ImagePicker(); //Intialize ImagePicker API
-
-  Future<void> getReceiptPic() async {
-    final PickedFile?  pickedFile=
-        await _picker.getIpickedFilemage(source: ImageSource.camera);
-
-    if (pickedFile.isEmpty) {
-      return;
-    }
-    if (pickedFile.file != null) {
-      setState(() => _handleImage(pickedFile));
-    } else {
-      _handleError(pickedFile.exception)
-    }
-  }
-
-  //@TODO
-  void _handleImage(PickedFile? file) {
-    return;
-  }
-
-  void _handleError(String? error){ 
-    print(error); 
-  }
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -70,23 +45,29 @@ class _UserFoodPageState extends State<UserFoodPage> {
             expand: true,
             builder: (context, scrollController) => Container(
               color: Colors.white70,
-              child: ListView(
-                controller: scrollController,
-                children: [
-                  FoodToolbar(),
-                  FoodList(
-                      foods: widget.fruits,
-                      category: "Fruits",
-                      color: Colors.red),
-                  FoodList(
-                      foods: widget.veggies,
-                      category: "Veggies",
-                      color: Colors.green),
-                  FoodList(
-                      foods: widget.fruits,
-                      category: "Grains",
-                      color: Colors.yellow),
-                ],
+              child: FoodMethods(
+                child: Builder(
+                  builder: (BuildContext innerContext) {
+                    return ListView(
+                      controller: scrollController,
+                      children: [
+                        FoodToolbar(),
+                        FoodList(
+                            foods: widget.fruits,
+                            category: "Fruits",
+                            color: Colors.red),
+                        FoodList(
+                            foods: widget.veggies,
+                            category: "Veggies",
+                            color: Colors.green),
+                        FoodList(
+                            foods: widget.fruits,
+                            category: "Grains",
+                            color: Colors.yellow),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
