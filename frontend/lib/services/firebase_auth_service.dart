@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart'; 
-//our_user is an overriden class, User is defined by Firestore Auth, holds 
-//our oauth info 
-import '../app/models/user.dart' as our_user; 
+import 'package:google_sign_in/google_sign_in.dart';
+//our_user is an overriden class, User is defined by Firestore Auth, holds
+//our oauth info
+import '../app/models/user.dart' as our_user;
 import 'package:mongo_dart/mongo_dart.dart';
+import './strings.dart'; 
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth;
@@ -42,12 +43,18 @@ class FirebaseAuthService {
   }
 
   /// sends the user information to the backend
-  /// our_user.User : our overriden class specified 
-  /// @TODO: add proper implementation and documentation 
+  /// our_user.User : our overriden class specified
+  /// @TODO: add proper implementation and documentation
   void sendUserInfo(our_user.User user, String id) async {
-    var db = Db("blahblahblah"); //temp user
+    var db = Db(uri_string); //temp user
     await db.open();
-    var userCol = db.collection('user'); 
-   await userCol.insert({'Name': user.displayName, '_id': null, 'Fridge': null, 'id_token' : id }); 
+    var userCol = db.collection('user');
+    await userCol.insert({
+      'Name': user.displayName,
+      '_id': null,
+      'Fridge': null,
+      'id_token': id
+    });
   }
+
 }

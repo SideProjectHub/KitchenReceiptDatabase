@@ -1,42 +1,40 @@
-import 'package:avatar_glow/avatar_glow.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:reflectly_flutter_app/delayed_animation.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import './services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
-import '../app/models/user.dart' as our_user;
-import '../widgets/widgets.dart';
-import '../widgets/sign_in_google_button.dart';
-import '../widgets/glow_logo.dart';
-import '../screens/login_page.dart';
+import './app/models/user.dart' as our_user;
+import './widgets/widgets.dart';
+import './screens/login_page.dart';
+import '../services/kitchen_provider.dart';
 
+void main() { 
+  /// initializes all providers necessary 
+  KitchenProvider(MyApp()); 
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays([]);
-  runApp(
-    MultiProvider(
-      providers: [
-        Provider(
-          create: (_) => FirebaseAuthService(),
-        ),
-        StreamProvider(
-          create: (context) =>
-              context.read<FirebaseAuthService>().onAuthStateChanged,
-          initialData: null,
-        ),
-      ],
-      child: MyApp(),
-    ),
-  );
+//   WidgetsFlutterBinding.ensureInitialized();
+//   SystemChrome.setEnabledSystemUIOverlays([]);
+//   runApp(
+//     MultiProvider(
+//       providers: [
+//         Provider(
+//           create: (_) => FirebaseAuthService(),
+//         ),
+//         StreamProvider(
+//           create: (context) =>
+//               context.read<FirebaseAuthService>().onAuthStateChanged,
+//           initialData: null,
+//         ),
+//       ],
+//       child: MyApp(),
+//     ),
+//   );
 }
 
 class MyApp extends StatefulWidget {
   @override
-  login_page createState() => login_page();
+  LoginPage createState() => LoginPage();
 }
 
 // class _loginbody extends State<MyApp> with SingleTickerProviderStateMixin {

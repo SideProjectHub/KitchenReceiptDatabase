@@ -7,7 +7,7 @@ import 'package:reflectly_flutter_app/widgets/sign_in_google_button.dart';
 import '../delayed_animation.dart';
 import '../main.dart';
 
-class login_page extends State<MyApp> with SingleTickerProviderStateMixin {
+class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
   final int delayedAmount = 500;
   double _scale = 0.0;
   AnimationController _controller;
