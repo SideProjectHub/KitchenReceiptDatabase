@@ -42,17 +42,31 @@ class ProfilePage extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _mainBar("Fridges", 0),
-                _mainBar("Foods", 0),
-                _mainBar("Eaten", 0)
-              ],
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  _mainBar("Fridges", 0),
+                  _dividers(),
+                  _mainBar("Foods", 0),
+                  _dividers(),
+                  _mainBar("Eaten", 0),
+                ],
+              ),
             ),
           )
         ],
       ),
+    );
+  }
+
+  Widget _dividers() {
+    return const VerticalDivider(
+      thickness: 2,
+      color: Colors.grey,
+      width: 20,
+      indent: 5,
+      endIndent: 5,
     );
   }
 
