@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.reflectly_flutter_app">
+
+    package="com.example.project">
    <application
-        android:label="reflectly_flutter_app"
+        android:label="project"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
