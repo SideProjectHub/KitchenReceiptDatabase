@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  http: 0.13.3
 
   # For radial mennu 
   vector_math: ^2.0.8
