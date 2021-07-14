@@ -1,3 +1,4 @@
+
 # KitchenDatabase Frontend 
 
 A new Flutter project.
@@ -19,4 +20,3 @@ samples, guidance on mobile development, and a full API reference.
 The file system we're using is adapted from *Chinmay Mourya* [blog](https://medium.com/flutter-community/flutter-scalable-folder-files-structure-8f860faafebd) which offers a scalable design for flutter apps. 
 ##### Notes: 
 - If assests are needed, they are required to be placed in pubsec.yaml folder. 
-
