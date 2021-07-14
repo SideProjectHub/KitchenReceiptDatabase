@@ -36,7 +36,7 @@ class CustomAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 leading,
-                FlatButton(
+                TextButton(
                   onPressed: null,
                   child: Text(
                     title,
@@ -53,7 +53,7 @@ class CustomAppBar extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: childHeight / 2,
+          bottom: 0,
           left: 0,
           right: 0,
           child: Align(
@@ -77,7 +77,7 @@ class _AppBarClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    double height = isBig ? size.height - childHeight : size.height;
+    double height = isBig ? size.height - (childHeight / 4) : size.height;
 
     Path path = Path();
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/widgets/profile_pic.dart';
+import 'package:project/screens/ProfilePage/user_profile_screen.dart';
 import 'Screens/FoodPage/user_food_page.dart';
-import 'widgets/custom_app_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,9 +17,6 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.white,
         primaryColor: Colors.black,
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
 
         // Define the default TextTheme. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
@@ -29,24 +25,7 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
         ),
       ),
-      home: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Builder(builder: (BuildContext context) {
-              return CustomAppBar(
-                leading: const Text(""),
-                trailing: const Text(""),
-                title: "Profile",
-                childHeight: 100,
-                height: 225,
-                isBig: true,
-                child: ProfilePic(diameter: 100),
-              );
-            }),
-            const Text("Hello World"),
-          ],
-        ),
-      ),
+      home: ProfilePage(),
     );
     // return MaterialApp(title: 'FoodPage', home: UserFoodPage());
   }
