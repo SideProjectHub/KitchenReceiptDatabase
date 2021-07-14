@@ -14,7 +14,7 @@ class _TabPageState extends State<TabPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexStack(
+      body: IndexedStack(
         index: _currentIndex,
         children: [
           for (final tabItem in TabNavigationItem.items) tabItem.page,
@@ -25,7 +25,7 @@ class _TabPageState extends State<TabPage> {
           onTap: (int index) => setState(() => _currentIndex = index),
           items: [
             for (final tabItem in TabNavigationItem.items)
-              BottomNavigationBarItem(icon: tabItem.icon, title: tabItem.title)
+              BottomNavigationBarItem(icon: tabItem.icon, label: tabItem.title)
           ]),
     );
   }

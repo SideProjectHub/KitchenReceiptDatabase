@@ -1,6 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:project/screens/HomePage/home_page.dart';
+import 'package:project/screens/ProfilePage/user_profile_screen.dart';
+
 class TabNavigationItem {
   final Widget page;
-  final Widget title;
+  final String title;
   final Icon icon;
 
   TabNavigationItem({
@@ -10,12 +14,15 @@ class TabNavigationItem {
   });
 
   static List<TabNavigationItem> get items => [
-        /* Example tab navigation 
         TabNavigationItem(
           page: HomePage(),
           icon: Icon(Icons.home),
-          title: Text("Home"),
+          title: "Home",
         ),
-        */
+        TabNavigationItem(
+          page: ProfilePage(),
+          title: "Profile",
+          icon: Icon(Icons.person),
+        )
       ];
 }

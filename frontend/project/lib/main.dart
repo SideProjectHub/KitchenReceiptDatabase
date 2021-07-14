@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/screens/ProfilePage/user_profile_screen.dart';
+import 'package:project/screens/tab_page.dart';
 import 'Screens/FoodPage/user_food_page.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
         ),
       ),
-      home: ProfilePage(),
+      home: TabPage(),
     );
     // return MaterialApp(title: 'FoodPage', home: UserFoodPage());
   }

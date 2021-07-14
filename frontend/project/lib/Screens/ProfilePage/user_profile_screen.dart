@@ -5,6 +5,10 @@ import '../../widgets/custom_app_bar.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
+  static Route<dynamic> route() => MaterialPageRoute(
+        builder: (context) => ProfilePage(),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
