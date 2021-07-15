@@ -35,9 +35,41 @@ class HomePage extends StatelessWidget {
               );
             }),
           ),
+          Row(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 10),
+                child: Text(
+                  "Fridges",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Divider(
+                  color: Colors.grey,
+                  thickness: 5,
+                ),
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  child: FloatingActionButton(
+                      onPressed: _AddFridge,
+                      backgroundColor: Colors.grey,
+                      child: const Icon(Icons.add),
+                      mini: true)),
+            ],
+          ),
           FridgeDashBoard(cards: cards),
         ],
       ),
     );
+  }
+
+  void _AddFridge() {
+    return;
   }
 }
