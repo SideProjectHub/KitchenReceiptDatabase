@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  margin: EdgeInsets.only(left: 10, right: 10),
                   child: FloatingActionButton(
                       onPressed: _AddFridge,
                       backgroundColor: Colors.grey,

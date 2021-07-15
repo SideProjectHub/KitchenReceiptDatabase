@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/screens/FoodPage/Components/food_list.dart';
+import 'package:project/screens/FoodPage/user_food_page.dart';
 
 class FridgeCard extends StatelessWidget {
   final String title;
@@ -21,7 +22,10 @@ class FridgeCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.black.withAlpha(30),
         onTap: () {
-          print("Card tapped.");
+          Navigator.of(context)
+              .push(MaterialPageRoute<void>(builder: (BuildContext context) {
+            return UserFoodPage();
+          }));
         },
         child: SizedBox(
           height: 100,
