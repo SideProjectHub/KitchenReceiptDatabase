@@ -4,19 +4,23 @@ import 'package:google_sign_in/google_sign_in.dart';
 //our oauth info
 import '../app/models/user.dart' as our_user;
 import 'package:mongo_dart/mongo_dart.dart';
-import './strings.dart'; 
+import './strings.dart';
 
 class FirebaseAuthService {
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
+  late final FirebaseAuth _firebaseAuth;
+  late final GoogleSignIn _googleSignIn;
 
-  FirebaseAuthService({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
+  FirebaseAuthService({FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignin})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignin ?? GoogleSignIn();
 
-  our_user.User _userFromFirebase(User user) {
+  our_user.User _userFromFirebase(User? user) {
     if (user == null) {
-      return null;
+      return our_user.User(
+        uid: null,
+        email: null,
+        displayName: null,
+      );
     }
     return our_user.User(
       uid: user.uid,
@@ -29,8 +33,11 @@ class FirebaseAuthService {
     return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
-  Future<our_user.User> signInWithGoogle() async {
+  Future<our_user.User?> signInWithGoogle() async {
     final googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) {
+      return null;
+    }
     final googleAuth = await googleUser.authentication;
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -45,7 +52,7 @@ class FirebaseAuthService {
   /// sends the user information to the backend
   /// our_user.User : our overriden class specified
   /// @TODO: add proper implementation and documentation
-  void sendUserInfo(our_user.User user, String id) async {
+  void sendUserInfo(our_user.User user, String? id) async {
     var db = Db(uri_string); //temp user
     await db.open();
     var userCol = db.collection('user');
@@ -56,5 +63,4 @@ class FirebaseAuthService {
       'id_token': id
     });
   }
-
 }

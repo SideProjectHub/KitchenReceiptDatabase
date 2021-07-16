@@ -35,7 +35,10 @@ class CustomAppBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                leading,
+                SizedBox(
+                  child: leading,
+                  width: 40,
+                ),
                 TextButton(
                   onPressed: null,
                   child: Text(

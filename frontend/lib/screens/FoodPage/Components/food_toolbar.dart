@@ -17,7 +17,7 @@ class FoodToolbar extends StatelessWidget {
           _buildButtonColumn(color, Icons.camera_alt, 'ADD RECEIPT',
               FoodMethods.of(context).getReceiptPic),
           _buildButtonColumn(color, Icons.food_bank, 'ADD FOOD',
-              FoodMethods.of(context).getReceiptPic),
+              () => FoodMethods.of(context).inputModal(context)),
         ],
       ),
       decoration: BoxDecoration(

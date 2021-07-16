@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:reflectly_flutter_app/widgets/glow_logo.dart';
-import 'package:reflectly_flutter_app/widgets/sign_in_google_button.dart';
+import 'package:project/widgets/glow_logo.dart';
+import 'package:project/widgets/sign_in_google_button.dart';
 
 import '../delayed_animation.dart';
 import '../main.dart';
@@ -10,9 +9,9 @@ import '../main.dart';
 class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
   final int delayedAmount = 500;
   double _scale = 0.0;
-  AnimationController _controller;
+  late AnimationController _controller;
 
- // _loginbody() : super();  
+  // _loginbody() : super();
 
   @override
   void initState() {
