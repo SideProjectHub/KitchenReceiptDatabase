@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 //our oauth info
 import '../app/models/user.dart' as our_user;
 import 'package:mongo_dart/mongo_dart.dart';
-import './strings.dart'; 
+import './strings.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth;
@@ -56,5 +56,4 @@ class FirebaseAuthService {
       'id_token': id
     });
   }
-
 }
