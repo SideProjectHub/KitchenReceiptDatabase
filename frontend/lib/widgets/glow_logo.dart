@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 
 class GlowLogo extends StatelessWidget {
   const GlowLogo({
-    Key key,
-  }) : super(key: key);  
+    Key? key,
+  }) : super(key: key);
 
-
-  
   @override
   Widget build(BuildContext context) {
     return AvatarGlow(
