@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/screens/HomePage/components/fridge_card.dart';
 import 'package:project/screens/HomePage/components/fridge_dashboard.dart';
 import 'package:project/widgets/custom_app_bar.dart';
+import 'package:project/widgets/kitchen_drawer.dart';
 import 'package:project/widgets/profile_pic.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,52 +21,58 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Container(
-            child: Builder(builder: (BuildContext context) {
-              return CustomAppBar(
-                leading: const Text(""),
-                trailing: const Text(""),
-                title: "Home",
-                childHeight: 0,
-                height: 115,
-                isBig: false,
-                child: ProfilePic(diameter: 100),
-              );
-            }),
-          ),
-          Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 10),
-                child: Text(
-                  "Fridges",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Builder(builder: (context) {
+                return CustomAppBar(
+                  leading: const Text(""),
+                  trailing: IconButton(
+                    onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    icon: const Icon(Icons.menu),
+                  ),
+                  title: "Home",
+                  childHeight: 0,
+                  height: 115,
+                  isBig: false,
+                  child: ProfilePic(diameter: 100),
+                );
+              }),
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 10),
+                  child: Text(
+                    "Fridges",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Divider(
-                  color: Colors.grey,
-                  thickness: 5,
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    thickness: 5,
+                  ),
                 ),
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  child: FloatingActionButton(
-                      onPressed: _AddFridge,
-                      backgroundColor: Colors.grey,
-                      child: const Icon(Icons.add),
-                      mini: true)),
-            ],
-          ),
-          FridgeDashBoard(cards: cards),
-        ],
+                Container(
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    child: FloatingActionButton(
+                        onPressed: _AddFridge,
+                        backgroundColor: Colors.grey,
+                        child: const Icon(Icons.add),
+                        mini: true)),
+              ],
+            ),
+            FridgeDashBoard(cards: cards),
+          ],
+        ),
       ),
+      endDrawer: KitchenDrawer(),
     );
   }
 

@@ -85,7 +85,7 @@ class FoodListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.clip,
+      clipBehavior: Clip.hardEdge,
       children: <Widget>[
         Dismissible(
             key: ObjectKey(food),
@@ -95,7 +95,11 @@ class FoodListItem extends StatelessWidget {
                   SnackBar(content: Text('${food.name} deleted')));
             },
             child: Container(
-                child: ListTile(title: Text(food.name)),
+                child: ListTile(
+                    title: Text(
+                  food.name,
+                  style: TextStyle(color: Colors.black),
+                )),
                 decoration: new BoxDecoration(
                     border: new Border(bottom: new BorderSide()))),
             background: Container(color: Colors.red.withOpacity(0.5))),
