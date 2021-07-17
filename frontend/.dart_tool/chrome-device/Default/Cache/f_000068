@@ -1,0 +1,530 @@
+define(['dart_sdk', 'packages/bson/src/types/decimal_128.dart'], (function load__packages__mongo_dart_query__mongo_dart_query_dart(dart_sdk, packages__bson__src__types__decimal_128$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _js_helper = dart_sdk._js_helper;
+  const _interceptors = dart_sdk._interceptors;
+  const convert = dart_sdk.convert;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const bson = packages__bson__src__types__decimal_128$46dart.bson;
+  var mongo_dart_query = Object.create(dart.library);
+  var $_set = dartx._set;
+  var $_get = dartx._get;
+  var $isEmpty = dartx.isEmpty;
+  var $containsKey = dartx.containsKey;
+  var $add = dartx.add;
+  var $toString = dartx.toString;
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    StringL: () => (T.StringL = dart.constFn(dart.legacy(core.String)))(),
+    IdentityMapOfStringL$dynamic: () => (T.IdentityMapOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), dart.dynamic)))(),
+    MapOfStringL$dynamic: () => (T.MapOfStringL$dynamic = dart.constFn(core.Map$(T.StringL(), dart.dynamic)))(),
+    MapLOfStringL$dynamic: () => (T.MapLOfStringL$dynamic = dart.constFn(dart.legacy(T.MapOfStringL$dynamic())))(),
+    ListL: () => (T.ListL = dart.constFn(dart.legacy(core.List)))(),
+    JSArrayOfMapLOfStringL$dynamic: () => (T.JSArrayOfMapLOfStringL$dynamic = dart.constFn(_interceptors.JSArray$(T.MapLOfStringL$dynamic())))(),
+    ListOfMapLOfStringL$dynamic: () => (T.ListOfMapLOfStringL$dynamic = dart.constFn(core.List$(T.MapLOfStringL$dynamic())))(),
+    ListLOfMapLOfStringL$dynamic: () => (T.ListLOfMapLOfStringL$dynamic = dart.constFn(dart.legacy(T.ListOfMapLOfStringL$dynamic())))(),
+    IdentityMapOfStringL$ListLOfMapLOfStringL$dynamic: () => (T.IdentityMapOfStringL$ListLOfMapLOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.ListLOfMapLOfStringL$dynamic())))(),
+    IdentityMapOfStringL$ListL: () => (T.IdentityMapOfStringL$ListL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.ListL())))(),
+    boolL: () => (T.boolL = dart.constFn(dart.legacy(core.bool)))(),
+    IdentityMapOfStringL$boolL: () => (T.IdentityMapOfStringL$boolL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.boolL())))(),
+    intL: () => (T.intL = dart.constFn(dart.legacy(core.int)))(),
+    JSArrayOfintL: () => (T.JSArrayOfintL = dart.constFn(_interceptors.JSArray$(T.intL())))(),
+    ListOfintL: () => (T.ListOfintL = dart.constFn(core.List$(T.intL())))(),
+    ListLOfintL: () => (T.ListLOfintL = dart.constFn(dart.legacy(T.ListOfintL())))(),
+    IdentityMapOfStringL$ListLOfintL: () => (T.IdentityMapOfStringL$ListLOfintL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.ListLOfintL())))(),
+    BsonRegexpL: () => (T.BsonRegexpL = dart.constFn(dart.legacy(bson.BsonRegexp)))(),
+    IdentityMapOfStringL$BsonRegexpL: () => (T.IdentityMapOfStringL$BsonRegexpL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.BsonRegexpL())))(),
+    IdentityMapOfStringL$StringL: () => (T.IdentityMapOfStringL$StringL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.StringL())))(),
+    IdentityMapOfStringL$MapLOfStringL$dynamic: () => (T.IdentityMapOfStringL$MapLOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.MapLOfStringL$dynamic())))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  var I = ["package:mongo_dart_query/mongo_dart_query.dart"];
+  var map = dart.privateName(mongo_dart_query, "SelectorBuilder.map");
+  var paramSkip = dart.privateName(mongo_dart_query, "SelectorBuilder.paramSkip");
+  var paramLimit = dart.privateName(mongo_dart_query, "SelectorBuilder.paramLimit");
+  var paramFields = dart.privateName(mongo_dart_query, "SelectorBuilder.paramFields");
+  var _isQuerySet = dart.privateName(mongo_dart_query, "_isQuerySet");
+  var _query = dart.privateName(mongo_dart_query, "_query");
+  var _addExpressionMap = dart.privateName(mongo_dart_query, "_addExpressionMap");
+  var _addExpression = dart.privateName(mongo_dart_query, "_addExpression");
+  var _ensureParamFields = dart.privateName(mongo_dart_query, "_ensureParamFields");
+  var _ensureOrderBy = dart.privateName(mongo_dart_query, "_ensureOrderBy");
+  mongo_dart_query.SelectorBuilder = class SelectorBuilder extends core.Object {
+    get map() {
+      return this[map];
+    }
+    set map(value) {
+      this[map] = value;
+    }
+    get paramSkip() {
+      return this[paramSkip];
+    }
+    set paramSkip(value) {
+      this[paramSkip] = value;
+    }
+    get paramLimit() {
+      return this[paramLimit];
+    }
+    set paramLimit(value) {
+      this[paramLimit] = value;
+    }
+    get paramFields() {
+      return this[paramFields];
+    }
+    set paramFields(value) {
+      this[paramFields] = value;
+    }
+    get [_query]() {
+      if (!dart.test(this[_isQuerySet])) {
+        this.map[$_set]("$query", new (T.IdentityMapOfStringL$dynamic()).new());
+        this[_isQuerySet] = true;
+      }
+      return T.MapLOfStringL$dynamic().as(this.map[$_get]("$query"));
+    }
+    toString() {
+      return "SelectorBuilder(" + dart.str(this.map) + ")";
+    }
+    [_addExpression](fieldName, value) {
+      let exprMap = new (T.IdentityMapOfStringL$dynamic()).new();
+      exprMap[$_set](fieldName, value);
+      if (dart.test(this[_query][$isEmpty])) {
+        this[_query][$_set](fieldName, value);
+      } else {
+        this[_addExpressionMap](exprMap);
+      }
+    }
+    [_addExpressionMap](expr) {
+      if (dart.test(this[_query][$containsKey]("$and"))) {
+        let expressions = T.ListL().as(this[_query][$_get]("$and"));
+        expressions[$add](expr);
+      } else {
+        let expressions = T.JSArrayOfMapLOfStringL$dynamic().of([this[_query]]);
+        expressions[$add](expr);
+        this.map[$_set]("$query", new (T.IdentityMapOfStringL$ListLOfMapLOfStringL$dynamic()).from(["$and", expressions]));
+      }
+    }
+    [_ensureParamFields]() {
+      if (this.paramFields == null) {
+        this.paramFields = new (T.IdentityMapOfStringL$dynamic()).new();
+      }
+    }
+    [_ensureOrderBy]() {
+      this[_query];
+      if (!dart.test(this.map[$containsKey]("orderby"))) {
+        this.map[$_set]("orderby", new (T.IdentityMapOfStringL$dynamic()).new());
+      }
+    }
+    eq(fieldName, value) {
+      this[_addExpression](fieldName, value);
+      return this;
+    }
+    id(value) {
+      this[_addExpression]("_id", value);
+      return this;
+    }
+    ne(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$ne", value]));
+      return this;
+    }
+    gt(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$gt", value]));
+      return this;
+    }
+    lt(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$lt", value]));
+      return this;
+    }
+    gte(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$gte", value]));
+      return this;
+    }
+    lte(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$lte", value]));
+      return this;
+    }
+    all(fieldName, values) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$ListL()).from(["$all", values]));
+      return this;
+    }
+    nin(fieldName, values) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$ListL()).from(["$nin", values]));
+      return this;
+    }
+    oneFrom(fieldName, values) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$ListL()).from(["$in", values]));
+      return this;
+    }
+    exists(fieldName) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$boolL()).from(["$exists", true]));
+      return this;
+    }
+    notExists(fieldName) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$boolL()).from(["$exists", false]));
+      return this;
+    }
+    mod(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$ListLOfintL()).from(["$mod", T.JSArrayOfintL().of([value, 0])]));
+      return this;
+    }
+    match(fieldName, pattern, opts) {
+      let multiLine = opts && 'multiLine' in opts ? opts.multiLine : null;
+      let caseInsensitive = opts && 'caseInsensitive' in opts ? opts.caseInsensitive : null;
+      let dotAll = opts && 'dotAll' in opts ? opts.dotAll : null;
+      let extended = opts && 'extended' in opts ? opts.extended : null;
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$BsonRegexpL()).from(["$regex", new bson.BsonRegexp.new(pattern, {multiLine: multiLine, caseInsensitive: caseInsensitive, dotAll: dotAll, extended: extended})]));
+      return this;
+    }
+    inRange(fieldName, min, max, opts) {
+      let minInclude = opts && 'minInclude' in opts ? opts.minInclude : true;
+      let maxInclude = opts && 'maxInclude' in opts ? opts.maxInclude : false;
+      let rangeMap = new (T.IdentityMapOfStringL$dynamic()).new();
+      if (dart.test(minInclude)) {
+        rangeMap[$_set]("$gte", min);
+      } else {
+        rangeMap[$_set]("$gt", min);
+      }
+      if (dart.test(maxInclude)) {
+        rangeMap[$_set]("$lte", max);
+      } else {
+        rangeMap[$_set]("$lt", max);
+      }
+      this[_addExpression](fieldName, rangeMap);
+      return this;
+    }
+    sortBy(fieldName, opts) {
+      let descending = opts && 'descending' in opts ? opts.descending : false;
+      this[_ensureOrderBy]();
+      let order = 1;
+      if (dart.test(descending)) {
+        order = -1;
+      }
+      dart.dsend(this.map[$_get]("orderby"), '_set', [fieldName, order]);
+      return this;
+    }
+    sortByMetaTextScore(fieldName) {
+      this[_ensureOrderBy]();
+      dart.dsend(this.map[$_get]("orderby"), '_set', [fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$meta", "textScore"])]);
+      return this;
+    }
+    hint(fieldName, opts) {
+      let descending = opts && 'descending' in opts ? opts.descending : false;
+      this[_query];
+      if (!dart.test(this.map[$containsKey]("$hint"))) {
+        this.map[$_set]("$hint", new (T.IdentityMapOfStringL$dynamic()).new());
+      }
+      let order = 1;
+      if (dart.test(descending)) {
+        order = -1;
+      }
+      dart.dsend(this.map[$_get]("$hint"), '_set', [fieldName, order]);
+      return this;
+    }
+    hintIndex(indexName) {
+      this[_query];
+      this.map[$_set]("$hint", indexName);
+      return this;
+    }
+    comment(commentStr) {
+      this[_query];
+      this.map[$_set]("$comment", commentStr);
+      return this;
+    }
+    explain() {
+      this[_query];
+      this.map[$_set]("$explain", true);
+      return this;
+    }
+    snapshot() {
+      this[_query];
+      this.map[$_set]("$snapshot", true);
+      return this;
+    }
+    showDiskLoc() {
+      this[_query];
+      this.map[$_set]("$showDiskLoc", true);
+      return this;
+    }
+    returnKey() {
+      this[_query];
+      this.map[$_set]("$sreturnKey", true);
+      return this;
+    }
+    jsQuery(javaScriptCode) {
+      this[_query][$_set]("$where", new bson.BsonCode.new(javaScriptCode));
+      return this;
+    }
+    metaTextScore(fieldName) {
+      this[_ensureParamFields]();
+      this.paramFields[$_set](fieldName, new (T.IdentityMapOfStringL$StringL()).from(["$meta", "textScore"]));
+      return this;
+    }
+    fields(fields) {
+      this[_ensureParamFields]();
+      for (let field of fields) {
+        this.paramFields[$_set](field, 1);
+      }
+      return this;
+    }
+    excludeFields(fields) {
+      this[_ensureParamFields]();
+      for (let field of fields) {
+        this.paramFields[$_set](field, 0);
+      }
+      return this;
+    }
+    limit(limit) {
+      this.paramLimit = limit;
+      return this;
+    }
+    skip(skip) {
+      this.paramSkip = skip;
+      return this;
+    }
+    raw(rawSelector) {
+      this.map = rawSelector;
+      return this;
+    }
+    within(fieldName, value) {
+      this[_addExpression](fieldName, new (T.IdentityMapOfStringL$MapLOfStringL$dynamic()).from(["$within", new (T.IdentityMapOfStringL$dynamic()).from(["$box", value])]));
+      return this;
+    }
+    near(fieldName, value, maxDistance = null) {
+      if (maxDistance == null) {
+        this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$near", value]));
+      } else {
+        this[_addExpression](fieldName, new (T.IdentityMapOfStringL$dynamic()).from(["$near", value, "$maxDistance", maxDistance]));
+      }
+      return this;
+    }
+    and(other) {
+      if (dart.test(this[_query][$isEmpty])) {
+        dart.throw(new core.StateError.new("`And` opertion is not supported on empty query"));
+      }
+      this[_addExpressionMap](other[_query]);
+      return this;
+    }
+    or(other) {
+      if (dart.test(this[_query][$isEmpty])) {
+        dart.throw(new core.StateError.new("`And` opertion is not supported on empty query"));
+      }
+      if (dart.test(this[_query][$containsKey]("$or"))) {
+        let expressions = T.ListL().as(this[_query][$_get]("$or"));
+        expressions[$add](other[_query]);
+      } else {
+        let expressions = T.JSArrayOfMapLOfStringL$dynamic().of([this[_query]]);
+        expressions[$add](other[_query]);
+        this.map[$_set]("$query", new (T.IdentityMapOfStringL$ListLOfMapLOfStringL$dynamic()).from(["$or", expressions]));
+      }
+      return this;
+    }
+    getQueryString() {
+      let result = convert.json.encode(this.map);
+      return result;
+    }
+  };
+  (mongo_dart_query.SelectorBuilder.new = function() {
+    this[map] = new (T.IdentityMapOfStringL$dynamic()).new();
+    this[_isQuerySet] = false;
+    this[paramSkip] = 0;
+    this[paramLimit] = 0;
+    this[paramFields] = null;
+    ;
+  }).prototype = mongo_dart_query.SelectorBuilder.prototype;
+  dart.addTypeTests(mongo_dart_query.SelectorBuilder);
+  dart.addTypeCaches(mongo_dart_query.SelectorBuilder);
+  dart.setMethodSignature(mongo_dart_query.SelectorBuilder, () => ({
+    __proto__: dart.getMethods(mongo_dart_query.SelectorBuilder.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    [_addExpression]: dart.fnType(dart.dynamic, [dart.legacy(core.String), dart.dynamic]),
+    [_addExpressionMap]: dart.fnType(dart.dynamic, [dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))]),
+    [_ensureParamFields]: dart.fnType(dart.void, []),
+    [_ensureOrderBy]: dart.fnType(dart.void, []),
+    eq: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    id: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(bson.ObjectId)]),
+    ne: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    gt: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    lt: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    gte: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    lte: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    all: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.legacy(core.List)]),
+    nin: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.legacy(core.List)]),
+    oneFrom: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.legacy(core.List)]),
+    exists: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    notExists: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    mod: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.legacy(core.int)]),
+    match: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.legacy(core.String)], {caseInsensitive: dart.legacy(core.bool), dotAll: dart.legacy(core.bool), extended: dart.legacy(core.bool), multiLine: dart.legacy(core.bool)}, {}),
+    inRange: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic, dart.dynamic], {maxInclude: dart.legacy(core.bool), minInclude: dart.legacy(core.bool)}, {}),
+    sortBy: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)], {descending: dart.legacy(core.bool)}, {}),
+    sortByMetaTextScore: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    hint: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)], {descending: dart.legacy(core.bool)}, {}),
+    hintIndex: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    comment: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    explain: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), []),
+    snapshot: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), []),
+    showDiskLoc: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), []),
+    returnKey: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), []),
+    jsQuery: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    metaTextScore: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String)]),
+    fields: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.List$(dart.legacy(core.String)))]),
+    excludeFields: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.List$(dart.legacy(core.String)))]),
+    limit: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.int)]),
+    skip: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.int)]),
+    raw: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))]),
+    within: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic]),
+    near: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(core.String), dart.dynamic], [dart.legacy(core.double)]),
+    and: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(mongo_dart_query.SelectorBuilder)]),
+    or: dart.fnType(dart.legacy(mongo_dart_query.SelectorBuilder), [dart.legacy(mongo_dart_query.SelectorBuilder)]),
+    getQueryString: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setGetterSignature(mongo_dart_query.SelectorBuilder, () => ({
+    __proto__: dart.getGetters(mongo_dart_query.SelectorBuilder.__proto__),
+    [_query]: dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))
+  }));
+  dart.setLibraryUri(mongo_dart_query.SelectorBuilder, I[0]);
+  dart.setFieldSignature(mongo_dart_query.SelectorBuilder, () => ({
+    __proto__: dart.getFields(mongo_dart_query.SelectorBuilder.__proto__),
+    map: dart.fieldType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))),
+    [_isQuerySet]: dart.fieldType(dart.legacy(core.bool)),
+    paramSkip: dart.fieldType(dart.legacy(core.int)),
+    paramLimit: dart.fieldType(dart.legacy(core.int)),
+    paramFields: dart.fieldType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic)))
+  }));
+  dart.defineExtensionMethods(mongo_dart_query.SelectorBuilder, ['toString']);
+  dart.defineLazy(mongo_dart_query.SelectorBuilder, {
+    /*mongo_dart_query.SelectorBuilder.objectIdRegexp*/get objectIdRegexp() {
+      return core.RegExp.new(".ObjectId...([0-9a-f]{24})....");
+    }
+  }, true);
+  var map$ = dart.privateName(mongo_dart_query, "ModifierBuilder.map");
+  var _updateOperation = dart.privateName(mongo_dart_query, "_updateOperation");
+  mongo_dart_query.ModifierBuilder = class ModifierBuilder extends core.Object {
+    get map() {
+      return this[map$];
+    }
+    set map(value) {
+      this[map$] = value;
+    }
+    toString() {
+      return "ModifierBuilder(" + dart.str(this.map) + ")";
+    }
+    [_updateOperation](operator, fieldName, value) {
+      let opMap = T.MapLOfStringL$dynamic().as(this.map[$_get](operator));
+      if (opMap == null) {
+        opMap = new (T.IdentityMapOfStringL$dynamic()).new();
+        this.map[$_set](operator, opMap);
+      }
+      opMap[$_set](fieldName, value);
+    }
+    inc(fieldName, value) {
+      this[_updateOperation]("$inc", fieldName, value);
+      return this;
+    }
+    min(fieldName, value) {
+      this[_updateOperation]("$min", fieldName, value);
+      return this;
+    }
+    max(fieldName, value) {
+      this[_updateOperation]("$max", fieldName, value);
+      return this;
+    }
+    rename(oldName, newName) {
+      this[_updateOperation]("$rename", oldName, newName);
+      return this;
+    }
+    set(fieldName, value) {
+      this[_updateOperation]("$set", fieldName, value);
+      return this;
+    }
+    setOnInsert(fieldName, value) {
+      this[_updateOperation]("$setOnInsert", fieldName, value);
+      return this;
+    }
+    unset(fieldName) {
+      this[_updateOperation]("$unset", fieldName, 1);
+      return this;
+    }
+    push(fieldName, value) {
+      this[_updateOperation]("$push", fieldName, value);
+      return this;
+    }
+    pushAll(fieldName, values) {
+      this[_updateOperation]("$pushAll", fieldName, values);
+      return this;
+    }
+    pull(fieldName, value) {
+      this[_updateOperation]("$pull", fieldName, value);
+      return this;
+    }
+    pullAll(fieldName, values) {
+      this[_updateOperation]("$pullAll", fieldName, values);
+      return this;
+    }
+    addToSet(fieldName, value) {
+      this[_updateOperation]("$addToSet", fieldName, value);
+      return this;
+    }
+    popFirst(fieldName) {
+      this[_updateOperation]("$pop", fieldName, -1);
+      return this;
+    }
+    popLast(fieldName) {
+      this[_updateOperation]("$pop", fieldName, 1);
+      return this;
+    }
+  };
+  (mongo_dart_query.ModifierBuilder.new = function() {
+    this[map$] = new (T.IdentityMapOfStringL$dynamic()).new();
+    ;
+  }).prototype = mongo_dart_query.ModifierBuilder.prototype;
+  dart.addTypeTests(mongo_dart_query.ModifierBuilder);
+  dart.addTypeCaches(mongo_dart_query.ModifierBuilder);
+  dart.setMethodSignature(mongo_dart_query.ModifierBuilder, () => ({
+    __proto__: dart.getMethods(mongo_dart_query.ModifierBuilder.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    [_updateOperation]: dart.fnType(dart.void, [dart.legacy(core.String), dart.legacy(core.String), dart.dynamic]),
+    inc: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    min: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    max: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    rename: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.legacy(core.String)]),
+    set: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    setOnInsert: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    unset: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String)]),
+    push: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    pushAll: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.legacy(core.List)]),
+    pull: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    pullAll: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.legacy(core.List)]),
+    addToSet: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String), dart.dynamic]),
+    popFirst: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String)]),
+    popLast: dart.fnType(dart.legacy(mongo_dart_query.ModifierBuilder), [dart.legacy(core.String)])
+  }));
+  dart.setLibraryUri(mongo_dart_query.ModifierBuilder, I[0]);
+  dart.setFieldSignature(mongo_dart_query.ModifierBuilder, () => ({
+    __proto__: dart.getFields(mongo_dart_query.ModifierBuilder.__proto__),
+    map: dart.fieldType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic)))
+  }));
+  dart.defineExtensionMethods(mongo_dart_query.ModifierBuilder, ['toString']);
+  dart.copyProperties(mongo_dart_query, {
+    get modify() {
+      return new mongo_dart_query.ModifierBuilder.new();
+    },
+    get where() {
+      return new mongo_dart_query.SelectorBuilder.new();
+    }
+  });
+  dart.trackLibraries("packages/mongo_dart_query/mongo_dart_query.dart", {
+    "package:mongo_dart_query/mongo_dart_query.dart": mongo_dart_query
+  }, {
+    "package:mongo_dart_query/mongo_dart_query.dart": ["src/selector_builder.dart", "src/modifier_builder.dart"]
+  }, '{"version":3,"sourceRoot":"","sources":["src/selector_builder.dart","src/modifier_builder.dart"],"names":[],"mappings":"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","file":"../../../../../../../../C:/packages/mongo_dart_query/mongo_dart_query.dart.lib.js"}');
+  // Exports:
+  return {
+    mongo_dart_query: mongo_dart_query
+  };
+}));
+
+//# sourceMappingURL=mongo_dart_query.dart.lib.js.map

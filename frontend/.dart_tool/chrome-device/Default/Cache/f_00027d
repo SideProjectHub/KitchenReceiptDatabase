@@ -1,0 +1,325 @@
+define(['dart_sdk', 'packages/collection/src/union_set_controller.dart'], (function load__packages__more__src__collection__bitlist_dart(dart_sdk, packages__collection__src__union_set_controller$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _native_typed_data = dart_sdk._native_typed_data;
+  const collection = dart_sdk.collection;
+  const typed_data = dart_sdk.typed_data;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const unmodifiable_wrappers = packages__collection__src__union_set_controller$46dart.src__unmodifiable_wrappers;
+  var bitlist = Object.create(dart.library);
+  var $rightShift = dartx['>>'];
+  var $length = dartx.length;
+  var $fillRange = dartx.fillRange;
+  var $setAll = dartx.setAll;
+  var $iterator = dartx.iterator;
+  var $_get = dartx._get;
+  var $_set = dartx._set;
+  var $setRange = dartx.setRange;
+  var $leftShift = dartx['<<'];
+  var $plus = dartx['+'];
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    BitListL: () => (T.BitListL = dart.constFn(dart.legacy(bitlist.BitList)))(),
+    boolL: () => (T.boolL = dart.constFn(dart.legacy(core.bool)))(),
+    ListOfboolL: () => (T.ListOfboolL = dart.constFn(core.List$(T.boolL())))(),
+    ListLOfboolL: () => (T.ListLOfboolL = dart.constFn(dart.legacy(T.ListOfboolL())))(),
+    VoidToBitListL: () => (T.VoidToBitListL = dart.constFn(dart.fnType(T.BitListL(), [])))(),
+    intL: () => (T.intL = dart.constFn(dart.legacy(core.int)))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C0() {
+      return C[0] = dart.constList([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824, 2147483648.0], T.intL());
+    },
+    get C1() {
+      return C[1] = dart.constList([-2, -3, -5, -9, -17, -33, -65, -129, -257, -513, -1025, -2049, -4097, -8193, -16385, -32769, -65537, -131073, -262145, -524289, -1048577, -2097153, -4194305, -8388609, -16777217, -33554433, -67108865, -134217729, -268435457, -536870913, -1073741825, -2147483649.0], T.intL());
+    }
+  }, false);
+  var C = Array(2).fill(void 0);
+  var I = ["package:more/src/collection/bitlist.dart"];
+  var buffer$ = dart.privateName(bitlist, "BitList.buffer");
+  var length$ = dart.privateName(bitlist, "BitList.length");
+  var _checkLength = dart.privateName(bitlist, "_checkLength");
+  const ListBase_NonGrowableListMixin$36 = class ListBase_NonGrowableListMixin extends collection.ListBase$(dart.legacy(core.bool)) {};
+  (ListBase_NonGrowableListMixin$36.new = function() {
+  }).prototype = ListBase_NonGrowableListMixin$36.prototype;
+  dart.applyMixin(ListBase_NonGrowableListMixin$36, unmodifiable_wrappers.NonGrowableListMixin$(dart.legacy(core.bool)));
+  bitlist.BitList = class BitList extends ListBase_NonGrowableListMixin$36 {
+    get buffer() {
+      return this[buffer$];
+    }
+    set buffer(value) {
+      super.buffer = value;
+    }
+    get length() {
+      return this[length$];
+    }
+    set length(value) {
+      super.length = value;
+    }
+    static new(length) {
+      return bitlist.BitList.filled(length, false);
+    }
+    static filled(length, fill) {
+      let buffer = _native_typed_data.NativeUint32List.new((dart.notNull(length) + 31)[$rightShift](5));
+      if (dart.test(fill)) {
+        buffer[$fillRange](0, buffer[$length], 4294967295.0);
+      }
+      return new bitlist.BitList.__(buffer, length);
+    }
+    static of(other) {
+      let length = other[$length];
+      let buffer = _native_typed_data.NativeUint32List.new((dart.notNull(length) + 31)[$rightShift](5));
+      if (T.BitListL().is(other)) {
+        buffer[$setAll](0, other.buffer);
+      } else {
+        let iterator = other[$iterator];
+        for (let i = 0; i < dart.notNull(buffer[$length]); i = i + 1) {
+          let value = 0;
+          for (let j = 0; j <= 31 && dart.test(iterator.moveNext()); j = j + 1) {
+            if (dart.test(iterator.current)) {
+              value = (value | dart.notNull(bitlist.bitSetMask[$_get](j))) >>> 0;
+            }
+          }
+          buffer[$_set](i, value);
+        }
+      }
+      return new bitlist.BitList.__(buffer, length);
+    }
+    static from(other) {
+      return bitlist.BitList.of(other);
+    }
+    _get(index) {
+      core.RangeError.checkValidIndex(index, this);
+      return this.getUnchecked(index);
+    }
+    getUnchecked(index) {
+      return (dart.notNull(this.buffer[$_get](index[$rightShift](5))) & dart.notNull(bitlist.bitSetMask[$_get]((dart.notNull(index) & 31) >>> 0))) !== 0;
+    }
+    _set(index, value$) {
+      let value = value$;
+      T.boolL().as(value);
+      core.RangeError.checkValidIndex(index, this);
+      this.setUnchecked(index, value);
+      return value$;
+    }
+    setUnchecked(index, value) {
+      let t1, t0, t1$, t0$;
+      if (dart.test(value)) {
+        t0 = this.buffer;
+        t1 = index[$rightShift](5);
+        t0[$_set](t1, (dart.notNull(t0[$_get](t1)) | dart.notNull(bitlist.bitSetMask[$_get]((dart.notNull(index) & 31) >>> 0))) >>> 0);
+      } else {
+        t0$ = this.buffer;
+        t1$ = index[$rightShift](5);
+        t0$[$_set](t1$, (dart.notNull(t0$[$_get](t1$)) & dart.notNull(bitlist.bitClearMask[$_get]((dart.notNull(index) & 31) >>> 0))) >>> 0);
+      }
+    }
+    ['+'](other) {
+      T.ListLOfboolL().as(other);
+      let result = bitlist.BitList.new(dart.notNull(this.length) + dart.notNull(other[$length]));
+      result.buffer[$setRange](0, this.buffer[$length], this.buffer);
+      for (let i = 0; i < dart.notNull(other[$length]); i = i + 1) {
+        result._set(dart.notNull(this.length) + i, other[$_get](i));
+      }
+      return result;
+    }
+    flip(index) {
+      let t1, t0;
+      core.RangeError.checkValidIndex(index, this);
+      t0 = this.buffer;
+      t1 = index[$rightShift](5);
+      t0[$_set](t1, (dart.notNull(t0[$_get](t1)) ^ dart.notNull(bitlist.bitSetMask[$_get]((dart.notNull(index) & 31) >>> 0))) >>> 0);
+    }
+    count(expected = true) {
+      let tally = 0;
+      for (let index = 0; index < dart.notNull(this.length); index = index + 1) {
+        let actual = (dart.notNull(this.buffer[$_get](index[$rightShift](5))) & dart.notNull(bitlist.bitSetMask[$_get]((index & 31) >>> 0))) !== 0;
+        if (actual === expected) {
+          tally = tally + 1;
+        }
+      }
+      return tally;
+    }
+    ['~']() {
+      let result = bitlist.BitList.new(this.length);
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        result.buffer[$_set](i, ~dart.notNull(this.buffer[$_get](i)) >>> 0);
+      }
+      return result;
+    }
+    not() {
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        this.buffer[$_set](i, ~dart.notNull(this.buffer[$_get](i)) >>> 0);
+      }
+    }
+    ['&'](other) {
+      this[_checkLength](other);
+      let result = bitlist.BitList.new(this.length);
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        result.buffer[$_set](i, (dart.notNull(this.buffer[$_get](i)) & dart.notNull(other.buffer[$_get](i))) >>> 0);
+      }
+      return result;
+    }
+    and(other) {
+      let t1, t0;
+      this[_checkLength](other);
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        t0 = this.buffer;
+        t1 = i;
+        t0[$_set](t1, (dart.notNull(t0[$_get](t1)) & dart.notNull(other.buffer[$_get](i))) >>> 0);
+      }
+    }
+    ['|'](other) {
+      this[_checkLength](other);
+      let result = bitlist.BitList.new(this.length);
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        result.buffer[$_set](i, (dart.notNull(this.buffer[$_get](i)) | dart.notNull(other.buffer[$_get](i))) >>> 0);
+      }
+      return result;
+    }
+    or(other) {
+      let t1, t0;
+      this[_checkLength](other);
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        t0 = this.buffer;
+        t1 = i;
+        t0[$_set](t1, (dart.notNull(t0[$_get](t1)) | dart.notNull(other.buffer[$_get](i))) >>> 0);
+      }
+    }
+    ['-'](other) {
+      this[_checkLength](other);
+      let result = bitlist.BitList.new(this.length);
+      for (let i = 0; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+        result.buffer[$_set](i, (dart.notNull(this.buffer[$_get](i)) & ~dart.notNull(other.buffer[$_get](i)) >>> 0) >>> 0);
+      }
+      return result;
+    }
+    ['<<'](amount) {
+      core.RangeError.checkNotNegative(amount, "amount", "Unable to left-shift by " + dart.str(amount));
+      if (amount === 0 || this.length === 0) {
+        return bitlist.BitList.of(this);
+      }
+      let shift = amount[$rightShift](5);
+      let offset = (dart.notNull(amount) & 31) >>> 0;
+      let result = bitlist.BitList.new(this.length);
+      if (offset === 0) {
+        for (let i = shift; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+          result.buffer[$_set](i, this.buffer[$_get](i - shift));
+        }
+      } else {
+        let otherOffset = 1 + 31 - offset;
+        for (let i = shift + 1; i < dart.notNull(this.buffer[$length]); i = i + 1) {
+          result.buffer[$_set](i, (this.buffer[$_get](i - shift)[$leftShift](offset) & 4294967295.0 | (this.buffer[$_get](i - shift - 1)[$rightShift](otherOffset) & 4294967295.0) >>> 0) >>> 0);
+        }
+        if (shift < dart.notNull(this.buffer[$length])) {
+          result.buffer[$_set](shift, (this.buffer[$_get](0)[$leftShift](offset) & 4294967295.0) >>> 0);
+        }
+      }
+      return result;
+    }
+    ['>>'](amount) {
+      core.RangeError.checkNotNegative(amount, "amount", "Unable to right-shift by " + dart.str(amount));
+      if (amount === 0 || this.length === 0) {
+        return bitlist.BitList.of(this);
+      }
+      let shift = amount[$rightShift](5);
+      let offset = (dart.notNull(amount) & 31) >>> 0;
+      let result = bitlist.BitList.new(this.length);
+      if (offset === 0) {
+        for (let i = 0; i < dart.notNull(this.buffer[$length]) - shift; i = i + 1) {
+          result.buffer[$_set](i, this.buffer[$_get](i + shift));
+        }
+      } else {
+        let last = dart.notNull(this.buffer[$length]) - shift - 1;
+        let otherOffset = 1 + 31 - offset;
+        for (let i = 0; i < last; i = i + 1) {
+          result.buffer[$_set](i, (this.buffer[$_get](i + shift)[$rightShift](offset) & 4294967295.0 | (this.buffer[$_get](i + shift + 1)[$leftShift](otherOffset) & 4294967295.0) >>> 0) >>> 0);
+        }
+        if (0 <= last) {
+          result.buffer[$_set](last, (this.buffer[$_get](dart.notNull(this.buffer[$length]) - 1)[$rightShift](offset) & 4294967295.0) >>> 0);
+        }
+      }
+      return result;
+    }
+    [_checkLength](other) {
+      if (this.length != other.length) {
+        dart.throw(new core.ArgumentError.value(other, "other", "Expected list with length " + dart.str(this.length) + ", but got " + dart.str(other.length)));
+      }
+    }
+  };
+  (bitlist.BitList.__ = function(buffer, length) {
+    this[buffer$] = buffer;
+    this[length$] = length;
+    ;
+  }).prototype = bitlist.BitList.prototype;
+  dart.addTypeTests(bitlist.BitList);
+  dart.addTypeCaches(bitlist.BitList);
+  dart.setMethodSignature(bitlist.BitList, () => ({
+    __proto__: dart.getMethods(bitlist.BitList.__proto__),
+    _get: dart.fnType(dart.legacy(core.bool), [dart.legacy(core.int)]),
+    [$_get]: dart.fnType(dart.legacy(core.bool), [dart.legacy(core.int)]),
+    getUnchecked: dart.fnType(dart.legacy(core.bool), [dart.legacy(core.int)]),
+    _set: dart.fnType(dart.void, [dart.legacy(core.int), dart.legacy(core.Object)]),
+    [$_set]: dart.fnType(dart.void, [dart.legacy(core.int), dart.legacy(core.Object)]),
+    setUnchecked: dart.fnType(dart.void, [dart.legacy(core.int), dart.legacy(core.bool)]),
+    '+': dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(core.Object)]),
+    [$plus]: dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(core.Object)]),
+    flip: dart.fnType(dart.void, [dart.legacy(core.int)]),
+    count: dart.fnType(dart.legacy(core.int), [], [dart.legacy(core.bool)]),
+    '~': dart.fnType(dart.legacy(bitlist.BitList), []),
+    not: dart.fnType(dart.void, []),
+    '&': dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(bitlist.BitList)]),
+    and: dart.fnType(dart.void, [dart.legacy(bitlist.BitList)]),
+    '|': dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(bitlist.BitList)]),
+    or: dart.fnType(dart.void, [dart.legacy(bitlist.BitList)]),
+    '-': dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(bitlist.BitList)]),
+    '<<': dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(core.int)]),
+    '>>': dart.fnType(dart.legacy(bitlist.BitList), [dart.legacy(core.int)]),
+    [_checkLength]: dart.fnType(dart.void, [dart.legacy(bitlist.BitList)])
+  }));
+  dart.setLibraryUri(bitlist.BitList, I[0]);
+  dart.setFieldSignature(bitlist.BitList, () => ({
+    __proto__: dart.getFields(bitlist.BitList.__proto__),
+    buffer: dart.finalFieldType(dart.legacy(typed_data.Uint32List)),
+    length: dart.finalFieldType(dart.legacy(core.int))
+  }));
+  dart.defineExtensionMethods(bitlist.BitList, ['_get', '_set', '+']);
+  dart.defineExtensionAccessors(bitlist.BitList, ['length']);
+  bitlist['BitListExtension|toBitList'] = function BitListExtension$124toBitList($this) {
+    return bitlist.BitList.of($this);
+  };
+  bitlist['BitListExtension|get#toBitList'] = function BitListExtension$124get$35toBitList($this) {
+    return dart.fn(() => bitlist['BitListExtension|toBitList']($this), T.VoidToBitListL());
+  };
+  dart.defineLazy(bitlist, {
+    /*bitlist.bitShift*/get bitShift() {
+      return 5;
+    },
+    /*bitlist.bitOffset*/get bitOffset() {
+      return 31;
+    },
+    /*bitlist.bitMask*/get bitMask() {
+      return 4294967295.0;
+    },
+    /*bitlist.bitSetMask*/get bitSetMask() {
+      return C[0] || CT.C0;
+    },
+    /*bitlist.bitClearMask*/get bitClearMask() {
+      return C[1] || CT.C1;
+    }
+  }, true);
+  dart.trackLibraries("packages/more/src/collection/bitlist.dart", {
+    "package:more/src/collection/bitlist.dart": bitlist
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["bitlist.dart"],"names":[],"mappings":"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","file":"../../../../../../../../../../C:/packages/more/src/collection/bitlist.dart.lib.js"}');
+  // Exports:
+  return {
+    src__collection__bitlist: bitlist
+  };
+}));
+
+//# sourceMappingURL=bitlist.dart.lib.js.map

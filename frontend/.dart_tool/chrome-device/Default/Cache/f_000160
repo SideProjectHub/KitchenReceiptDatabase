@@ -1,0 +1,2178 @@
+define(['dart_sdk', 'packages/rational/rational.dart', 'packages/fixnum/fixnum.dart', 'packages/more/src/char_matcher/whitespace.dart'], (function load__packages__bson__src__types__decimal_128_dart(dart_sdk, packages__rational__rational$46dart, packages__fixnum__fixnum$46dart, packages__more__src__char_matcher__whitespace$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const typed_data = dart_sdk.typed_data;
+  const _native_typed_data = dart_sdk._native_typed_data;
+  const _interceptors = dart_sdk._interceptors;
+  const convert = dart_sdk.convert;
+  const math = dart_sdk.math;
+  const _js_helper = dart_sdk._js_helper;
+  const collection = dart_sdk.collection;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const rational$ = packages__rational__rational$46dart.rational;
+  const fixnum = packages__fixnum__fixnum$46dart.fixnum;
+  const char_matcher = packages__more__src__char_matcher__whitespace$46dart.char_matcher;
+  var decimal_128 = Object.create(dart.library);
+  var bson = Object.create(dart.library);
+  var $hashCode = dartx.hashCode;
+  var $setRange = dartx.setRange;
+  var $truncate = dartx.truncate;
+  var $split = dartx.split;
+  var $length = dartx.length;
+  var $last = dartx.last;
+  var $first = dartx.first;
+  var $replaceAll = dartx.replaceAll;
+  var $_get = dartx._get;
+  var $_equals = dartx._equals;
+  var $toString = dartx.toString;
+  var $isNegative = dartx.isNegative;
+  var $toRadixString = dartx.toRadixString;
+  var $substring = dartx.substring;
+  var $toInt = dartx.toInt;
+  var $_set = dartx._set;
+  var $toLowerCase = dartx.toLowerCase;
+  var $remainder = dartx.remainder;
+  var $round = dartx.round;
+  var $codeUnitAt = dartx.codeUnitAt;
+  var $setInt32 = dartx.setInt32;
+  var $modulo = dartx['%'];
+  var $setInt16 = dartx.setInt16;
+  var $setInt8 = dartx.setInt8;
+  var $setFloat64 = dartx.setFloat64;
+  var $setInt64 = dartx.setInt64;
+  var $getInt32 = dartx.getInt32;
+  var $getInt64 = dartx.getInt64;
+  var $getFloat64 = dartx.getFloat64;
+  var $add = dartx.add;
+  var $leftShift = dartx['<<'];
+  var $containsKey = dartx.containsKey;
+  var $getRange = dartx.getRange;
+  var $toList = dartx.toList;
+  var $forEach = dartx.forEach;
+  var $bitLength = dartx.bitLength;
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    BsonDecimal128L: () => (T.BsonDecimal128L = dart.constFn(dart.legacy(decimal_128.BsonDecimal128)))(),
+    Int32L: () => (T.Int32L = dart.constFn(dart.legacy(fixnum.Int32)))(),
+    BsonBinaryL: () => (T.BsonBinaryL = dart.constFn(dart.legacy(bson.BsonBinary)))(),
+    StringL: () => (T.StringL = dart.constFn(dart.legacy(core.String)))(),
+    intL: () => (T.intL = dart.constFn(dart.legacy(core.int)))(),
+    intLToStringL: () => (T.intLToStringL = dart.constFn(dart.fnType(T.StringL(), [T.intL()])))(),
+    RationalL: () => (T.RationalL = dart.constFn(dart.legacy(rational$.Rational)))(),
+    intLToRationalL: () => (T.intLToRationalL = dart.constFn(dart.fnType(T.RationalL(), [T.intL()])))(),
+    ObjectIdL: () => (T.ObjectIdL = dart.constFn(dart.legacy(bson.ObjectId)))(),
+    ListOfintL: () => (T.ListOfintL = dart.constFn(core.List$(T.intL())))(),
+    intLAndintLToNull: () => (T.intLAndintLToNull = dart.constFn(dart.fnType(core.Null, [T.intL(), T.intL()])))(),
+    EndianL: () => (T.EndianL = dart.constFn(dart.legacy(typed_data.Endian)))(),
+    JSArrayOfintL: () => (T.JSArrayOfintL = dart.constFn(_interceptors.JSArray$(T.intL())))(),
+    ListLOfintL: () => (T.ListLOfintL = dart.constFn(dart.legacy(T.ListOfintL())))(),
+    LinkedMapOfStringL$ListLOfintL: () => (T.LinkedMapOfStringL$ListLOfintL = dart.constFn(_js_helper.LinkedMap$(T.StringL(), T.ListLOfintL())))(),
+    StringLAnddynamicToNull: () => (T.StringLAnddynamicToNull = dart.constFn(dart.fnType(core.Null, [T.StringL(), dart.dynamic])))(),
+    IdentityMapOfStringL$dynamic: () => (T.IdentityMapOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), dart.dynamic)))(),
+    MapL: () => (T.MapL = dart.constFn(dart.legacy(core.Map)))(),
+    ListL: () => (T.ListL = dart.constFn(dart.legacy(core.List)))(),
+    DbRefL: () => (T.DbRefL = dart.constFn(dart.legacy(bson.DbRef)))(),
+    DBPointerL: () => (T.DBPointerL = dart.constFn(dart.legacy(bson.DBPointer)))(),
+    IdentityMapOfStringL$StringL: () => (T.IdentityMapOfStringL$StringL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.StringL())))(),
+    numL: () => (T.numL = dart.constFn(dart.legacy(core.num)))(),
+    BsonObjectL: () => (T.BsonObjectL = dart.constFn(dart.legacy(bson.BsonObject)))(),
+    LinkedHashMapOfStringL$dynamic: () => (T.LinkedHashMapOfStringL$dynamic = dart.constFn(collection.LinkedHashMap$(T.StringL(), dart.dynamic)))(),
+    DateTimeL: () => (T.DateTimeL = dart.constFn(dart.legacy(core.DateTime)))(),
+    boolL: () => (T.boolL = dart.constFn(dart.legacy(core.bool)))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: typed_data.Endian.prototype,
+        [Endian__littleEndian]: true
+      });
+    }
+  }, false);
+  var C = [void 0];
+  var I = [
+    "package:bson/bson.dart",
+    "package:bson/src/types/decimal_128.dart",
+    "file:///D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/bson-0.3.4/lib/src/types/decimal_128.dart"
+  ];
+  var bin$ = dart.privateName(decimal_128, "BsonDecimal128.bin");
+  var _checkBinaryLength = dart.privateName(decimal_128, "_checkBinaryLength");
+  bson.BsonObject = class BsonObject extends core.Object {
+    get typeByte() {
+      dart.throw("must be implemented");
+    }
+    byteLength() {
+      return 0;
+    }
+    packElement(name, buffer) {
+      dart.dsend(buffer, 'writeByte', [this.typeByte]);
+      if (name != null) {
+        new bson.BsonCString.new(name).packValue(T.BsonBinaryL().as(buffer));
+      }
+      this.packValue(T.BsonBinaryL().as(buffer));
+    }
+    packValue(buffer) {
+      dart.throw("must be implemented");
+    }
+    unpackElement(buffer) {
+      let result = new bson._ElementPair.new();
+      result.name = T.StringL().as(dart.dsend(buffer, 'readCString', []));
+      this.unpackValue(T.BsonBinaryL().as(buffer));
+      result.value = this.value;
+      return result;
+    }
+    unpackValue(buffer) {
+      dart.throw("must be implemented");
+    }
+    get value() {
+      return null;
+    }
+  };
+  (bson.BsonObject.new = function() {
+    ;
+  }).prototype = bson.BsonObject.prototype;
+  dart.addTypeTests(bson.BsonObject);
+  dart.addTypeCaches(bson.BsonObject);
+  dart.setMethodSignature(bson.BsonObject, () => ({
+    __proto__: dart.getMethods(bson.BsonObject.__proto__),
+    byteLength: dart.fnType(dart.legacy(core.int), []),
+    packElement: dart.fnType(dart.dynamic, [dart.legacy(core.String), dart.dynamic]),
+    packValue: dart.fnType(dart.dynamic, [dart.legacy(bson.BsonBinary)]),
+    unpackElement: dart.fnType(dart.legacy(bson._ElementPair), [dart.dynamic]),
+    unpackValue: dart.fnType(dart.dynamic, [dart.legacy(bson.BsonBinary)])
+  }));
+  dart.setGetterSignature(bson.BsonObject, () => ({
+    __proto__: dart.getGetters(bson.BsonObject.__proto__),
+    typeByte: dart.legacy(core.int),
+    value: dart.dynamic
+  }));
+  dart.setLibraryUri(bson.BsonObject, I[0]);
+  decimal_128.BsonDecimal128 = class BsonDecimal128 extends bson.BsonObject {
+    get bin() {
+      return this[bin$];
+    }
+    set bin(value) {
+      this[bin$] = value;
+    }
+    static fromHexString(hexString) {
+      if (hexString.length !== 32) {
+        dart.throw(new core.ArgumentError.new("Expected hexadecimal string with length of 32, got " + dart.str(hexString)));
+      }
+      return new decimal_128.BsonDecimal128.fromBsonBinary(new bson.BsonBinary.fromHexString(hexString));
+    }
+    static parse(hexString) {
+      return decimal_128.BsonDecimal128.fromHexString(hexString);
+    }
+    get hashCode() {
+      return dart.hashCode(this.bin.hexString);
+    }
+    _equals(other) {
+      if (other == null) return false;
+      return T.BsonDecimal128L().is(other) && this.toHexString() == other.toHexString();
+    }
+    toString() {
+      return "BsonDecimal128(\"" + dart.str(this.bin.hexString) + "\")";
+    }
+    toHexString() {
+      return this.bin.hexString;
+    }
+    get typeByte() {
+      return 19;
+    }
+    get value() {
+      return decimal_128.BsonDecimal128.convertBinaryToRational(this.bin);
+    }
+    byteLength() {
+      return 16;
+    }
+    unpackValue(buffer) {
+      let t0;
+      if (this.bin.byteList == null) {
+        this.bin.makeByteList();
+      }
+      this.bin.byteList[$setRange](0, 16, buffer.byteList, buffer.offset);
+      t0 = buffer;
+      t0.offset = dart.notNull(t0.offset) + 16;
+    }
+    packValue(buffer) {
+      let t0;
+      if (this.bin.byteList == null) {
+        this.bin.makeByteList();
+      }
+      buffer.byteList[$setRange](buffer.offset, dart.notNull(buffer.offset) + 16, this.bin.byteList);
+      t0 = buffer;
+      t0.offset = dart.notNull(t0.offset) + 16;
+    }
+    toJson() {
+      return this.bin.hexString;
+    }
+    [_checkBinaryLength](_binary) {
+      if (_binary.hexString == null) {
+        _binary.makeHexString();
+      }
+      if (_binary.hexString.length !== 32) {
+        dart.throw(new core.ArgumentError.new("The BsonBinary received is " + dart.str((_binary.hexString.length / 2)[$truncate]()) + " bytes long instead of 16"));
+      }
+    }
+    static convertBinaryToRational(binary) {
+      let high = null;
+      let low = null;
+      if (binary.byteList == null) {
+        binary.makeByteList();
+        binary.subType = 0;
+      }
+      binary.rewind();
+      low = binary.readFixInt64();
+      high = binary.readFixInt64();
+      if (dart.equals(high['&'](decimal_128.naNMask), decimal_128.naNMask)) {
+        return null;
+      }
+      let isNegative = dart.equals(high['&'](decimal_128.signMask), decimal_128.signMask);
+      if (dart.equals(high['&'](decimal_128.infinityMask), decimal_128.infinityMask)) {
+        if (isNegative) {
+          return decimal_128.infinityValue._negate();
+        }
+        return decimal_128.infinityValue;
+      }
+      let isFiniteCase2 = dart.equals(high['&'](decimal_128.finite2Mask), decimal_128.finite2Mask);
+      let exponent = null;
+      let significand = null;
+      let highSignificand = null;
+      significand = rational$.Rational.parse(low.toRadixString(10));
+      if (dart.test(low.isNegative)) {
+        significand = significand['+'](decimal_128.maxUInt64);
+      }
+      if (isFiniteCase2) {
+        exponent = high['&'](decimal_128.exponent2Mask)['>>'](47).toInt32();
+        highSignificand = rational$.Rational.parse(high['&'](decimal_128.significand2Mask)['|'](decimal_128.significand2impliedMask).toRadixString(10));
+      } else {
+        exponent = high['&'](decimal_128.exponent1Mask)['>>'](49).toInt32();
+        highSignificand = rational$.Rational.parse(high['&'](decimal_128.significand1Mask).toRadixString(10));
+      }
+      if (dart.test(exponent['>'](decimal_128.maxExponent))) {
+        return rational$.Rational.zero;
+      }
+      exponent = T.Int32L().as(exponent['-'](6176));
+      significand = significand['+'](highSignificand['*'](decimal_128.maxUInt64));
+      if (dart.test(significand['>'](decimal_128.maxSignificand))) {
+        significand = rational$.Rational.zero;
+      }
+      if (isNegative) {
+        significand = significand._negate();
+      }
+      return significand['*'](decimal_128['RationalExtension|power'](decimal_128._r10, exponent.toInt()));
+    }
+    static convertRationalToBinary(rational) {
+      let t0;
+      if (rational == null) {
+        return new bson.BsonBinary.fromHexString("0000000000000000000000000000007c");
+      } else if (dart.equals(rational, decimal_128.infinityValue)) {
+        return new bson.BsonBinary.fromHexString("00000000000000000000000000000078");
+      } else if (dart.equals(rational, decimal_128.infinityValue._negate())) {
+        return new bson.BsonBinary.fromHexString("000000000000000000000000000000f8");
+      } else if (dart.equals(rational, rational$.Rational.zero)) {
+        return new bson.BsonBinary.fromHexString("00000000000000000000000000004030");
+      } else if (dart.test(rational.hasFinitePrecision) && dart.test(rational['<'](decimal_128._r1)) && dart.notNull(rational.precision) > 34) {
+        return new bson.BsonBinary.fromHexString("00000000000000000000000000004030");
+      }
+      let res = null;
+      if (dart.test(rational.hasFinitePrecision)) {
+        res = rational.toStringAsFixed(rational.scale);
+      } else {
+        res = decimal_128['RationalExtension|toStringAsPrecisionFast'](rational, 34);
+      }
+      let exponent = decimal_128.BsonDecimal128.extractExponent(res);
+      let significand = decimal_128.BsonDecimal128.extractSignificand(res);
+      if (dart.test(significand['>'](decimal_128.maxSignificand))) {
+        significand = rational$.Rational.zero;
+      }
+      let biasedExponent = dart.notNull(exponent) + 6176;
+      let highSignificand = significand['~/'](decimal_128.maxUInt64);
+      let lowSignificand = significand['-'](highSignificand['*'](decimal_128.maxUInt64));
+      if (dart.test(lowSignificand['>='](decimal_128.maxInt64))) {
+        lowSignificand = lowSignificand['-'](decimal_128.maxUInt64);
+      }
+      let lowInt = fixnum.Int64.parseRadix(dart.toString(lowSignificand), 10);
+      let highInt = fixnum.Int64.parseRadix(dart.toString(highSignificand), 10);
+      highInt = highInt['+'](fixnum.Int64.new(biasedExponent)['<<'](49));
+      if (dart.test(rational.isNegative)) {
+        highInt = highInt['|'](decimal_128.signMask);
+      }
+      t0 = new bson.BsonBinary.new(16);
+      return (() => {
+        t0.writeFixInt64(lowInt);
+        t0.writeFixInt64(highInt);
+        return t0;
+      })();
+    }
+    static extractExponent(valueString) {
+      let parts = valueString[$split](".");
+      let value = null;
+      if (parts[$length] === 2) {
+        value = decimal_128.BsonDecimal128.removeTrailingZeros(parts[$last]);
+        if (value.length !== 0) {
+          return -value.length;
+        }
+      }
+      let cleanedValue = parts[$first][$replaceAll](core.RegExp.new("[+-]"), "");
+      value = decimal_128.BsonDecimal128.removeTrailingZeros(cleanedValue);
+      return cleanedValue.length - value.length;
+    }
+    static extractSignificand(valueString) {
+      let buffer = new core.StringBuffer.new();
+      let zeroBuffer = new core.StringBuffer.new();
+      for (let idx = 0; idx < valueString.length; idx = idx + 1) {
+        if (valueString[$_get](idx) === "." || valueString[$_get](idx) === "-" || valueString[$_get](idx) === "+") {
+          continue;
+        }
+        if (valueString[$_get](idx) === "0") {
+          if (dart.test(buffer.isEmpty)) {
+            continue;
+          }
+          zeroBuffer.write("0");
+          continue;
+        }
+        if (dart.test(zeroBuffer.isNotEmpty)) {
+          buffer.write(zeroBuffer);
+          zeroBuffer.clear();
+        }
+        buffer.write(valueString[$_get](idx));
+      }
+      return rational$.Rational.parse(dart.str(buffer));
+    }
+    static removeTrailingZeros(valueString) {
+      let buffer = new core.StringBuffer.new();
+      let zeroBuffer = new core.StringBuffer.new();
+      for (let idx = 0; idx < valueString.length; idx = idx + 1) {
+        if (valueString[$_get](idx) === "." || valueString[$_get](idx) === "-" || valueString[$_get](idx) === "+") {
+          continue;
+        }
+        if (valueString[$_get](idx) === "0") {
+          zeroBuffer.write("0");
+          continue;
+        }
+        if (dart.test(zeroBuffer.isNotEmpty)) {
+          buffer.write(zeroBuffer);
+          zeroBuffer.clear();
+        }
+        buffer.write(valueString[$_get](idx));
+      }
+      return dart.str(buffer);
+    }
+  };
+  (decimal_128.BsonDecimal128.new = function(rational) {
+    this[bin$] = null;
+    if (rational == null) {
+      this.bin = new bson.BsonBinary.fromHexString("0000000000000000000000000000007c");
+    } else {
+      this.bin = decimal_128.BsonDecimal128.convertRationalToBinary(rational);
+    }
+  }).prototype = decimal_128.BsonDecimal128.prototype;
+  (decimal_128.BsonDecimal128.fromBsonBinary = function(bin) {
+    this[bin$] = bin;
+    if (this.bin == null) {
+      this.bin = new bson.BsonBinary.fromHexString("0000000000000000000000000000007c");
+    } else {
+      this[_checkBinaryLength](this.bin);
+    }
+  }).prototype = decimal_128.BsonDecimal128.prototype;
+  dart.addTypeTests(decimal_128.BsonDecimal128);
+  dart.addTypeCaches(decimal_128.BsonDecimal128);
+  dart.setMethodSignature(decimal_128.BsonDecimal128, () => ({
+    __proto__: dart.getMethods(decimal_128.BsonDecimal128.__proto__),
+    _equals: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    [$_equals]: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    toHexString: dart.fnType(dart.legacy(core.String), []),
+    toJson: dart.fnType(dart.legacy(core.String), []),
+    [_checkBinaryLength]: dart.fnType(dart.void, [dart.legacy(bson.BsonBinary)])
+  }));
+  dart.setGetterSignature(decimal_128.BsonDecimal128, () => ({
+    __proto__: dart.getGetters(decimal_128.BsonDecimal128.__proto__),
+    hashCode: dart.legacy(core.int),
+    [$hashCode]: dart.legacy(core.int),
+    value: dart.legacy(rational$.Rational)
+  }));
+  dart.setLibraryUri(decimal_128.BsonDecimal128, I[1]);
+  dart.setFieldSignature(decimal_128.BsonDecimal128, () => ({
+    __proto__: dart.getFields(decimal_128.BsonDecimal128.__proto__),
+    bin: dart.fieldType(dart.legacy(bson.BsonBinary))
+  }));
+  dart.defineExtensionMethods(decimal_128.BsonDecimal128, ['_equals', 'toString']);
+  dart.defineExtensionAccessors(decimal_128.BsonDecimal128, ['hashCode']);
+  decimal_128['RationalExtension|toStringAsPrecisionFast'] = function RationalExtension$124toStringAsPrecisionFast($this, requiredPrecision) {
+    if (!(dart.notNull(requiredPrecision) > 0)) dart.assertFailed(null, I[2], 329, 12, "requiredPrecision > 0");
+    if (!dart.test($this.hasFinitePrecision)) {
+      let pwr = dart.notNull(requiredPrecision) + $this.denominator.toRadixString(10).length;
+      let shifter = decimal_128['RationalExtension|_r10'].pow(pwr);
+      let rational = $this['*'](shifter).round()['/'](shifter);
+      return decimal_128['RationalExtension|toStringAsPrecisionFast'](rational, requiredPrecision);
+    }
+    let shiftExponent = dart.notNull(requiredPrecision) - (dart.notNull($this.precision) - dart.notNull($this.scale));
+    let value = null;
+    if (shiftExponent === 0) {
+      value = $this;
+    } else {
+      let coefficient = decimal_128['RationalExtension|power'](decimal_128['RationalExtension|_r10'], shiftExponent);
+      value = $this['*'](coefficient).round()['/'](coefficient);
+    }
+    return shiftExponent <= 0 ? dart.toString(value) : value.toStringAsFixed(shiftExponent);
+  };
+  decimal_128['RationalExtension|get#toStringAsPrecisionFast'] = function RationalExtension$124get$35toStringAsPrecisionFast($this) {
+    return dart.fn(requiredPrecision => decimal_128['RationalExtension|toStringAsPrecisionFast']($this, requiredPrecision), T.intLToStringL());
+  };
+  decimal_128['RationalExtension|power'] = function RationalExtension$124power($this, exponent) {
+    return exponent[$isNegative] ? $this.inverse.pow(-dart.notNull(exponent)) : $this.pow(exponent);
+  };
+  decimal_128['RationalExtension|get#power'] = function RationalExtension$124get$35power($this) {
+    return dart.fn(exponent => decimal_128['RationalExtension|power']($this, exponent), T.intLToRationalL());
+  };
+  dart.defineLazy(decimal_128, {
+    /*decimal_128.signMask*/get signMask() {
+      return fixnum.Int64.parseHex("8000000000000000");
+    },
+    /*decimal_128.naNMask*/get naNMask() {
+      return fixnum.Int64.parseHex("7C00000000000000");
+    },
+    /*decimal_128.infinityMask*/get infinityMask() {
+      return fixnum.Int64.parseHex("7800000000000000");
+    },
+    /*decimal_128.finite2Mask*/get finite2Mask() {
+      return fixnum.Int64.parseHex("6000000000000000");
+    },
+    /*decimal_128.exponent1Mask*/get exponent1Mask() {
+      return fixnum.Int64.parseHex("7FFE000000000000");
+    },
+    /*decimal_128.exponent2Mask*/get exponent2Mask() {
+      return fixnum.Int64.parseHex("1FFF800000000000");
+    },
+    /*decimal_128.significand1Mask*/get significand1Mask() {
+      return fixnum.Int64.parseHex("0001FFFFFFFFFFFF");
+    },
+    /*decimal_128.significand2Mask*/get significand2Mask() {
+      return fixnum.Int64.parseHex("00007FFFFFFFFFFF");
+    },
+    /*decimal_128.significand2impliedMask*/get significand2impliedMask() {
+      return fixnum.Int64.parseHex("2000000000000");
+    },
+    /*decimal_128.infinityValue*/get infinityValue() {
+      return rational$.Rational.parse("10000000000000000000000000000000000").pow(10000);
+    },
+    /*decimal_128.maxSignificand*/get maxSignificand() {
+      return rational$.Rational.fromInt(10).pow(34)['-'](rational$.Rational.one);
+    },
+    /*decimal_128.maxUInt64*/get maxUInt64() {
+      return rational$.Rational.fromInt(2).pow(64);
+    },
+    /*decimal_128.maxInt64*/get maxInt64() {
+      return rational$.Rational.fromInt(2).pow(63);
+    },
+    /*decimal_128._r10*/get _r10() {
+      return rational$.Rational.fromInt(10);
+    },
+    /*decimal_128._r1*/get _r1() {
+      return rational$.Rational.fromInt(1);
+    },
+    /*decimal_128.maxExponent*/get maxExponent() {
+      return fixnum.Int64.new(12287);
+    },
+    /*decimal_128['RationalExtension|_r10']*/get ['RationalExtension|_r10']() {
+      return rational$.Rational.fromInt(10);
+    }
+  }, true);
+  bson._ElementPair = class _ElementPair extends core.Object {};
+  (bson._ElementPair.new = function(name = null, value = null) {
+    this.name = name;
+    this.value = value;
+    ;
+  }).prototype = bson._ElementPair.prototype;
+  dart.addTypeTests(bson._ElementPair);
+  dart.addTypeCaches(bson._ElementPair);
+  dart.setLibraryUri(bson._ElementPair, I[0]);
+  dart.setFieldSignature(bson._ElementPair, () => ({
+    __proto__: dart.getFields(bson._ElementPair.__proto__),
+    name: dart.fieldType(dart.legacy(core.String)),
+    value: dart.fieldType(dart.dynamic)
+  }));
+  var id$ = dart.privateName(bson, "ObjectId.id");
+  bson.ObjectId = class ObjectId extends bson.BsonObject {
+    get id() {
+      return this[id$];
+    }
+    set id(value) {
+      this[id$] = value;
+    }
+    createId(seconds, clientMode) {
+      let t4;
+      function getOctet(value) {
+        let res = value[$toRadixString](16);
+        while (res.length < 8) {
+          res = "0" + res;
+        }
+        return res;
+      }
+      dart.fn(getOctet, T.intLToStringL());
+      if (dart.test(clientMode)) {
+        let s = dart.str(getOctet(seconds)) + dart.str(getOctet(bson._Statics.RandomId)) + dart.str(getOctet(bson._Statics.nextIncrement));
+        return new bson.BsonBinary.fromHexString(s);
+      } else {
+        t4 = new bson.BsonBinary.new(12);
+        return (() => {
+          t4.writeInt(seconds, {endianness: typed_data.Endian.big});
+          t4.writeInt(bson._Statics.RandomId);
+          t4.writeInt(bson._Statics.nextIncrement, {endianness: typed_data.Endian.big});
+          return t4;
+        })();
+      }
+    }
+    static fromHexString(hexString) {
+      if (hexString.length !== 24 || !dart.test(bson._objectIdMatcher.everyOf(hexString))) {
+        dart.throw(new core.ArgumentError.new("Expected hexadecimal string with length of 24, got " + dart.str(hexString)));
+      }
+      return new bson.ObjectId.fromBsonBinary(new bson.BsonBinary.fromHexString(hexString));
+    }
+    static parse(hexString) {
+      return bson.ObjectId.fromHexString(hexString);
+    }
+    get hashCode() {
+      return dart.hashCode(this.id.hexString);
+    }
+    _equals(other) {
+      if (other == null) return false;
+      return T.ObjectIdL().is(other) && this.toHexString() == other.toHexString();
+    }
+    toString() {
+      return "ObjectId(\"" + dart.str(this.id.hexString) + "\")";
+    }
+    toHexString() {
+      return this.id.hexString;
+    }
+    get typeByte() {
+      return 7;
+    }
+    get value() {
+      return this;
+    }
+    byteLength() {
+      return 12;
+    }
+    unpackValue(buffer) {
+      let t4;
+      this.id.byteList[$setRange](0, 12, buffer.byteList, buffer.offset);
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + 12;
+    }
+    packValue(buffer) {
+      let t4;
+      if (this.id.byteList == null) {
+        this.id.makeByteList();
+      }
+      buffer.byteList[$setRange](buffer.offset, dart.notNull(buffer.offset) + 12, this.id.byteList);
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + 12;
+    }
+    toJson() {
+      return this.id.hexString;
+    }
+    get dateTime() {
+      return new core.DateTime.fromMillisecondsSinceEpoch(dart.notNull(core.int.parse(this.id.hexString[$substring](0, 8), {radix: 16})) * 1000);
+    }
+  };
+  (bson.ObjectId.new = function(opts) {
+    let clientMode = opts && 'clientMode' in opts ? opts.clientMode : false;
+    this[id$] = null;
+    let seconds = new bson.Timestamp.new(null, 0).seconds;
+    this.id = this.createId(seconds, clientMode);
+  }).prototype = bson.ObjectId.prototype;
+  (bson.ObjectId.fromSeconds = function(seconds, clientMode = false) {
+    this[id$] = null;
+    this.id = this.createId(seconds, clientMode);
+  }).prototype = bson.ObjectId.prototype;
+  (bson.ObjectId.fromBsonBinary = function(id) {
+    this[id$] = id;
+    ;
+  }).prototype = bson.ObjectId.prototype;
+  dart.addTypeTests(bson.ObjectId);
+  dart.addTypeCaches(bson.ObjectId);
+  dart.setMethodSignature(bson.ObjectId, () => ({
+    __proto__: dart.getMethods(bson.ObjectId.__proto__),
+    createId: dart.fnType(dart.legacy(bson.BsonBinary), [dart.legacy(core.int), dart.legacy(core.bool)]),
+    _equals: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    [$_equals]: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    toHexString: dart.fnType(dart.legacy(core.String), []),
+    toJson: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setGetterSignature(bson.ObjectId, () => ({
+    __proto__: dart.getGetters(bson.ObjectId.__proto__),
+    hashCode: dart.legacy(core.int),
+    [$hashCode]: dart.legacy(core.int),
+    dateTime: dart.legacy(core.DateTime)
+  }));
+  dart.setLibraryUri(bson.ObjectId, I[0]);
+  dart.setFieldSignature(bson.ObjectId, () => ({
+    __proto__: dart.getFields(bson.ObjectId.__proto__),
+    id: dart.fieldType(dart.legacy(bson.BsonBinary))
+  }));
+  dart.defineExtensionMethods(bson.ObjectId, ['_equals', 'toString']);
+  dart.defineExtensionAccessors(bson.ObjectId, ['hashCode']);
+  var seconds$ = dart.privateName(bson, "Timestamp.seconds");
+  var increment$ = dart.privateName(bson, "Timestamp.increment");
+  bson.Timestamp = class Timestamp extends bson.BsonObject {
+    get seconds() {
+      return this[seconds$];
+    }
+    set seconds(value) {
+      this[seconds$] = value;
+    }
+    get increment() {
+      return this[increment$];
+    }
+    set increment(value) {
+      this[increment$] = value;
+    }
+    get value() {
+      return this;
+    }
+    get typeByte() {
+      return 17;
+    }
+    toString() {
+      return "Timestamp(" + dart.str(this.seconds) + ", " + dart.str(this.increment) + ")";
+    }
+    byteLength() {
+      return 8;
+    }
+    packValue(buffer) {
+      buffer.writeInt(this.increment);
+      buffer.writeInt(this.seconds);
+    }
+    unpackValue(buffer) {
+      this.increment = buffer.readInt32();
+      this.seconds = buffer.readInt32();
+    }
+  };
+  (bson.Timestamp.new = function(seconds = null, increment = null) {
+    this[seconds$] = seconds;
+    this[increment$] = increment;
+    if (this.seconds == null) {
+      this.seconds = (dart.notNull(new core.DateTime.now().millisecondsSinceEpoch) / 1000)[$truncate]()[$toInt]();
+    }
+    if (this.increment == null) {
+      this.increment = bson._Statics.nextIncrement;
+    }
+  }).prototype = bson.Timestamp.prototype;
+  dart.addTypeTests(bson.Timestamp);
+  dart.addTypeCaches(bson.Timestamp);
+  dart.setMethodSignature(bson.Timestamp, () => ({
+    __proto__: dart.getMethods(bson.Timestamp.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(bson.Timestamp, I[0]);
+  dart.setFieldSignature(bson.Timestamp, () => ({
+    __proto__: dart.getFields(bson.Timestamp.__proto__),
+    seconds: dart.fieldType(dart.legacy(core.int)),
+    increment: dart.fieldType(dart.legacy(core.int))
+  }));
+  dart.defineExtensionMethods(bson.Timestamp, ['toString']);
+  var byteArray = dart.privateName(bson, "BsonBinary.byteArray");
+  var byteList = dart.privateName(bson, "BsonBinary.byteList");
+  var offset = dart.privateName(bson, "BsonBinary.offset");
+  var subType = dart.privateName(bson, "BsonBinary.subType");
+  var _hexString$ = dart.privateName(bson, "_hexString");
+  var _getByteData = dart.privateName(bson, "_getByteData");
+  var Endian__littleEndian = dart.privateName(typed_data, "Endian._littleEndian");
+  bson.BsonBinary = class BsonBinary extends bson.BsonObject {
+    get byteArray() {
+      return this[byteArray];
+    }
+    set byteArray(value) {
+      this[byteArray] = value;
+    }
+    get byteList() {
+      return this[byteList];
+    }
+    set byteList(value) {
+      this[byteList] = value;
+    }
+    get offset() {
+      return this[offset];
+    }
+    set offset(value) {
+      this[offset] = value;
+    }
+    get subType() {
+      return this[subType];
+    }
+    set subType(value) {
+      this[subType] = value;
+    }
+    static createTokens() {
+      let result = T.ListOfintL().new(255);
+      result[$_set](48, 0);
+      result[$_set](49, 1);
+      result[$_set](50, 2);
+      result[$_set](51, 3);
+      result[$_set](52, 4);
+      result[$_set](53, 5);
+      result[$_set](54, 6);
+      result[$_set](55, 7);
+      result[$_set](56, 8);
+      result[$_set](57, 9);
+      result[$_set](97, 10);
+      result[$_set](98, 11);
+      result[$_set](99, 12);
+      result[$_set](100, 13);
+      result[$_set](101, 14);
+      result[$_set](102, 15);
+      return result;
+    }
+    set hexString(value) {
+      return this[_hexString$] = value;
+    }
+    get hexString() {
+      if (this[_hexString$] == null) {
+        this.makeHexString();
+      }
+      return this[_hexString$];
+    }
+    get typeByte() {
+      return 5;
+    }
+    [_getByteData](from) {
+      return typed_data.ByteData.view(typed_data.ByteBuffer.as(dart.dload(from, 'buffer')));
+    }
+    makeHexString() {
+      let stringBuffer = new core.StringBuffer.new();
+      for (let byte of this.byteList) {
+        if (dart.notNull(byte) < 16) {
+          stringBuffer.write("0");
+        }
+        stringBuffer.write(byte[$toRadixString](16));
+      }
+      this[_hexString$] = stringBuffer.toString()[$toLowerCase]();
+    }
+    makeByteList() {
+      let t4;
+      if (this[_hexString$].length[$remainder](2) !== 0) {
+        dart.throw("Not valid hex representation: " + dart.str(this[_hexString$]) + " (odd length)");
+      }
+      this.byteList = _native_typed_data.NativeUint8List.new((this[_hexString$].length / 2)[$round]()[$toInt]());
+      this.byteArray = this[_getByteData](this.byteList);
+      let pos = 0;
+      let listPos = 0;
+      while (pos < this[_hexString$].length) {
+        let char = this[_hexString$][$codeUnitAt](pos);
+        let n1 = bson.BsonBinary.tokens[$_get](char);
+        if (n1 == null) {
+          dart.throw("Invalid char " + this[_hexString$][$_get](pos) + " in " + dart.str(this[_hexString$]));
+        }
+        pos = pos + 1;
+        char = this[_hexString$][$codeUnitAt](pos);
+        let n2 = bson.BsonBinary.tokens[$_get](char);
+        if (n2 == null) {
+          dart.throw("Invalid char " + this[_hexString$][$_get](pos) + " in " + dart.str(this[_hexString$]));
+        }
+        this.byteList[$_set]((t4 = listPos, listPos = t4 + 1, t4), (dart.notNull(n1) << 4 >>> 0) + dart.notNull(n2));
+        pos = pos + 1;
+      }
+    }
+    setIntExtended(value, numOfBytes, endianness) {
+      let byteListTmp = _native_typed_data.NativeUint8List.new(4);
+      let byteArrayTmp = this[_getByteData](byteListTmp);
+      if (numOfBytes === 3) {
+        byteArrayTmp[$setInt32](0, value, endianness);
+      } else {
+        dart.throw(core.Exception.new("Unsupported num of bytes: " + dart.str(numOfBytes)));
+      }
+      this.byteList[$setRange](this.offset, dart.notNull(this.offset) + dart.notNull(numOfBytes), byteListTmp);
+    }
+    reverse(numOfBytes) {
+      const swap = (x, y) => {
+        let t = this.byteList[$_get](dart.notNull(x) + dart.notNull(this.offset));
+        this.byteList[$_set](dart.notNull(x) + dart.notNull(this.offset), this.byteList[$_get](dart.notNull(y) + dart.notNull(this.offset)));
+        this.byteList[$_set](dart.notNull(y) + dart.notNull(this.offset), t);
+      };
+      dart.fn(swap, T.intLAndintLToNull());
+      for (let i = 0; i <= (dart.notNull(numOfBytes) - 1)[$modulo](2); i = i + 1) {
+        swap(i, dart.notNull(numOfBytes) - 1 - i);
+      }
+    }
+    encodeInt(position, value, numOfBytes, endianness, signed) {
+      switch (numOfBytes) {
+        case 4:
+        {
+          this.byteArray[$setInt32](position, value, endianness);
+          break;
+        }
+        case 2:
+        {
+          this.byteArray[$setInt16](position, value, endianness);
+          break;
+        }
+        case 1:
+        {
+          this.byteArray[$setInt8](position, value);
+          break;
+        }
+        default:
+        {
+          dart.throw(core.Exception.new("Unsupported num of bytes: " + dart.str(numOfBytes)));
+        }
+      }
+    }
+    writeInt(value, opts) {
+      let numOfBytes = opts && 'numOfBytes' in opts ? opts.numOfBytes : 4;
+      let endianness = opts && 'endianness' in opts ? opts.endianness : C[0] || CT.C0;
+      let signed = opts && 'signed' in opts ? opts.signed : false;
+      this.encodeInt(this.offset, value, numOfBytes, T.EndianL().as(endianness), signed);
+      this.offset = dart.notNull(this.offset) + dart.notNull(numOfBytes);
+    }
+    writeByte(value) {
+      this.encodeInt(this.offset, value, 1, typed_data.Endian.little, false);
+      this.offset = dart.notNull(this.offset) + 1;
+    }
+    writeDouble(value) {
+      this.byteArray[$setFloat64](this.offset, value, typed_data.Endian.little);
+      this.offset = dart.notNull(this.offset) + 8;
+    }
+    writeInt64(value) {
+      if (dart.test(bson.BsonBinary.UseFixnum)) {
+        let d64 = fixnum.Int64.new(value);
+        this.byteList[$setRange](this.offset, dart.notNull(this.offset) + 8, d64.toBytes());
+      } else {
+        this.byteArray[$setInt64](this.offset, value, typed_data.Endian.little);
+      }
+      this.offset = dart.notNull(this.offset) + 8;
+    }
+    writeFixInt64(value) {
+      this.byteList[$setRange](this.offset, dart.notNull(this.offset) + 8, value.toBytes());
+      this.offset = dart.notNull(this.offset) + 8;
+    }
+    readByte() {
+      let t4;
+      return this.byteList[$_get]((t4 = this.offset, this.offset = dart.notNull(t4) + 1, t4));
+    }
+    readInt32() {
+      this.offset = dart.notNull(this.offset) + 4;
+      return this.byteArray[$getInt32](dart.notNull(this.offset) - 4, typed_data.Endian.little);
+    }
+    readInt64() {
+      this.offset = dart.notNull(this.offset) + 8;
+      if (dart.test(bson.BsonBinary.UseFixnum)) {
+        this.offset = dart.notNull(this.offset) - 8;
+        let i1 = this.readInt32();
+        let i2 = this.readInt32();
+        let i64 = fixnum.Int64.fromInts(i2, i1);
+        return i64.toInt();
+      }
+      return this.byteArray[$getInt64](dart.notNull(this.offset) - 8, typed_data.Endian.little);
+    }
+    readFixInt64() {
+      let i1 = this.readInt32();
+      let i2 = this.readInt32();
+      return fixnum.Int64.fromInts(i2, i1);
+    }
+    readDouble() {
+      this.offset = dart.notNull(this.offset) + 8;
+      return this.byteArray[$getFloat64](dart.notNull(this.offset) - 8, typed_data.Endian.little);
+    }
+    readCString() {
+      let t4;
+      let stringBytes = T.JSArrayOfintL().of([]);
+      while (this.byteList[$_get]((t4 = this.offset, this.offset = dart.notNull(t4) + 1, t4)) !== 0) {
+        stringBytes[$add](this.byteList[$_get](dart.notNull(this.offset) - 1));
+      }
+      return convert.utf8.decode(stringBytes);
+    }
+    writeCString(val) {
+      let utfData = convert.utf8.encode(val);
+      this.byteList[$setRange](this.offset, dart.notNull(this.offset) + dart.notNull(utfData[$length]), utfData);
+      this.offset = dart.notNull(this.offset) + dart.notNull(utfData[$length]);
+      this.writeByte(0);
+    }
+    byteLength() {
+      return dart.notNull(this.byteList[$length]) + 4 + 1;
+    }
+    atEnd() {
+      return this.offset == this.byteList[$length];
+    }
+    rewind() {
+      this.offset = 0;
+    }
+    packValue(buffer) {
+      let t4;
+      if (this.byteList == null) {
+        this.makeByteList();
+      }
+      buffer.writeInt(this.byteList[$length]);
+      buffer.writeByte(this.subType);
+      buffer.byteList[$setRange](buffer.offset, dart.notNull(buffer.offset) + dart.notNull(this.byteList[$length]), this.byteList);
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + dart.notNull(this.byteList[$length]);
+    }
+    unpackValue(buffer) {
+      let t4;
+      let size = buffer.readInt32();
+      this.subType = buffer.readByte();
+      this.byteList = _native_typed_data.NativeUint8List.new(size);
+      this.byteArray = this[_getByteData](this.byteList);
+      this.byteList[$setRange](0, size, buffer.byteList, buffer.offset);
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + dart.notNull(size);
+    }
+    get value() {
+      return this;
+    }
+    toString() {
+      return "BsonBinary(" + dart.str(this.hexString) + ")";
+    }
+  };
+  (bson.BsonBinary.new = function(length) {
+    this[byteArray] = null;
+    this[_hexString$] = null;
+    this[byteList] = _native_typed_data.NativeUint8List.new(length);
+    this[offset] = 0;
+    this[subType] = 0;
+    this.byteArray = this[_getByteData](this.byteList);
+  }).prototype = bson.BsonBinary.prototype;
+  (bson.BsonBinary.from = function(from) {
+    this[byteArray] = null;
+    this[_hexString$] = null;
+    this[byteList] = _native_typed_data.NativeUint8List.new(from[$length]);
+    this[offset] = 0;
+    this[subType] = 0;
+    this.byteList[$setRange](0, from[$length], from);
+    this.byteArray = this[_getByteData](this.byteList);
+  }).prototype = bson.BsonBinary.prototype;
+  (bson.BsonBinary.fromHexString = function(_hexString) {
+    this[byteArray] = null;
+    this[subType] = null;
+    this[offset] = null;
+    this[byteList] = null;
+    this[_hexString$] = _hexString;
+    ;
+  }).prototype = bson.BsonBinary.prototype;
+  dart.addTypeTests(bson.BsonBinary);
+  dart.addTypeCaches(bson.BsonBinary);
+  dart.setMethodSignature(bson.BsonBinary, () => ({
+    __proto__: dart.getMethods(bson.BsonBinary.__proto__),
+    [_getByteData]: dart.fnType(dart.legacy(typed_data.ByteData), [dart.dynamic]),
+    makeHexString: dart.fnType(dart.dynamic, []),
+    makeByteList: dart.fnType(dart.dynamic, []),
+    setIntExtended: dart.fnType(dart.dynamic, [dart.legacy(core.int), dart.legacy(core.int), dart.legacy(typed_data.Endian)]),
+    reverse: dart.fnType(dart.dynamic, [dart.legacy(core.int)]),
+    encodeInt: dart.fnType(dart.dynamic, [dart.legacy(core.int), dart.legacy(core.int), dart.legacy(core.int), dart.legacy(typed_data.Endian), dart.legacy(core.bool)]),
+    writeInt: dart.fnType(dart.void, [dart.legacy(core.int)], {endianness: dart.dynamic, numOfBytes: dart.legacy(core.int), signed: dart.legacy(core.bool)}, {}),
+    writeByte: dart.fnType(dart.dynamic, [dart.legacy(core.int)]),
+    writeDouble: dart.fnType(dart.void, [dart.legacy(core.double)]),
+    writeInt64: dart.fnType(dart.void, [dart.legacy(core.int)]),
+    writeFixInt64: dart.fnType(dart.void, [dart.legacy(fixnum.Int64)]),
+    readByte: dart.fnType(dart.legacy(core.int), []),
+    readInt32: dart.fnType(dart.legacy(core.int), []),
+    readInt64: dart.fnType(dart.legacy(core.int), []),
+    readFixInt64: dart.fnType(dart.legacy(fixnum.Int64), []),
+    readDouble: dart.fnType(dart.legacy(core.num), []),
+    readCString: dart.fnType(dart.legacy(core.String), []),
+    writeCString: dart.fnType(dart.dynamic, [dart.legacy(core.String)]),
+    atEnd: dart.fnType(dart.legacy(core.bool), []),
+    rewind: dart.fnType(dart.dynamic, []),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setGetterSignature(bson.BsonBinary, () => ({
+    __proto__: dart.getGetters(bson.BsonBinary.__proto__),
+    hexString: dart.legacy(core.String)
+  }));
+  dart.setSetterSignature(bson.BsonBinary, () => ({
+    __proto__: dart.getSetters(bson.BsonBinary.__proto__),
+    hexString: dart.legacy(core.String)
+  }));
+  dart.setLibraryUri(bson.BsonBinary, I[0]);
+  dart.setFieldSignature(bson.BsonBinary, () => ({
+    __proto__: dart.getFields(bson.BsonBinary.__proto__),
+    byteArray: dart.fieldType(dart.legacy(typed_data.ByteData)),
+    byteList: dart.fieldType(dart.legacy(core.List$(dart.legacy(core.int)))),
+    offset: dart.fieldType(dart.legacy(core.int)),
+    subType: dart.fieldType(dart.legacy(core.int)),
+    [_hexString$]: dart.fieldType(dart.legacy(core.String))
+  }));
+  dart.defineExtensionMethods(bson.BsonBinary, ['toString']);
+  dart.defineLazy(bson.BsonBinary, {
+    /*bson.BsonBinary.UseFixnum*/get UseFixnum() {
+      return bson._isIntWorkaroundNeeded();
+    },
+    /*bson.BsonBinary.BUFFER_SIZE*/get BUFFER_SIZE() {
+      return 256;
+    },
+    /*bson.BsonBinary.SUBTYPE_DEFAULT*/get SUBTYPE_DEFAULT() {
+      return 0;
+    },
+    /*bson.BsonBinary.SUBTYPE_FUNCTION*/get SUBTYPE_FUNCTION() {
+      return 1;
+    },
+    /*bson.BsonBinary.SUBTYPE_BYTE_ARRAY*/get SUBTYPE_BYTE_ARRAY() {
+      return 2;
+    },
+    /*bson.BsonBinary.SUBTYPE_UUID*/get SUBTYPE_UUID() {
+      return 3;
+    },
+    /*bson.BsonBinary.SUBTYPE_MD5*/get SUBTYPE_MD5() {
+      return 4;
+    },
+    /*bson.BsonBinary.SUBTYPE_USER_DEFINED*/get SUBTYPE_USER_DEFINED() {
+      return 128;
+    },
+    /*bson.BsonBinary.CHAR_0*/get CHAR_0() {
+      return 48;
+    },
+    /*bson.BsonBinary.CHAR_1*/get CHAR_1() {
+      return 49;
+    },
+    /*bson.BsonBinary.CHAR_2*/get CHAR_2() {
+      return 50;
+    },
+    /*bson.BsonBinary.CHAR_3*/get CHAR_3() {
+      return 51;
+    },
+    /*bson.BsonBinary.CHAR_4*/get CHAR_4() {
+      return 52;
+    },
+    /*bson.BsonBinary.CHAR_5*/get CHAR_5() {
+      return 53;
+    },
+    /*bson.BsonBinary.CHAR_6*/get CHAR_6() {
+      return 54;
+    },
+    /*bson.BsonBinary.CHAR_7*/get CHAR_7() {
+      return 55;
+    },
+    /*bson.BsonBinary.CHAR_8*/get CHAR_8() {
+      return 56;
+    },
+    /*bson.BsonBinary.CHAR_9*/get CHAR_9() {
+      return 57;
+    },
+    /*bson.BsonBinary.CHAR_a*/get CHAR_a() {
+      return 97;
+    },
+    /*bson.BsonBinary.CHAR_b*/get CHAR_b() {
+      return 98;
+    },
+    /*bson.BsonBinary.CHAR_c*/get CHAR_c() {
+      return 99;
+    },
+    /*bson.BsonBinary.CHAR_d*/get CHAR_d() {
+      return 100;
+    },
+    /*bson.BsonBinary.CHAR_e*/get CHAR_e() {
+      return 101;
+    },
+    /*bson.BsonBinary.CHAR_f*/get CHAR_f() {
+      return 102;
+    },
+    /*bson.BsonBinary.tokens*/get tokens() {
+      return bson.BsonBinary.createTokens();
+    }
+  }, true);
+  bson._Statics = class _Statics extends core.Object {
+    static startStopwatch() {
+      let t4;
+      return bson._Statics._stopwatch = (t4 = new core.Stopwatch.new(), (() => {
+        t4.start();
+        return t4;
+      })());
+    }
+    static stopStopwatch() {
+      return bson._Statics._stopwatch.stop();
+    }
+    static getElapsedTime() {
+      bson._Statics._stopwatch.stop();
+      return new core.Duration.new({milliseconds: bson._Statics._stopwatch.elapsedMilliseconds});
+    }
+    static get nextIncrement() {
+      let t4;
+      t4 = bson._Statics._current_increment;
+      bson._Statics._current_increment = dart.notNull(t4) + 1;
+      return t4;
+    }
+    static get nextRequestId() {
+      if (bson._Statics._requestId == null) {
+        bson._Statics._requestId = 1;
+      }
+      return bson._Statics._requestId = dart.notNull(bson._Statics._requestId) + 1;
+    }
+    static MaxBits(bits) {
+      if (bson._Statics._maxBits == null) {
+        bson._Statics._maxBits = T.ListOfintL().new(65);
+        bson._Statics._maxBits[$_set](0, 0);
+        for (let i = 1; i < 65; i = i + 1) {
+          bson._Statics._maxBits[$_set](i, (2)[$leftShift](i - 1));
+        }
+      }
+      return bson._Statics._maxBits[$_get](bits);
+    }
+    static getKeyUtf8(key) {
+      if (!dart.test(bson._Statics.keys[$containsKey](key))) {
+        bson._Statics.keys[$_set](key, convert.utf8.encode(key));
+      }
+      return bson._Statics.keys[$_get](key);
+    }
+  };
+  (bson._Statics.new = function() {
+    ;
+  }).prototype = bson._Statics.prototype;
+  dart.addTypeTests(bson._Statics);
+  dart.addTypeCaches(bson._Statics);
+  dart.setLibraryUri(bson._Statics, I[0]);
+  dart.defineLazy(bson._Statics, {
+    /*bson._Statics._stopwatch*/get _stopwatch() {
+      return null;
+    },
+    set _stopwatch(_) {},
+    /*bson._Statics._current_increment*/get _current_increment() {
+      return math.Random.new().nextInt(4294967295);
+    },
+    set _current_increment(_) {},
+    /*bson._Statics._requestId*/get _requestId() {
+      return null;
+    },
+    set _requestId(_) {},
+    /*bson._Statics._maxBits*/get _maxBits() {
+      return null;
+    },
+    set _maxBits(_) {},
+    /*bson._Statics.RandomId*/get RandomId() {
+      return math.Random.new().nextInt(4294967295);
+    },
+    /*bson._Statics.keys*/get keys() {
+      return new (T.LinkedMapOfStringL$ListLOfintL()).new();
+    }
+  }, true);
+  bson.MinKey = class MinKey extends bson.BsonObject {};
+  (bson.MinKey.new = function() {
+    ;
+  }).prototype = bson.MinKey.prototype;
+  dart.addTypeTests(bson.MinKey);
+  dart.addTypeCaches(bson.MinKey);
+  dart.setLibraryUri(bson.MinKey, I[0]);
+  bson.MaxKey = class MaxKey extends bson.BsonObject {};
+  (bson.MaxKey.new = function() {
+    ;
+  }).prototype = bson.MaxKey.prototype;
+  dart.addTypeTests(bson.MaxKey);
+  dart.addTypeCaches(bson.MaxKey);
+  dart.setLibraryUri(bson.MaxKey, I[0]);
+  var data$ = dart.privateName(bson, "BsonInt.data");
+  bson.BsonInt = class BsonInt extends bson.BsonObject {
+    get data() {
+      return this[data$];
+    }
+    set data(value) {
+      this[data$] = value;
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return 4;
+    }
+    get typeByte() {
+      return 16;
+    }
+    packValue(buffer) {
+      buffer.writeInt(this.data);
+    }
+    unpackValue(buffer) {
+      this.data = buffer.readInt32();
+    }
+  };
+  (bson.BsonInt.new = function(data) {
+    this[data$] = data;
+    ;
+  }).prototype = bson.BsonInt.prototype;
+  dart.addTypeTests(bson.BsonInt);
+  dart.addTypeCaches(bson.BsonInt);
+  dart.setLibraryUri(bson.BsonInt, I[0]);
+  dart.setFieldSignature(bson.BsonInt, () => ({
+    __proto__: dart.getFields(bson.BsonInt.__proto__),
+    data: dart.fieldType(dart.legacy(core.int))
+  }));
+  var data$0 = dart.privateName(bson, "BsonLong.data");
+  bson.BsonLong = class BsonLong extends bson.BsonObject {
+    get data() {
+      return this[data$0];
+    }
+    set data(value) {
+      this[data$0] = value;
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return 8;
+    }
+    get typeByte() {
+      return 18;
+    }
+    packValue(buffer) {
+      buffer.writeInt64(this.data);
+    }
+    unpackValue(buffer) {
+      this.data = buffer.readInt64();
+    }
+  };
+  (bson.BsonLong.new = function(data) {
+    this[data$0] = data;
+    ;
+  }).prototype = bson.BsonLong.prototype;
+  dart.addTypeTests(bson.BsonLong);
+  dart.addTypeCaches(bson.BsonLong);
+  dart.setLibraryUri(bson.BsonLong, I[0]);
+  dart.setFieldSignature(bson.BsonLong, () => ({
+    __proto__: dart.getFields(bson.BsonLong.__proto__),
+    data: dart.fieldType(dart.legacy(core.int))
+  }));
+  var data$1 = dart.privateName(bson, "BsonString.data");
+  var _utfData = dart.privateName(bson, "_utfData");
+  bson.BsonString = class BsonString extends bson.BsonObject {
+    get data() {
+      return this[data$1];
+    }
+    set data(value) {
+      this[data$1] = value;
+    }
+    get utfData() {
+      if (this[_utfData] == null) {
+        this[_utfData] = convert.utf8.encode(this.data);
+      }
+      return this[_utfData];
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return dart.notNull(this.utfData[$length]) + 1 + 4;
+    }
+    get typeByte() {
+      return 2;
+    }
+    packValue(buffer) {
+      let t4;
+      buffer.writeInt(dart.notNull(this.utfData[$length]) + 1);
+      buffer.byteList[$setRange](buffer.offset, dart.notNull(buffer.offset) + dart.notNull(this.utfData[$length]), this.utfData);
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + dart.notNull(this.utfData[$length]);
+      buffer.writeByte(0);
+    }
+    unpackValue(buffer) {
+      let t4;
+      let size = dart.notNull(buffer.readInt32()) - 1;
+      this.data = convert.utf8.decode(buffer.byteList[$getRange](buffer.offset, dart.notNull(buffer.offset) + size)[$toList]());
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + (size + 1);
+    }
+  };
+  (bson.BsonString.new = function(data) {
+    this[_utfData] = null;
+    this[data$1] = data;
+    ;
+  }).prototype = bson.BsonString.prototype;
+  dart.addTypeTests(bson.BsonString);
+  dart.addTypeCaches(bson.BsonString);
+  dart.setGetterSignature(bson.BsonString, () => ({
+    __proto__: dart.getGetters(bson.BsonString.__proto__),
+    utfData: dart.legacy(core.List$(dart.legacy(core.int)))
+  }));
+  dart.setLibraryUri(bson.BsonString, I[0]);
+  dart.setFieldSignature(bson.BsonString, () => ({
+    __proto__: dart.getFields(bson.BsonString.__proto__),
+    data: dart.fieldType(dart.legacy(core.String)),
+    [_utfData]: dart.fieldType(dart.legacy(core.List$(dart.legacy(core.int))))
+  }));
+  bson.BsonCode = class BsonCode extends bson.BsonString {
+    get value() {
+      return this;
+    }
+    get typeByte() {
+      return 13;
+    }
+    toString() {
+      return "BsonCode('" + dart.str(this.data) + "')";
+    }
+  };
+  (bson.BsonCode.new = function(dataValue) {
+    bson.BsonCode.__proto__.new.call(this, dataValue);
+    ;
+  }).prototype = bson.BsonCode.prototype;
+  dart.addTypeTests(bson.BsonCode);
+  dart.addTypeCaches(bson.BsonCode);
+  dart.setMethodSignature(bson.BsonCode, () => ({
+    __proto__: dart.getMethods(bson.BsonCode.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(bson.BsonCode, I[0]);
+  dart.defineExtensionMethods(bson.BsonCode, ['toString']);
+  var useKeyCash$ = dart.privateName(bson, "BsonCString.useKeyCash");
+  bson.BsonCString = class BsonCString extends bson.BsonString {
+    get useKeyCash() {
+      return this[useKeyCash$];
+    }
+    set useKeyCash(value) {
+      this[useKeyCash$] = value;
+    }
+    get typeByte() {
+      dart.throw("Function typeByte of BsonCString must not be called");
+    }
+    get utfData() {
+      if (dart.test(this.useKeyCash)) {
+        return T.ListLOfintL().as(bson._Statics.getKeyUtf8(this.data));
+      } else {
+        return super.utfData;
+      }
+    }
+    byteLength() {
+      return dart.notNull(this.utfData[$length]) + 1;
+    }
+    packValue(buffer) {
+      let t4;
+      buffer.byteList[$setRange](buffer.offset, dart.notNull(buffer.offset) + dart.notNull(this.utfData[$length]), this.utfData);
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + dart.notNull(this.utfData[$length]);
+      buffer.writeByte(0);
+    }
+  };
+  (bson.BsonCString.new = function(data, useKeyCash = true) {
+    this[useKeyCash$] = useKeyCash;
+    bson.BsonCString.__proto__.new.call(this, data);
+    ;
+  }).prototype = bson.BsonCString.prototype;
+  dart.addTypeTests(bson.BsonCString);
+  dart.addTypeCaches(bson.BsonCString);
+  dart.setLibraryUri(bson.BsonCString, I[0]);
+  dart.setFieldSignature(bson.BsonCString, () => ({
+    __proto__: dart.getFields(bson.BsonCString.__proto__),
+    useKeyCash: dart.fieldType(dart.legacy(core.bool))
+  }));
+  var data$2 = dart.privateName(bson, "BsonMap.data");
+  var utfKeys = dart.privateName(bson, "BsonMap.utfKeys");
+  var _dataSize = dart.privateName(bson, "_dataSize");
+  bson.BsonMap = class BsonMap extends bson.BsonObject {
+    get data() {
+      return this[data$2];
+    }
+    set data(value) {
+      this[data$2] = value;
+    }
+    get utfKeys() {
+      return this[utfKeys];
+    }
+    set utfKeys(value) {
+      this[utfKeys] = value;
+    }
+    dataSize() {
+      if (this[_dataSize] == null) {
+        this[_dataSize] = 0;
+        this.data[$forEach](dart.fn((key, value) => {
+          this[_dataSize] = dart.notNull(this[_dataSize]) + dart.notNull(bson.elementSize(key, value));
+        }, T.StringLAnddynamicToNull()));
+      }
+      return this[_dataSize];
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return dart.notNull(this.dataSize()) + 1 + 4;
+    }
+    get typeByte() {
+      return 3;
+    }
+    packValue(buffer) {
+      buffer.writeInt(this.byteLength());
+      this.data[$forEach](dart.fn((key, value) => {
+        bson.bsonObjectFrom(value).packElement(key, buffer);
+      }, T.StringLAnddynamicToNull()));
+      buffer.writeByte(0);
+    }
+    unpackValue(buffer) {
+      let t4;
+      this.data = new (T.IdentityMapOfStringL$dynamic()).new();
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + 4;
+      let typeByte = buffer.readByte();
+      while (typeByte !== 0) {
+        let bsonObject = bson.bsonObjectFromTypeByte(typeByte);
+        let element = bsonObject.unpackElement(buffer);
+        this.data[$_set](element.name, element.value);
+        typeByte = buffer.readByte();
+      }
+    }
+  };
+  (bson.BsonMap.new = function(data) {
+    this[utfKeys] = null;
+    this[_dataSize] = null;
+    this[data$2] = data;
+    ;
+  }).prototype = bson.BsonMap.prototype;
+  dart.addTypeTests(bson.BsonMap);
+  dart.addTypeCaches(bson.BsonMap);
+  dart.setMethodSignature(bson.BsonMap, () => ({
+    __proto__: dart.getMethods(bson.BsonMap.__proto__),
+    dataSize: dart.fnType(dart.legacy(core.int), [])
+  }));
+  dart.setLibraryUri(bson.BsonMap, I[0]);
+  dart.setFieldSignature(bson.BsonMap, () => ({
+    __proto__: dart.getFields(bson.BsonMap.__proto__),
+    data: dart.fieldType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))),
+    utfKeys: dart.fieldType(dart.legacy(core.Map)),
+    [_dataSize]: dart.fieldType(dart.legacy(core.int))
+  }));
+  var data$3 = dart.privateName(bson, "BsonArray.data");
+  bson.BsonArray = class BsonArray extends bson.BsonObject {
+    get data() {
+      return this[data$3];
+    }
+    set data(value) {
+      this[data$3] = value;
+    }
+    dataSize() {
+      if (this[_dataSize] == null) {
+        this[_dataSize] = 0;
+        for (let i = 0; i < dart.notNull(this.data[$length]); i = i + 1) {
+          this[_dataSize] = dart.notNull(this[_dataSize]) + dart.notNull(bson.elementSize(i[$toString](), this.data[$_get](i)));
+        }
+      }
+      return this[_dataSize];
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return dart.notNull(this.dataSize()) + 1 + 4;
+    }
+    get typeByte() {
+      return 4;
+    }
+    packValue(buffer) {
+      buffer.writeInt(this.byteLength());
+      for (let i = 0; i < dart.notNull(this.data[$length]); i = i + 1) {
+        bson.bsonObjectFrom(this.data[$_get](i)).packElement(i[$toString](), buffer);
+      }
+      buffer.writeByte(0);
+    }
+    unpackValue(buffer) {
+      let t4;
+      this.data = [];
+      t4 = buffer;
+      t4.offset = dart.notNull(t4.offset) + 4;
+      let typeByte = buffer.readByte();
+      while (typeByte !== 0) {
+        let bsonObject = bson.bsonObjectFromTypeByte(typeByte);
+        let element = bsonObject.unpackElement(buffer);
+        this.data[$add](element.value);
+        typeByte = buffer.readByte();
+      }
+    }
+  };
+  (bson.BsonArray.new = function(data) {
+    this[_dataSize] = null;
+    this[data$3] = data;
+    ;
+  }).prototype = bson.BsonArray.prototype;
+  dart.addTypeTests(bson.BsonArray);
+  dart.addTypeCaches(bson.BsonArray);
+  dart.setMethodSignature(bson.BsonArray, () => ({
+    __proto__: dart.getMethods(bson.BsonArray.__proto__),
+    dataSize: dart.fnType(dart.legacy(core.int), [])
+  }));
+  dart.setLibraryUri(bson.BsonArray, I[0]);
+  dart.setFieldSignature(bson.BsonArray, () => ({
+    __proto__: dart.getFields(bson.BsonArray.__proto__),
+    data: dart.fieldType(dart.legacy(core.List)),
+    [_dataSize]: dart.fieldType(dart.legacy(core.int))
+  }));
+  bson.BSON = class BSON extends core.Object {
+    serialize(object, offset = 0) {
+      if (!(T.MapL().is(object) || T.ListL().is(object))) {
+        dart.throw(core.Exception.new("Invalid value for BSON serialize: " + dart.str(object)));
+      }
+      let bsonObject = bson.bsonObjectFrom(object);
+      let buffer = new bson.BsonBinary.new(dart.notNull(bsonObject.byteLength()) + dart.notNull(offset));
+      buffer.offset = offset;
+      bson.bsonObjectFrom(object).packValue(buffer);
+      return buffer;
+    }
+    deserialize(buffer) {
+      if (dart.notNull(buffer.byteList[$length]) < 5) {
+        dart.throw(core.Exception.new("corrupt bson message < 5 bytes long"));
+      }
+      let bsonMap = new bson.BsonMap.new(null);
+      bsonMap.unpackValue(buffer);
+      return bsonMap.value;
+    }
+  };
+  (bson.BSON.new = function() {
+    ;
+  }).prototype = bson.BSON.prototype;
+  dart.addTypeTests(bson.BSON);
+  dart.addTypeCaches(bson.BSON);
+  dart.setMethodSignature(bson.BSON, () => ({
+    __proto__: dart.getMethods(bson.BSON.__proto__),
+    serialize: dart.fnType(dart.legacy(bson.BsonBinary), [dart.dynamic], [dart.legacy(core.int)]),
+    deserialize: dart.fnType(dart.dynamic, [dart.legacy(bson.BsonBinary)])
+  }));
+  dart.setLibraryUri(bson.BSON, I[0]);
+  var data$4 = dart.privateName(bson, "BsonDouble.data");
+  bson.BsonDouble = class BsonDouble extends bson.BsonObject {
+    get data() {
+      return this[data$4];
+    }
+    set data(value) {
+      this[data$4] = value;
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return 8;
+    }
+    get typeByte() {
+      return 1;
+    }
+    packValue(buffer) {
+      buffer.writeDouble(this.data);
+    }
+    unpackValue(buffer) {
+      this.data = buffer.readDouble();
+    }
+  };
+  (bson.BsonDouble.new = function(data) {
+    this[data$4] = data;
+    ;
+  }).prototype = bson.BsonDouble.prototype;
+  dart.addTypeTests(bson.BsonDouble);
+  dart.addTypeCaches(bson.BsonDouble);
+  dart.setLibraryUri(bson.BsonDouble, I[0]);
+  dart.setFieldSignature(bson.BsonDouble, () => ({
+    __proto__: dart.getFields(bson.BsonDouble.__proto__),
+    data: dart.fieldType(dart.legacy(core.double))
+  }));
+  var collection$ = dart.privateName(bson, "DbRef.collection");
+  var id$0 = dart.privateName(bson, "DbRef.id");
+  var bsonCollection = dart.privateName(bson, "DbRef.bsonCollection");
+  bson.DbRef = class DbRef extends bson.BsonObject {
+    get collection() {
+      return this[collection$];
+    }
+    set collection(value) {
+      this[collection$] = value;
+    }
+    get id() {
+      return this[id$0];
+    }
+    set id(value) {
+      this[id$0] = value;
+    }
+    get bsonCollection() {
+      return this[bsonCollection];
+    }
+    set bsonCollection(value) {
+      this[bsonCollection] = value;
+    }
+    get value() {
+      return this;
+    }
+    get typeByte() {
+      return 12;
+    }
+    byteLength() {
+      return dart.notNull(this.bsonCollection.byteLength()) + dart.notNull(this.id.byteLength());
+    }
+    unpackValue(buffer) {
+      this.bsonCollection = new bson.BsonString.new(null);
+      this.bsonCollection.unpackValue(buffer);
+      this.collection = this.bsonCollection.data;
+      this.id = new bson.ObjectId.new();
+      this.id.unpackValue(buffer);
+    }
+    toString() {
+      return "DbRef(collection: " + dart.str(this.collection) + ", id: " + dart.str(this.id) + ")";
+    }
+    toJson() {
+      return "DBPointer(\"" + dart.str(this.collection) + "\", " + dart.str(this.id) + ")";
+    }
+    packValue(buffer) {
+      this.bsonCollection.packValue(buffer);
+      this.id.packValue(buffer);
+    }
+    get hashCode() {
+      return (dart.str(this.collection) + "." + dart.str(this.id.toHexString()))[$hashCode];
+    }
+    _equals(other) {
+      if (other == null) return false;
+      return T.DbRefL().is(other) && this.collection == other.collection && this.id.toHexString() == other.id.toHexString();
+    }
+  };
+  (bson.DbRef.new = function(collection, id) {
+    this[bsonCollection] = null;
+    this[collection$] = collection;
+    this[id$0] = id;
+    this.bsonCollection = new bson.BsonString.new(this.collection);
+  }).prototype = bson.DbRef.prototype;
+  dart.addTypeTests(bson.DbRef);
+  dart.addTypeCaches(bson.DbRef);
+  dart.setMethodSignature(bson.DbRef, () => ({
+    __proto__: dart.getMethods(bson.DbRef.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    toJson: dart.fnType(dart.dynamic, []),
+    _equals: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    [$_equals]: dart.fnType(dart.legacy(core.bool), [dart.dynamic])
+  }));
+  dart.setGetterSignature(bson.DbRef, () => ({
+    __proto__: dart.getGetters(bson.DbRef.__proto__),
+    hashCode: dart.legacy(core.int),
+    [$hashCode]: dart.legacy(core.int)
+  }));
+  dart.setLibraryUri(bson.DbRef, I[0]);
+  dart.setFieldSignature(bson.DbRef, () => ({
+    __proto__: dart.getFields(bson.DbRef.__proto__),
+    collection: dart.fieldType(dart.legacy(core.String)),
+    id: dart.fieldType(dart.legacy(bson.ObjectId)),
+    bsonCollection: dart.fieldType(dart.legacy(bson.BsonString))
+  }));
+  dart.defineExtensionMethods(bson.DbRef, ['toString', '_equals']);
+  dart.defineExtensionAccessors(bson.DbRef, ['hashCode']);
+  var collection$0 = dart.privateName(bson, "DBPointer.collection");
+  var id$1 = dart.privateName(bson, "DBPointer.id");
+  var bsonCollection$ = dart.privateName(bson, "DBPointer.bsonCollection");
+  bson.DBPointer = class DBPointer extends bson.BsonObject {
+    get collection() {
+      return this[collection$0];
+    }
+    set collection(value) {
+      this[collection$0] = value;
+    }
+    get id() {
+      return this[id$1];
+    }
+    set id(value) {
+      this[id$1] = value;
+    }
+    get bsonCollection() {
+      return this[bsonCollection$];
+    }
+    set bsonCollection(value) {
+      this[bsonCollection$] = value;
+    }
+    get value() {
+      return this;
+    }
+    get typeByte() {
+      return 12;
+    }
+    byteLength() {
+      return dart.notNull(this.bsonCollection.byteLength()) + dart.notNull(this.id.byteLength());
+    }
+    unpackValue(buffer) {
+      this.bsonCollection = new bson.BsonString.new(null);
+      this.bsonCollection.unpackValue(buffer);
+      this.collection = this.bsonCollection.data;
+      this.id = new bson.ObjectId.new();
+      this.id.unpackValue(buffer);
+    }
+    toString() {
+      return "DBPointer('" + dart.str(this.collection) + "', " + dart.str(this.id) + ")";
+    }
+    toJson() {
+      return this.toString();
+    }
+    packValue(buffer) {
+      this.bsonCollection.packValue(buffer);
+      this.id.packValue(buffer);
+    }
+    get hashCode() {
+      return (dart.str(this.collection) + "." + dart.str(this.id.toHexString()))[$hashCode];
+    }
+    _equals(other) {
+      if (other == null) return false;
+      return T.DBPointerL().is(other) && this.collection == other.collection && this.id.toHexString() == other.id.toHexString();
+    }
+  };
+  (bson.DBPointer.new = function(collection, id) {
+    this[bsonCollection$] = null;
+    this[collection$0] = collection;
+    this[id$1] = id;
+    this.bsonCollection = new bson.BsonString.new(this.collection);
+  }).prototype = bson.DBPointer.prototype;
+  dart.addTypeTests(bson.DBPointer);
+  dart.addTypeCaches(bson.DBPointer);
+  dart.setMethodSignature(bson.DBPointer, () => ({
+    __proto__: dart.getMethods(bson.DBPointer.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    toJson: dart.fnType(dart.dynamic, []),
+    _equals: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    [$_equals]: dart.fnType(dart.legacy(core.bool), [dart.dynamic])
+  }));
+  dart.setGetterSignature(bson.DBPointer, () => ({
+    __proto__: dart.getGetters(bson.DBPointer.__proto__),
+    hashCode: dart.legacy(core.int),
+    [$hashCode]: dart.legacy(core.int)
+  }));
+  dart.setLibraryUri(bson.DBPointer, I[0]);
+  dart.setFieldSignature(bson.DBPointer, () => ({
+    __proto__: dart.getFields(bson.DBPointer.__proto__),
+    collection: dart.fieldType(dart.legacy(core.String)),
+    id: dart.fieldType(dart.legacy(bson.ObjectId)),
+    bsonCollection: dart.fieldType(dart.legacy(bson.BsonString))
+  }));
+  dart.defineExtensionMethods(bson.DBPointer, ['toString', '_equals']);
+  dart.defineExtensionAccessors(bson.DBPointer, ['hashCode']);
+  bson.BsonNull = class BsonNull extends bson.BsonObject {
+    get value() {
+      return null;
+    }
+    byteLength() {
+      return 0;
+    }
+    get typeByte() {
+      return 10;
+    }
+    packValue(buffer) {
+    }
+    unpackValue(buffer) {
+    }
+  };
+  (bson.BsonNull.new = function() {
+    ;
+  }).prototype = bson.BsonNull.prototype;
+  dart.addTypeTests(bson.BsonNull);
+  dart.addTypeCaches(bson.BsonNull);
+  dart.setLibraryUri(bson.BsonNull, I[0]);
+  var data$5 = dart.privateName(bson, "BsonBoolean.data");
+  bson.BsonBoolean = class BsonBoolean extends bson.BsonObject {
+    get data() {
+      return this[data$5];
+    }
+    set data(value) {
+      this[data$5] = value;
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return 1;
+    }
+    get typeByte() {
+      return 8;
+    }
+    packValue(buffer) {
+      buffer.writeByte(dart.test(this.data) ? 1 : 0);
+    }
+    unpackValue(buffer) {
+      let b = buffer.readByte();
+      if (b === 1) {
+        this.data = true;
+      } else {
+        this.data = false;
+      }
+    }
+  };
+  (bson.BsonBoolean.new = function(data) {
+    this[data$5] = data;
+    ;
+  }).prototype = bson.BsonBoolean.prototype;
+  dart.addTypeTests(bson.BsonBoolean);
+  dart.addTypeCaches(bson.BsonBoolean);
+  dart.setLibraryUri(bson.BsonBoolean, I[0]);
+  dart.setFieldSignature(bson.BsonBoolean, () => ({
+    __proto__: dart.getFields(bson.BsonBoolean.__proto__),
+    data: dart.fieldType(dart.legacy(core.bool))
+  }));
+  var data$6 = dart.privateName(bson, "BsonDate.data");
+  bson.BsonDate = class BsonDate extends bson.BsonObject {
+    get data() {
+      return this[data$6];
+    }
+    set data(value) {
+      this[data$6] = value;
+    }
+    get value() {
+      return this.data;
+    }
+    byteLength() {
+      return 8;
+    }
+    get typeByte() {
+      return 9;
+    }
+    packValue(buffer) {
+      buffer.writeInt64(this.data.millisecondsSinceEpoch);
+    }
+    unpackValue(buffer) {
+      this.data = new core.DateTime.fromMillisecondsSinceEpoch(buffer.readInt64(), {isUtc: true});
+    }
+  };
+  (bson.BsonDate.new = function(data) {
+    this[data$6] = data;
+    ;
+  }).prototype = bson.BsonDate.prototype;
+  dart.addTypeTests(bson.BsonDate);
+  dart.addTypeCaches(bson.BsonDate);
+  dart.setLibraryUri(bson.BsonDate, I[0]);
+  dart.setFieldSignature(bson.BsonDate, () => ({
+    __proto__: dart.getFields(bson.BsonDate.__proto__),
+    data: dart.fieldType(dart.legacy(core.DateTime))
+  }));
+  var pattern$ = dart.privateName(bson, "BsonRegexp.pattern");
+  var options$ = dart.privateName(bson, "BsonRegexp.options");
+  var bsonPattern = dart.privateName(bson, "BsonRegexp.bsonPattern");
+  var bsonOptions = dart.privateName(bson, "BsonRegexp.bsonOptions");
+  var multiLine$ = dart.privateName(bson, "BsonRegexp.multiLine");
+  var caseInsensitive$ = dart.privateName(bson, "BsonRegexp.caseInsensitive");
+  var verbose = dart.privateName(bson, "BsonRegexp.verbose");
+  var dotAll$ = dart.privateName(bson, "BsonRegexp.dotAll");
+  var extended$ = dart.privateName(bson, "BsonRegexp.extended");
+  bson.BsonRegexp = class BsonRegexp extends bson.BsonObject {
+    get pattern() {
+      return this[pattern$];
+    }
+    set pattern(value) {
+      this[pattern$] = value;
+    }
+    get options() {
+      return this[options$];
+    }
+    set options(value) {
+      this[options$] = value;
+    }
+    get bsonPattern() {
+      return this[bsonPattern];
+    }
+    set bsonPattern(value) {
+      this[bsonPattern] = value;
+    }
+    get bsonOptions() {
+      return this[bsonOptions];
+    }
+    set bsonOptions(value) {
+      this[bsonOptions] = value;
+    }
+    get multiLine() {
+      return this[multiLine$];
+    }
+    set multiLine(value) {
+      this[multiLine$] = value;
+    }
+    get caseInsensitive() {
+      return this[caseInsensitive$];
+    }
+    set caseInsensitive(value) {
+      this[caseInsensitive$] = value;
+    }
+    get verbose() {
+      return this[verbose];
+    }
+    set verbose(value) {
+      this[verbose] = value;
+    }
+    get dotAll() {
+      return this[dotAll$];
+    }
+    set dotAll(value) {
+      this[dotAll$] = value;
+    }
+    get extended() {
+      return this[extended$];
+    }
+    set extended(value) {
+      this[extended$] = value;
+    }
+    get value() {
+      return this;
+    }
+    get typeByte() {
+      return 11;
+    }
+    byteLength() {
+      return dart.notNull(this.bsonPattern.byteLength()) + dart.notNull(this.bsonOptions.byteLength());
+    }
+    unpackValue(buffer) {
+      this.pattern = buffer.readCString();
+      this.options = buffer.readCString();
+      this.bsonPattern = new bson.BsonCString.new(this.pattern, false);
+      this.bsonOptions = new bson.BsonCString.new(this.options, false);
+    }
+    createOptionsString() {
+      if (this.options !== "") {
+        return;
+      }
+      let buffer = new core.StringBuffer.new();
+      if (this.caseInsensitive === true) {
+        buffer.write("i");
+      }
+      if (this.multiLine === true) {
+        buffer.write("m");
+      }
+      if (this.dotAll === true) {
+        buffer.write("s");
+      }
+      if (this.extended === true) {
+        buffer.write("x");
+      }
+      this.options = buffer.toString();
+    }
+    toString() {
+      return "BsonRegexp('" + dart.str(this.pattern) + "',options:'" + dart.str(this.options) + "')";
+    }
+    packValue(buffer) {
+      this.bsonPattern.packValue(buffer);
+      this.bsonOptions.packValue(buffer);
+    }
+    toJson() {
+      return new (T.IdentityMapOfStringL$StringL()).from(["$regex", this.pattern, "$oid", this.options]);
+    }
+  };
+  (bson.BsonRegexp.new = function(pattern, opts) {
+    let multiLine = opts && 'multiLine' in opts ? opts.multiLine : false;
+    let caseInsensitive = opts && 'caseInsensitive' in opts ? opts.caseInsensitive : false;
+    let dotAll = opts && 'dotAll' in opts ? opts.dotAll : false;
+    let extended = opts && 'extended' in opts ? opts.extended : false;
+    let options = opts && 'options' in opts ? opts.options : "";
+    this[bsonPattern] = null;
+    this[bsonOptions] = null;
+    this[verbose] = null;
+    this[pattern$] = pattern;
+    this[multiLine$] = multiLine;
+    this[caseInsensitive$] = caseInsensitive;
+    this[dotAll$] = dotAll;
+    this[extended$] = extended;
+    this[options$] = options;
+    this.createOptionsString();
+    this.bsonPattern = new bson.BsonCString.new(this.pattern, false);
+    this.bsonOptions = new bson.BsonCString.new(this.options, false);
+  }).prototype = bson.BsonRegexp.prototype;
+  dart.addTypeTests(bson.BsonRegexp);
+  dart.addTypeCaches(bson.BsonRegexp);
+  dart.setMethodSignature(bson.BsonRegexp, () => ({
+    __proto__: dart.getMethods(bson.BsonRegexp.__proto__),
+    createOptionsString: dart.fnType(dart.dynamic, []),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), []),
+    toJson: dart.fnType(dart.dynamic, [])
+  }));
+  dart.setLibraryUri(bson.BsonRegexp, I[0]);
+  dart.setFieldSignature(bson.BsonRegexp, () => ({
+    __proto__: dart.getFields(bson.BsonRegexp.__proto__),
+    pattern: dart.fieldType(dart.legacy(core.String)),
+    options: dart.fieldType(dart.legacy(core.String)),
+    bsonPattern: dart.fieldType(dart.legacy(bson.BsonCString)),
+    bsonOptions: dart.fieldType(dart.legacy(bson.BsonCString)),
+    multiLine: dart.fieldType(dart.legacy(core.bool)),
+    caseInsensitive: dart.fieldType(dart.legacy(core.bool)),
+    verbose: dart.fieldType(dart.legacy(core.bool)),
+    dotAll: dart.fieldType(dart.legacy(core.bool)),
+    extended: dart.fieldType(dart.legacy(core.bool))
+  }));
+  dart.defineExtensionMethods(bson.BsonRegexp, ['toString']);
+  bson.elementSize = function elementSize(name, value) {
+    let size = 1;
+    if (name != null) {
+      size = dart.asNullableInt(size + dart.notNull(T.numL().as(dart.dsend(dart.dload(bson._Statics.getKeyUtf8(name), 'length'), '+', [1]))));
+    }
+    size = size + dart.notNull(bson.bsonObjectFrom(value).byteLength());
+    return size;
+  };
+  bson.bsonObjectFrom = function bsonObjectFrom(value) {
+    if (T.BsonObjectL().is(value)) {
+      return value;
+    }
+    if (T.intL().is(value)) {
+      return value[$bitLength] > 31 ? new bson.BsonLong.new(value) : new bson.BsonInt.new(value);
+    }
+    if (T.numL().is(value)) {
+      return new bson.BsonDouble.new(value);
+    }
+    if (T.StringL().is(value)) {
+      return new bson.BsonString.new(value);
+    }
+    if (T.MapL().is(value)) {
+      return new bson.BsonMap.new(T.LinkedHashMapOfStringL$dynamic().from(value));
+    }
+    if (T.ListL().is(value)) {
+      return new bson.BsonArray.new(value);
+    }
+    if (value == null) {
+      return new bson.BsonNull.new();
+    }
+    if (T.DateTimeL().is(value)) {
+      return new bson.BsonDate.new(value);
+    }
+    if (dart.equals(value, true) || dart.equals(value, false)) {
+      return new bson.BsonBoolean.new(T.boolL().as(value));
+    }
+    if (T.RationalL().is(value)) {
+      return new decimal_128.BsonDecimal128.new(value);
+    }
+    dart.throw(core.Exception.new("Not implemented for " + dart.str(value)));
+  };
+  bson.bsonObjectFromTypeByte = function bsonObjectFromTypeByte(typeByte) {
+    switch (typeByte) {
+      case 16:
+      {
+        return new bson.BsonInt.new(null);
+      }
+      case 18:
+      {
+        return new bson.BsonLong.new(null);
+      }
+      case 1:
+      {
+        return new bson.BsonDouble.new(null);
+      }
+      case 2:
+      {
+        return new bson.BsonString.new(null);
+      }
+      case 4:
+      {
+        return new bson.BsonArray.new([]);
+      }
+      case 3:
+      {
+        return new bson.BsonMap.new(new (T.IdentityMapOfStringL$dynamic()).new());
+      }
+      case 6:
+      {
+        return new bson.BsonNull.new();
+      }
+      case 7:
+      {
+        return new bson.ObjectId.new();
+      }
+      case 10:
+      {
+        return new bson.BsonNull.new();
+      }
+      case 12:
+      {
+        return new bson.DbRef.new(null, null);
+      }
+      case 8:
+      {
+        return new bson.BsonBoolean.new(false);
+      }
+      case 5:
+      {
+        return new bson.BsonBinary.new(0);
+      }
+      case 9:
+      {
+        return new bson.BsonDate.new(null);
+      }
+      case 13:
+      {
+        return new bson.BsonCode.new(null);
+      }
+      case 11:
+      {
+        return new bson.BsonRegexp.new(null);
+      }
+      case 17:
+      {
+        return new bson.Timestamp.new(0, 0);
+      }
+      case 19:
+      {
+        return new decimal_128.BsonDecimal128.new(null);
+      }
+      default:
+      {
+        dart.throw(core.Exception.new("Not implemented for BSON TYPE " + dart.str(typeByte)));
+      }
+    }
+  };
+  bson._isIntWorkaroundNeeded = function _isIntWorkaroundNeeded() {
+    let n = 9007199254740992;
+    let newInt = n + 1;
+    return newInt[$toString]() === n[$toString]();
+  };
+  dart.defineLazy(bson, {
+    /*bson._BSON_DATA_NUMBER*/get _BSON_DATA_NUMBER() {
+      return 1;
+    },
+    /*bson._BSON_DATA_STRING*/get _BSON_DATA_STRING() {
+      return 2;
+    },
+    /*bson._BSON_DATA_OBJECT*/get _BSON_DATA_OBJECT() {
+      return 3;
+    },
+    /*bson._BSON_DATA_ARRAY*/get _BSON_DATA_ARRAY() {
+      return 4;
+    },
+    /*bson._BSON_DATA_BINARY*/get _BSON_DATA_BINARY() {
+      return 5;
+    },
+    /*bson._BSON_DATA_UNDEFINED*/get _BSON_DATA_UNDEFINED() {
+      return 6;
+    },
+    /*bson._BSON_DATA_OID*/get _BSON_DATA_OID() {
+      return 7;
+    },
+    /*bson._BSON_DATA_BOOLEAN*/get _BSON_DATA_BOOLEAN() {
+      return 8;
+    },
+    /*bson._BSON_DATA_DATE*/get _BSON_DATA_DATE() {
+      return 9;
+    },
+    /*bson._BSON_DATA_NULL*/get _BSON_DATA_NULL() {
+      return 10;
+    },
+    /*bson._BSON_DATA_REGEXP*/get _BSON_DATA_REGEXP() {
+      return 11;
+    },
+    /*bson._BSON_DATA_DBPOINTER*/get _BSON_DATA_DBPOINTER() {
+      return 12;
+    },
+    /*bson._BSON_DATA_INT*/get _BSON_DATA_INT() {
+      return 16;
+    },
+    /*bson._BSON_DATA_LONG*/get _BSON_DATA_LONG() {
+      return 18;
+    },
+    /*bson._BSON_DATA_CODE*/get _BSON_DATA_CODE() {
+      return 13;
+    },
+    /*bson._BSON_DATA_TIMESTAMP*/get _BSON_DATA_TIMESTAMP() {
+      return 17;
+    },
+    /*bson.bsonDecimal128*/get bsonDecimal128() {
+      return 19;
+    },
+    /*bson._objectIdMatcher*/get _objectIdMatcher() {
+      return char_matcher.CharMatcher.inRange("a", "f")['|'](char_matcher.CharMatcher.digit());
+    }
+  }, true);
+  dart.trackLibraries("packages/bson/src/types/decimal_128.dart", {
+    "package:bson/src/types/decimal_128.dart": decimal_128,
+    "package:bson/bson.dart": bson
+  }, {
+    "package:bson/bson.dart": ["src/bson_type.dart", "src/types/objectid.dart", "src/types/timestamp.dart", "src/types/binary.dart", "src/statics.dart", "src/types/min_max_keys.dart", "src/types/int.dart", "src/types/string.dart", "src/types/map.dart", "src/types/array.dart", "src/bson_impl.dart", "src/types/double.dart", "src/types/dbref.dart", "src/types/dbpointer.dart", "src/types/null.dart", "src/types/boolean.dart", "src/types/date.dart", "src/types/regexp.dart"]
+  }, '{"version":3,"sourceRoot":"","sources":["../bson_type.dart","decimal_128.dart","objectid.dart","timestamp.dart","binary.dart","../statics.dart","min_max_keys.dart","int.dart","string.dart","map.dart","array.dart","../bson_impl.dart","double.dart","dbref.dart","dbpointer.dart","null.dart","boolean.dart","date.dart","regexp.dart"],"names":[],"mappings":"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","file":"../../../../../../../../../../C:/packages/bson/src/types/decimal_128.dart.lib.js"}');
+  // Exports:
+  return {
+    src__types__decimal_128: decimal_128,
+    bson: bson
+  };
+}));
+
+//# sourceMappingURL=decimal_128.dart.lib.js.map
