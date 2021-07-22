@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'Components/fridge_menu.dart';
 import 'Components/food_list.dart';
@@ -53,6 +54,8 @@ class _UserFoodPageState extends State<UserFoodPage> {
   //Manages animations for food_menu
   final ScrollController foodScroll = ScrollController();
 
+  final ScrollController dragScroll = ScrollController();
+
   final List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -88,6 +91,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
   }
 
   void scrollEffect(int index) {
+    print(foodScroll.position);
     print(foodScroll.hasClients);
     if (foodScroll.hasClients) {
       foodScroll.animateTo(height[index],
@@ -102,28 +106,24 @@ class _UserFoodPageState extends State<UserFoodPage> {
       appBar: AppBar(
         title: Text("My Fridge"),
       ),
-      body: Stack(
-        children: [
-          FridgeMenu(
-            scrollEffect: scrollEffect,
-          ),
-          DraggableScrollableSheet(
-            maxChildSize: 1.0,
-            initialChildSize: 0.6,
-            minChildSize: 0.4,
-            expand: true,
-            builder: (context, scrollController) => Container(
-              color: Colors.white70,
-              child: FoodMethods(
+      body: FoodMethods(
+        child: Stack(
+          children: [
+            FridgeMenu(
+              scrollEffect: scrollEffect,
+            ),
+            SlidingUpPanel(
+              maxHeight: MediaQuery.of(context).size.height - 100,
+              minHeight: 300,
+              isDraggable: true,
+              panel: Container(
+                color: Colors.white70,
                 child: Column(
                   children: [
                     FoodToolbar(),
                     Expanded(
                       child: ListView.builder(
-                        primary: false,
                         controller: foodScroll,
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
                         itemCount: 6,
                         itemBuilder: (BuildContext innerContext, int index) {
                           return FoodList(
@@ -139,8 +139,8 @@ class _UserFoodPageState extends State<UserFoodPage> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
