@@ -54,7 +54,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
   //Manages animations for food_menu
   final ScrollController foodScroll = ScrollController();
 
-  final ScrollController dragScroll = ScrollController();
+  PanelController panelController = new PanelController();
 
   final List<Color> colors = [
     Colors.red,
@@ -80,12 +80,11 @@ class _UserFoodPageState extends State<UserFoodPage> {
   }
 
   setHeight() {
-    for (var i = 0; i < 6; i++) {
-      height[i] = tabKeys[i].currentContext?.size?.height ?? 0;
-      if (i > 0) {
-        height[i] = height[i] + height[i - 1];
-      }
-      print(height[i]);
+    for (var i = 1; i < 6; i++) {
+      height[i] =
+          (tabKeys[i - 1].currentContext?.size?.height ?? height[i - 1]) +
+              height[i - 1];
+      print(height);
     }
     setState(() {});
   }
@@ -94,6 +93,8 @@ class _UserFoodPageState extends State<UserFoodPage> {
     print(foodScroll.position);
     print(foodScroll.hasClients);
     if (foodScroll.hasClients) {
+      panelController.open();
+      print(height[index]);
       foodScroll.animateTo(height[index],
           duration: Duration(seconds: 1), curve: Curves.easeIn);
     }
@@ -113,8 +114,9 @@ class _UserFoodPageState extends State<UserFoodPage> {
               scrollEffect: scrollEffect,
             ),
             SlidingUpPanel(
+              controller: panelController,
               maxHeight: MediaQuery.of(context).size.height - 100,
-              minHeight: 300,
+              minHeight: MediaQuery.of(context).size.height * 0.4,
               isDraggable: true,
               panel: Container(
                 color: Colors.white70,
@@ -122,17 +124,19 @@ class _UserFoodPageState extends State<UserFoodPage> {
                   children: [
                     FoodToolbar(),
                     Expanded(
-                      child: ListView.builder(
+                      child: ListView(
+                        shrinkWrap: true,
                         controller: foodScroll,
-                        itemCount: 6,
-                        itemBuilder: (BuildContext innerContext, int index) {
+                        children: List<int>.generate(6, (i) => i)
+                            .map<Widget>((index) {
+                          print(index);
                           return FoodList(
                             key: tabKeys[index],
                             foods: widget.foods[index],
                             category: foodGroup[index],
                             color: colors[index],
                           );
-                        },
+                        }).toList(),
                       ),
                     ),
                   ],
