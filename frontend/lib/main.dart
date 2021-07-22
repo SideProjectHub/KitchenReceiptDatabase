@@ -7,6 +7,7 @@ import './app/models/user.dart' as our_user;
 import './widgets/widgets.dart';
 import './screens/login_page.dart';
 import '../services/kitchen_provider.dart';
+import 'package:project/screens/tab_page.dart';
 
 import 'package:project/config/themes/custom_default_theme.dart';
 
@@ -28,7 +29,7 @@ void main() {
           initialData: null,
         ),
       ],
-      child: MyApp(),
+      child: MaterialApp(home: TabPage()),
     ),
   );
 }

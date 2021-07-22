@@ -3,6 +3,13 @@ import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
 
 class FridgeMenu extends StatefulWidget {
+  final Function scrollEffect;
+
+  const FridgeMenu({
+    Key? key,
+    required this.scrollEffect,
+  }) : super(key: key);
+
   createState() => _FridgeMenuState();
 }
 
@@ -12,9 +19,9 @@ class _FridgeMenuState extends State<FridgeMenu>
 
   @override
   void initState() {
-    super.initState();
     controller = AnimationController(
         duration: Duration(milliseconds: 1000), vsync: this);
+    super.initState();
   }
 
   @override
@@ -23,13 +30,14 @@ class _FridgeMenuState extends State<FridgeMenu>
       margin: const EdgeInsets.symmetric(vertical: 20),
       width: double.infinity,
       height: 300,
-      child: RadialAnimation(controller: controller),
+      child:
+          RadialAnimation(controller: controller, clicked: widget.scrollEffect),
     );
   }
 }
 
 class RadialAnimation extends StatelessWidget {
-  RadialAnimation({Key? key, required this.controller})
+  RadialAnimation({Key? key, required this.controller, required this.clicked})
       : scale = Tween<double>(
           begin: 1.5,
           end: 0.0,
@@ -48,6 +56,7 @@ class RadialAnimation extends StatelessWidget {
   final AnimationController controller;
   final Animation<double> scale;
   final Animation<double> translation;
+  final Function clicked;
 
   build(context) {
     return AnimatedBuilder(
@@ -56,21 +65,28 @@ class RadialAnimation extends StatelessWidget {
           return Stack(alignment: Alignment.center, children: [
             _buildButton(330,
                 color: Colors.red,
-                icon: Image.asset('assets/icons/fruits.png')),
+                icon: Image.asset('assets/icons/fruits.png'),
+                clicked: () => clicked(0)),
             _buildButton(30,
                 color: Colors.green,
-                icon: Image.asset('assets/icons/veggies.png')),
+                icon: Image.asset('assets/icons/veggies.png'),
+                clicked: () => clicked(1)),
             _buildButton(90,
                 color: Colors.brown,
-                icon: Image.asset('assets/icons/meat.png')),
+                icon: Image.asset('assets/icons/meat.png'),
+                clicked: () => clicked(2)),
             _buildButton(150,
-                color: Colors.grey, icon: Image.asset('assets/icons/misc.png')),
+                color: Colors.grey,
+                icon: Image.asset('assets/icons/misc.png'),
+                clicked: () => clicked(3)),
             _buildButton(210,
                 color: Colors.yellow,
-                icon: Image.asset('assets/icons/grains.png')),
+                icon: Image.asset('assets/icons/grains.png'),
+                clicked: () => clicked(4)),
             _buildButton(270,
                 color: Colors.blue,
-                icon: Image.asset('assets/icons/diary.png')),
+                icon: Image.asset('assets/icons/diary.png'),
+                clicked: () => clicked(5)),
             Transform.scale(
               scale: scale.value - 1.5,
               child: new IconButton(
@@ -89,7 +105,8 @@ class RadialAnimation extends StatelessWidget {
         });
   }
 
-  _buildButton(double angle, {required Color color, required Image icon}) {
+  _buildButton(double angle,
+      {required Color color, required Image icon, required Function clicked}) {
     final double rad = radians(angle);
     return Transform(
       transform: Matrix4.identity()
@@ -107,17 +124,23 @@ class RadialAnimation extends StatelessWidget {
           icon: icon,
           iconSize: 30,
           color: Colors.white,
-          onPressed: _close,
+          onPressed: () => _close(clicked: clicked),
         ),
       )),
     );
   }
 
   _open() {
+    print("open");
     controller.forward();
   }
 
-  _close() {
+  _close({Function? clicked}) {
+    print("hello ");
     controller.reverse();
+    if (clicked != null) {
+      print("In");
+      clicked();
+    }
   }
 }
