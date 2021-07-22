@@ -84,21 +84,22 @@ class _UserFoodPageState extends State<UserFoodPage> {
       height[i] =
           (tabKeys[i - 1].currentContext?.size?.height ?? height[i - 1]) +
               height[i - 1];
-      print(height);
     }
     setState(() {});
   }
 
   void scrollEffect(int index) {
-    print(foodScroll.position);
-    print(foodScroll.hasClients);
     if (foodScroll.hasClients) {
       panelController.open();
-      print(height[index]);
       foodScroll.animateTo(height[index],
           duration: Duration(seconds: 1), curve: Curves.easeIn);
     }
   }
+
+  BorderRadiusGeometry radius = BorderRadius.only(
+    topLeft: Radius.circular(24.0),
+    topRight: Radius.circular(24.0),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -115,11 +116,23 @@ class _UserFoodPageState extends State<UserFoodPage> {
             ),
             SlidingUpPanel(
               controller: panelController,
+              renderPanelSheet: false,
               maxHeight: MediaQuery.of(context).size.height - 100,
               minHeight: MediaQuery.of(context).size.height * 0.4,
               isDraggable: true,
+              backdropEnabled: true,
+              borderRadius: radius,
               panel: Container(
-                color: Colors.white70,
+                margin: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: radius,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 20.0,
+                        color: Colors.grey,
+                      ),
+                    ]),
                 child: Column(
                   children: [
                     FoodToolbar(),
@@ -129,7 +142,6 @@ class _UserFoodPageState extends State<UserFoodPage> {
                         controller: foodScroll,
                         children: List<int>.generate(6, (i) => i)
                             .map<Widget>((index) {
-                          print(index);
                           return FoodList(
                             key: tabKeys[index],
                             foods: widget.foods[index],

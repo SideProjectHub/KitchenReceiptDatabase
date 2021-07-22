@@ -131,15 +131,12 @@ class RadialAnimation extends StatelessWidget {
   }
 
   _open() {
-    print("open");
     controller.forward();
   }
 
   _close({Function? clicked}) {
-    print("hello ");
     controller.reverse();
     if (clicked != null) {
-      print("In");
       clicked();
     }
   }
