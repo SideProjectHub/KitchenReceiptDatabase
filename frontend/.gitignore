@@ -1,3 +1,36 @@
+Skip to content
+Search or jump to…
+
+Pulls
+Issues
+Marketplace
+Explore
+ 
+@guyLee687 
+SideProjectHub
+/
+KitchenReceiptDatabase
+Private
+0
+0
+0
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+Settings
+KitchenReceiptDatabase/frontend/.gitignore
+@guyLee687
+guyLee687 Updated gitignore
+Latest commit af131a3 16 minutes ago
+ History
+ 2 contributors
+@guyLee687@joeymtn
+95 lines (83 sloc)  1.83 KB
+  
 # Miscellaneous
 *.class
 *.log
@@ -26,12 +59,14 @@
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
 .pub-cache/
 .pub/
-/build/
-
-
+build/
+.packages
+package-lock.json
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
 
 
 # Web related
@@ -91,3 +126,16 @@ app.*.map.json
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete{"mode":"full","isActive":false}
