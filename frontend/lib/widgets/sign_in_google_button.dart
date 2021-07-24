@@ -22,7 +22,7 @@ class GoogleSignInButton extends StatelessWidget {
           child: SignInButton(
             Buttons.Google,
             onPressed: () {
-              context.read<FirebaseAuthService>().signInWithGoogle(context);
+              context.read<FirebaseAuthService>().signInWithGoogle();
             },
           ),
         ));
