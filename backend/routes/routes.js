@@ -24,7 +24,7 @@ router.post('/addfood', (req, res) => {
 
 router.post('/addUser', (req, res) => { 
     console.log(req.body); 
-    const user = new user({ 
+    const User = new User({ 
         uid: req.body.uid, 
         displayName:  req.body.email, 
         email: req.body.email, 
@@ -38,7 +38,5 @@ router.post('/addUser', (req, res) => {
         res.json({message:err}); 
     })
 })
-
-
 
 module.exports = router; 

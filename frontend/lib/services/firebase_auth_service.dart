@@ -20,13 +20,15 @@ class FirebaseAuthService {
       return kartUser(
         uid: null,
         email: null,
-        displayName: null,
+        displayName: null, 
+        imageURL: null
       );
     }
     return kartUser(
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName: user.displayName, 
+      imageURL: user.photoURL, 
     );
   }
 
@@ -45,7 +47,7 @@ class FirebaseAuthService {
       idToken: googleAuth.idToken,
     );
     final authResult = await _firebaseAuth.signInWithCredential(credential);
-    var user = _userFromFirebase(authResult.user);
+    var user = _userFromFirebase(authResult.user); 
     print(user.email);
     print(user.displayName);
     print(user.uid);
@@ -61,7 +63,8 @@ class FirebaseAuthService {
     Map<String, dynamic> body = {
       "displayName": user.displayName.toString(),
       "uid": user.uid.toString(),
-      "email": user.email.toString(),
+      "email": user.email.toString(), 
+      "imageURL": user.imageURL.toString() 
       //"fridge": null,
     };
 
