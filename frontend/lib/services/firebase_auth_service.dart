@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/screens/tab_page.dart';
+import 'package:flutter/material.dart';
 //our_user is an overriden class, User is defined by Firestore Auth, holds
 //our oauth info
 import '../app/models/kartUser.dart';

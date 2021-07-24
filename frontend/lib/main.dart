@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import './services/firebase_auth_service.dart';
 import './screens/login_page.dart';
 import '../services/kitchen_provider.dart';
+import 'package:project/screens/tab_page.dart';
 
 void main() {
   /// initializes all providers necessary
