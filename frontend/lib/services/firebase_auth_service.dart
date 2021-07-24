@@ -1,11 +1,11 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //our_user is an overriden class, User is defined by Firestore Auth, holds
 //our oauth info
-import 'package:mongo_dart/mongo_dart.dart';
-import './strings.dart';
 import '../app/models/kartUser.dart'; 
-
+import 'package:http/http.dart' as http; 
  
 
 class FirebaseAuthService {
@@ -54,15 +54,22 @@ class FirebaseAuthService {
   /// sends the user information to the backend
   /// our_user.User : our overriden class specified
   /// @TODO: add proper implementation and documentation
-  void sendUserInfo(User user, String? id) async {
-    var db = Db(uri_string); //temp user
-    await db.open();
-    var userCol = db.collection('user');
-    await userCol.insert({
-      'Name': user.displayName,
-      '_id': null,
-      'Fridge': null,
-      'id_token': id
-    });
+  void postUser(kartUser user) async {
+    Map<String, dynamic> body = {
+      "displayName": user.displayName,
+      "uid": user.uid,
+      "email": user.email,
+      //"fridge": null,
+    };
+    final response = await http.post(
+      Uri.parse("http://localhost:5000/routes/addUser"),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json.encode(body),
+    );
+    print(response.body);
   }
+
 }
