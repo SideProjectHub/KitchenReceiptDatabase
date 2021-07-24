@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //our_user is an overriden class, User is defined by Firestore Auth, holds
 //our oauth info
-import '../app/models/kartUser.dart'; 
-import 'package:http/http.dart' as http; 
- 
+import '../app/models/kartUser.dart';
+import 'package:http/http.dart' as http;
 
 class FirebaseAuthService {
   late final FirebaseAuth _firebaseAuth;
@@ -47,6 +46,10 @@ class FirebaseAuthService {
     );
     final authResult = await _firebaseAuth.signInWithCredential(credential);
     var user = _userFromFirebase(authResult.user);
+    print(user.email);
+    print(user.displayName);
+    print(user.uid);
+    postUser(user);
     //sendUserInfo(user, credential.idToken);
     return user;
   }
@@ -56,11 +59,13 @@ class FirebaseAuthService {
   /// @TODO: add proper implementation and documentation
   void postUser(kartUser user) async {
     Map<String, dynamic> body = {
-      "displayName": user.displayName,
-      "uid": user.uid,
-      "email": user.email,
+      "displayName": user.displayName.toString(),
+      "uid": user.uid.toString(),
+      "email": user.email.toString(),
       //"fridge": null,
     };
+
+    print(body.toString()); 
     final response = await http.post(
       Uri.parse("http://localhost:5000/routes/addUser"),
       headers: {
@@ -69,7 +74,7 @@ class FirebaseAuthService {
       },
       body: json.encode(body),
     );
+    print('printing response');
     print(response.body);
   }
-
 }

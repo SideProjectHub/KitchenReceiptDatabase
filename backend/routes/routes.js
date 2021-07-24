@@ -24,7 +24,7 @@ router.post('/addfood', (req, res) => {
 
 router.post('/addUser', (req, res) => { 
     console.log(req.body); 
-    const kartUser = new kartUser({ 
+    const user = new user({ 
         uid: req.body.uid, 
         displayName:  req.body.email, 
         email: req.body.email, 
