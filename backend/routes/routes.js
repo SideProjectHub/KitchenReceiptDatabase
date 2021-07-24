@@ -20,6 +20,25 @@ router.post('/addfood', (req, res) => {
     .catch(err => {
         res.json({message:err});
     })
+})  
+
+router.post('/addUser', (req, res) => { 
+    console.log(req.body); 
+    const user = new user({ 
+        uid: req.body.uid, 
+        displayName:  req.body.email, 
+        email: req.body.email, 
+        fridge: null 
+    }); 
+    kartUser.save()
+    .then(data => { 
+        res.json(data); 
+    }) 
+    .catch(err => { 
+        res.json({message:err}); 
+    })
 })
+
+
 
 module.exports = router; 

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import './services/firebase_auth_service.dart';
-import './app/models/user.dart' as our_user;
-import './widgets/widgets.dart';
 import './screens/login_page.dart';
 import '../services/kitchen_provider.dart';
 import 'package:project/screens/tab_page.dart';
-
-import 'package:project/config/themes/custom_default_theme.dart';
 
 void main() {
   /// initializes all providers necessary

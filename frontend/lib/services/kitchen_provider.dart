@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:project/services/firebase_auth_service.dart';
 
 import '../main.dart';
+import 'firebase_auth_service.dart';
 
 class KitchenProvider {
   /// Initializes all providers necessary for the app
