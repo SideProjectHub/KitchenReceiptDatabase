@@ -29,7 +29,7 @@ void main() {
           initialData: null,
         ),
       ],
-      child: MaterialApp(home: TabPage()),
+      child: MyApp(),
     ),
   );
 }

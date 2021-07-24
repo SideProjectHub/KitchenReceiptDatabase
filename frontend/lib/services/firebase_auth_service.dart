@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/screens/tab_page.dart';
+import 'package:flutter/material.dart';
 //our_user is an overriden class, User is defined by Firestore Auth, holds
 //our oauth info
 import '../app/models/user.dart' as our_user;
@@ -33,7 +35,7 @@ class FirebaseAuthService {
     return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
-  Future<our_user.User?> signInWithGoogle() async {
+  Future<our_user.User?> signInWithGoogle(BuildContext context) async {
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {
       return null;
