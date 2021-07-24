@@ -17,10 +17,10 @@ class FoodList extends StatefulWidget {
   Color color;
 
   @override
-  _FoodListState createState() => _FoodListState();
+  FoodListState createState() => FoodListState();
 }
 
-class _FoodListState extends State<FoodList> {
+class FoodListState extends State<FoodList> {
   @override
   void _handleFoodList(Food food) {
     setState(() {
