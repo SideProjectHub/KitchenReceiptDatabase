@@ -9,7 +9,7 @@ const UserSchema = mongoose.Schema(
     imageURL:{type:String, required: true, unique: false}, 
     fridge: {type: [], required: false}  
     },
-    { collection: 'user'}
+    { collection: 'User'}
     );
 
 module.exports = mongoose.model('UserSchema', UserSchema);

@@ -19,18 +19,16 @@ class FirebaseAuthService {
 
   kartUser _userFromFirebase(User? user) {
     if (user == null) {
+      print('user is null'); 
       return kartUser(
-        uid: null,
-        email: null,
-        displayName: null, 
-        imageURL: null
-      );
-    }
+          uid: null, email: null, displayName: null, imageURL: null);
+    } 
+    print('user is not null'); 
     return kartUser(
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName, 
-      imageURL: user.photoURL, 
+      displayName: user.displayName,
+      imageURL: user.photoURL,
     );
   }
 
@@ -49,7 +47,7 @@ class FirebaseAuthService {
       idToken: googleAuth.idToken,
     );
     final authResult = await _firebaseAuth.signInWithCredential(credential);
-    var user = _userFromFirebase(authResult.user); 
+    var user = _userFromFirebase(authResult.user);
     print(user.email);
     print(user.displayName);
     print(user.uid);
@@ -65,21 +63,22 @@ class FirebaseAuthService {
     Map<String, dynamic> body = {
       "displayName": user.displayName.toString(),
       "uid": user.uid.toString(),
-      "email": user.email.toString(), 
-      "imageURL": user.imageURL.toString() 
+      "email": user.email.toString(),
+      "imageURL": user.imageURL.toString()
       //"fridge": null,
     };
 
-    print(body.toString()); 
+    print(body.toString());
+    String jsonBody = jsonEncode(body);
     final response = await http.post(
       Uri.parse("http://localhost:5000/routes/addUser"),
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       },
-      body: json.encode(body),
+      body: jsonBody,
     );
     print('printing response');
-    print(response.body);
+    print(response.statusCode);
   }
 }
