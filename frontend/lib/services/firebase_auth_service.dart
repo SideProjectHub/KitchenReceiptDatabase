@@ -20,7 +20,7 @@ class FirebaseAuthService {
   kartUser _userFromFirebase(User? user) {
     if (user == null) {
       return kartUser(
-        uid: null,
+        uid: "null",
         email: null,
         displayName: null,
       );
@@ -36,7 +36,7 @@ class FirebaseAuthService {
     return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
-  Future<kartUser?> signInWithGoogle() async {
+  Future<kartUser?> signInWithGoogle(BuildContext context) async {
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {
       return null;
@@ -52,7 +52,12 @@ class FirebaseAuthService {
     print(user.displayName);
     print(user.uid);
     postUser(user);
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (BuildContext context) {
+      return TabPage();
+    }));
     //sendUserInfo(user, credential.idToken);
+    print("After");
     return user;
   }
 
@@ -67,7 +72,7 @@ class FirebaseAuthService {
       //"fridge": null,
     };
 
-    print(body.toString()); 
+    print(body.toString());
     final response = await http.post(
       Uri.parse("http://localhost:5000/routes/addUser"),
       headers: {

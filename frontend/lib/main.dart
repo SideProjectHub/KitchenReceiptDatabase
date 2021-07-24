@@ -8,7 +8,7 @@ import 'package:project/screens/tab_page.dart';
 
 void main() {
   /// initializes all providers necessary
-  KitchenProvider(MyApp());
+  // KitchenProvider(MyApp());
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays([]);
@@ -16,11 +16,14 @@ void main() {
     MultiProvider(
       providers: [
         Provider(
-          create: (_) => FirebaseAuthService(),
+          create: (context) => FirebaseAuthService(),
         ),
         StreamProvider(
-          create: (context) =>
-              context.read<FirebaseAuthService>().onAuthStateChanged,
+          create: (context) {
+            print("Hello");
+            print(context.read<FirebaseAuthService>().onAuthStateChanged);
+            context.read<FirebaseAuthService>().onAuthStateChanged;
+          },
           initialData: null,
         ),
       ],
