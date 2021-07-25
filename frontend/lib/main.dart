@@ -8,28 +8,26 @@ import 'package:project/screens/tab_page.dart';
 
 void main() {
   /// initializes all providers necessary
-  // KitchenProvider(MyApp());
+  KitchenProvider(MyApp());
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays([]);
-  runApp(
-    MultiProvider(
-      providers: [
-        Provider(
-          create: (context) => FirebaseAuthService(),
-        ),
-        StreamProvider(
-          create: (context) {
-            print("Hello");
-            print(context.read<FirebaseAuthService>().onAuthStateChanged);
-            context.read<FirebaseAuthService>().onAuthStateChanged;
-          },
-          initialData: null,
-        ),
-      ],
-      child: MyApp(),
-    ),
-  );
+  // runApp(
+  //   MultiProvider(
+  //     providers: [
+  //       Provider(
+  //         create: (context) => FirebaseAuthService(),
+  //       ),
+  //       StreamProvider(
+  //         create: (context) {
+  //           context.read<FirebaseAuthService>().onAuthStateChanged;
+  //         },
+  //         initialData: null,
+  //       ),
+  //     ],
+  //     child: MyApp(),
+  //   ),
+  // );
 }
 
 class MyApp extends StatefulWidget {

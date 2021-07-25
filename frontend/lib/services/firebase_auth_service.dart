@@ -19,16 +19,13 @@ class FirebaseAuthService {
 
   kartUser _userFromFirebase(User? user) {
     if (user == null) {
-      return kartUser(
-        uid: "null",
-        email: null,
-        displayName: null,
-      );
+      return kartUser();
     }
     return kartUser(
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
+      photoURL: user.photoURL,
     );
   }
 
@@ -51,13 +48,12 @@ class FirebaseAuthService {
     print(user.email);
     print(user.displayName);
     print(user.uid);
+    print(user.photoURL);
     postUser(user);
-    Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
       return TabPage();
     }));
     //sendUserInfo(user, credential.idToken);
-    print("After");
     return user;
   }
 

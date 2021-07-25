@@ -12,6 +12,11 @@ class ProfilePage extends StatelessWidget {
         builder: (context) => ProfilePage(),
       );
 
+  String _profileName(BuildContext context) {
+    String name = Provider.of<kartUser?>(context)?.displayName ?? "Hello";
+    return name;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +43,7 @@ class ProfilePage extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
-                  "Hello",
+                  _profileName(context),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
