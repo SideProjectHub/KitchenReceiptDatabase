@@ -9,7 +9,7 @@ const cors = require("cors");
 require("dotenv/config");
 
 //Port Number
-app.listen(5000, function (){
+app.listen(4000, function (){
      console.log("Did it");
 }); 
 

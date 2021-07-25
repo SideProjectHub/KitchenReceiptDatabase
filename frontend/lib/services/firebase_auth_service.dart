@@ -49,7 +49,7 @@ class FirebaseAuthService {
     print(user.displayName);
     print(user.uid);
     print(user.photoURL);
-    postUser(user);
+    await postUser(user);
     Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
       return TabPage();
     }));
@@ -60,7 +60,7 @@ class FirebaseAuthService {
   /// sends the user information to the backend
   /// our_user.User : our overriden class specified
   /// @TODO: add proper implementation and documentation
-  void postUser(kartUser user) async {
+  Future<void> postUser(kartUser user) async {
     Map<String, dynamic> body = {
       "displayName": user.displayName.toString(),
       "uid": user.uid.toString(),
@@ -70,7 +70,7 @@ class FirebaseAuthService {
 
     print(body.toString());
     final response = await http.post(
-      Uri.parse("http://localhost:5000/routes/addUser"),
+      Uri.parse("http://localhost:4000/routes/addUser"),
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
