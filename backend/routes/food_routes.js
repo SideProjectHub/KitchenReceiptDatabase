@@ -4,7 +4,7 @@ const Food = require('../schemas/foodSchema');
 
 const Fridge = require('../schemas/fridgeSchema');
 
-//TODO: Get the food page for the fridge
+//Get the food page for the fridge
 food_router.get('/getFood/:id', (req, res) => { 
     var id = req.params.id
     if (id == null || id == undefined){ 
