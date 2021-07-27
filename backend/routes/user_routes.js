@@ -10,9 +10,9 @@ user_router.get('/getProfile/:uid', (req, res) => {
         return; 
     }
 
-    User.find({uid: uid}, '-_id fridgeTotal foodTotal eatenTotal')
+    User.findOne({uid: uid}, '-_id fridgeTotal foodTotal eatenTotal')
     .then(user => { 
-        res.send(user[0]); 
+        res.send(user); 
     }).catch(err => {
         res.status(400).send('UserProfile currently unavailable ' + err);
     });
