@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../app/models/kartUser.dart';
 import 'package:project/widgets/kitchen_drawer.dart';
 import 'package:project/widgets/profile_pic.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/custom_app_bar.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -9,6 +11,11 @@ class ProfilePage extends StatelessWidget {
   static Route<dynamic> route() => MaterialPageRoute(
         builder: (context) => ProfilePage(),
       );
+
+  String _profileName(BuildContext context) {
+    String name = Provider.of<kartUser?>(context)?.displayName ?? "Hello";
+    return name;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class ProfilePage extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
-                  "Name",
+                  _profileName(context),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,

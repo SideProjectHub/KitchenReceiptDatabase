@@ -19,16 +19,13 @@ class FirebaseAuthService {
 
   kartUser _userFromFirebase(User? user) {
     if (user == null) {
-      print('user is null'); 
-      return kartUser(
-          uid: null, email: null, displayName: null, imageURL: null);
-    } 
-    print('user is not null'); 
+      return kartUser();
+    }
     return kartUser(
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      imageURL: user.photoURL,
+      photoURL: user.photoURL,
     );
   }
 
@@ -36,7 +33,7 @@ class FirebaseAuthService {
     return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
-  Future<kartUser?> signInWithGoogle() async {
+  Future<kartUser?> signInWithGoogle(BuildContext context) async {
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {
       return null;
@@ -51,7 +48,11 @@ class FirebaseAuthService {
     print(user.email);
     print(user.displayName);
     print(user.uid);
-    postUser(user);
+    print(user.photoURL);
+    await postUser(user);
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
+      return TabPage();
+    }));
     //sendUserInfo(user, credential.idToken);
     return user;
   }
@@ -59,7 +60,7 @@ class FirebaseAuthService {
   /// sends the user information to the backend
   /// our_user.User : our overriden class specified
   /// @TODO: add proper implementation and documentation
-  void postUser(kartUser user) async {
+  Future<void> postUser(kartUser user) async {
     Map<String, dynamic> body = {
       "displayName": user.displayName.toString(),
       "uid": user.uid.toString(),
@@ -69,9 +70,12 @@ class FirebaseAuthService {
     };
 
     print(body.toString());
+<<<<<<< HEAD
+=======
     String jsonBody = jsonEncode(body);
+>>>>>>> master
     final response = await http.post(
-      Uri.parse("http://localhost:5000/routes/addUser"),
+      Uri.parse("http://localhost:4000/routes/addUser"),
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
