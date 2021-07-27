@@ -25,7 +25,7 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
             }).catch(() =>{ 
                 res.status(404);
             });
-            return Promise(data);
+            return data;
         }).then(data => { 
             console.log(data); 
             res.send(data);
