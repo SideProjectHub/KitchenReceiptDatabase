@@ -17,6 +17,7 @@ app.listen(4000, function (){
 //Reference specific route
 const food_routes = require('./routes/food_routes'); 
 const user_routes = require('./routes/user_routes'); 
+const fridge_router = require('./routes/fridge_routes');
 
 // Require cors
 app.use(cors());
@@ -25,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 //Example of running middleware on routes
-app.use('/routes', [food_routes, user_routes]);
+app.use('/routes', [food_routes, user_routes, fridge_router]);
 
 app.get('/' , (req,res) => {
      res.send('Welcome to our app')

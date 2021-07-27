@@ -1,6 +1,6 @@
 const express = require('express'); 
 const food_router = express.Router(); 
-const Food = require('../schemas/foodSchema');
+const Food = require('../schemas/foodSchema.js');
 
 const Fridge = require('../schemas/fridgeSchema');
 
@@ -13,7 +13,7 @@ food_router.get('/getFood/:id', (req, res) => {
     }
     Fridge.findOne({id: id}, '-_id')
     .then(user => { 
-        res.send(user)
+        res.send(user);
     }).catch(err => {
         res.status(400).send('UserProfile currently unavailable ' + err);
     });
@@ -25,7 +25,7 @@ food_router.get('/getFood/:id', (req, res) => {
 // Route for addition of food item to food items in database
 food_router.post('/addfood', (req, res) => {
     console.log(req.body);
-    const food = new Food({
+    const food = new Food.Model({
         quantity: req.body.quantity, 
         foodName: req.body.foodName,
         description: req.body.description,
