@@ -65,19 +65,24 @@ class FirebaseAuthService {
       "displayName": user.displayName.toString(),
       "uid": user.uid.toString(),
       "email": user.email.toString(),
+      "imageURL": user.imageURL.toString()
       //"fridge": null,
     };
 
     print(body.toString());
+<<<<<<< HEAD
+=======
+    String jsonBody = jsonEncode(body);
+>>>>>>> master
     final response = await http.post(
       Uri.parse("http://localhost:4000/routes/addUser"),
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       },
-      body: json.encode(body),
+      body: jsonBody,
     );
     print('printing response');
-    print(response.body);
+    print(response.statusCode);
   }
 }
