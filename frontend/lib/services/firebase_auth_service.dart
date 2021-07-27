@@ -65,7 +65,6 @@ class FirebaseAuthService {
       "displayName": user.displayName.toString(),
       "uid": user.uid.toString(),
       "email": user.email.toString(),
-      "imageURL": user.imageURL.toString()
       //"fridge": null,
     };
 
