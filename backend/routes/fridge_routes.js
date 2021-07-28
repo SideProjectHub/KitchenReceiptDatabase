@@ -1,4 +1,5 @@
 const express = require('express'); 
+const mongoose = require('mongoose');
 const fridge_router = express.Router(); 
 const Fridge = require('../schemas/fridgeSchema'); 
 const User = require('../schemas/userSchema'); 
@@ -11,25 +12,23 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
         return; 
     }
 
+    var data = [];
     //Intialize json list to hold fridge
-    User.findOne({uid: uid}, '-_id fridgeList')
+    User.findOne({uid: uid}, '_id fridgeList')
     .then(async function(user){ 
-        var data = [];
-        console.log(user.fridgeList);
+        console.log((user._id.toString()));
+        console.log(user.fridgeList[1].toString());
         Object.entries(user.fridgeList).forEach(async function(ele) { 
-            console.log(ele[1]);
-            await Fridge.findOne({_id: ele[1]}, '-foodList')
+            await Fridge.findOne({_id: ele[1].toString()}, '-foodList')
             .then(fridgeEle => { 
-                console.log(fridgeEle);
                 data.push(fridgeEle); 
-            }).catch(() =>{ 
-                res.status(404);
+            }).catch(err =>{ 
+                res.status(404).send(err);
             });
-            return data;
-        }).then(data => { 
-            console.log(data); 
-            res.send(data);
         });
+    }).then(() => { 
+        console.log(data); 
+        res.send(data);
     }).catch(err => { 
         res.status(404).send('UserProfile currently unavailable ' + err);
     });
