@@ -1,4 +1,5 @@
 const express = require('express'); 
+const { Model } = require('mongoose');
 const food_router = express.Router(); 
 const Food = require('../schemas/foodSchema.js');
 
@@ -41,8 +42,38 @@ food_router.post('/addfood', (req, res) => {
     })
 })  
 
-//TODO Delete food from the fridge 
-food_router.delete('/deleteFood', (req, res) => { 
+//TODO Delete food from the fridge  
+//
+food_router.delete('/deleteFood', (req, res) => {   
+    //grab the user id  
+    //sendin the food_id 
+    //lookup the corresponding fridge 
+    //inside that fridge I would delete a foodschema or an index of that fridge 
+
+    console.log(req.body); 
+    var foodId = req.body.foodId;  
+    var fridgeId = req.body.fridgeId;  
+    if(fridgeId == null || id == undefined) { 
+        res.status(400).send('Missing Fridge ID'); 
+        return; 
+    }
+
+    Fridge.findOne({id: id}, '-_id') 
+    .then( deletingFridge => { 
+        deletingFridge.foodList.findOne({_id: foodId})
+        .then(foodDeleting => {
+            if(foodDeleting == null || foodDeleting == undefined) { 
+                res.status(400).send('food not present'); 
+                return; 
+            } 
+            Model.deleteOne(foodDeleting); 
+        }) 
+        .catch(err => {res.json( {message: err}); 
+        })
+        
+    })
+    .catch(err => {res.json( {message: err})
+})
 
 })
 
