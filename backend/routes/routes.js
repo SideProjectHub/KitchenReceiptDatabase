@@ -25,15 +25,14 @@ router.post('/addfood', (req, res) => {
 router.post('/addUser', (req, res) => { 
     console.log('printing request')
     console.log(req.body); 
-    const User = new User({ 
+    const sentUser = new User({ 
         uid: req.body.uid, 
         displayName:  req.body.email, 
         email: req.body.email, 
-        imageURL: req.body.imageURL, 
-        fridge: null 
+        fridgeList: [], 
     });      
 
-    User.save()
+    sentUser.save() 
     .then(data => { 
         res.json(data); 
     }) 

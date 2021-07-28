@@ -36,7 +36,7 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
 }); 
 
 //TODO: Adds a new fridge to user's fridge list 
-fridge_router.post('/addFridge', (req, res) => { 
+fridge_router.post('/addFridge', (req, res) => {  
 
 });
 
