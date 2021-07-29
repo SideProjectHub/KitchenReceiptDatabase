@@ -20,8 +20,9 @@ class GlowLogo extends StatelessWidget {
           shape: CircleBorder(),
           child: CircleAvatar(
             backgroundColor: Colors.grey[100],
-            child: FlutterLogo(
-              size: 50.0,
+            child:Image(  
+              fit: BoxFit.fitWidth, 
+              image: AssetImage('assets/images/kartlogo.png'),
             ),
             radius: 50.0,
           )),
