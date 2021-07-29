@@ -12,23 +12,17 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
         return; 
     }
 
-    var data = [];
     //Intialize json list to hold fridge
-    User.findOne({uid: uid}, '_id fridgeList')
+    User.findOne({uid: uid}, '-_id fridgeList')
     .then(async function(user){ 
-        console.log((user._id.toString()));
-        console.log(user.fridgeList[1].toString());
-        Object.entries(user.fridgeList).forEach(async function(ele) { 
-            await Fridge.findOne({_id: ele[1].toString()}, '-foodList')
-            .then(fridgeEle => { 
-                data.push(fridgeEle); 
-            }).catch(err =>{ 
-                res.status(404).send(err);
-            });
-        });
-    }).then(() => { 
-        console.log(data); 
-        res.send(data);
+        try{
+            console.log(user.fridgeList);
+            var data = await Fridge.find({_id : {$in: user.fridgeList}});
+            console.log(data);
+            res.send(data);
+        } catch{ 
+            res.status(404).send('Cant get data');
+        };
     }).catch(err => { 
         res.status(404).send('UserProfile currently unavailable ' + err);
     });
