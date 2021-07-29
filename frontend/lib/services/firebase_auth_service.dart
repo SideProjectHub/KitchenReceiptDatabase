@@ -69,7 +69,7 @@ class FirebaseAuthService {
     };
 
     print(body.toString());
-    String jsonBody = jsonEncode(body);
+    String jsonBody = await jsonEncode(body);
     final response = await http.post(
       Uri.parse("http://localhost:4000/routes/addUser"),
       headers: {
