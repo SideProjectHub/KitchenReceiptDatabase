@@ -40,7 +40,8 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
             child: Column(
               children: <Widget>[
                 GlowLogo(), 
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,),
                 DelayedAnimation(
                   child: Text(
                     "Hi There",

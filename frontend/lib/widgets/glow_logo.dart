@@ -15,17 +15,20 @@ class GlowLogo extends StatelessWidget {
       repeat: true,
       repeatPauseDuration: Duration(seconds: 2),
       startDelay: Duration(seconds: 1),
-      child: Material(
-          elevation: 8.0,
-          shape: CircleBorder(),
+      child:CircleAvatar(  
+        radius: 55, 
+        
+
+          
           child: CircleAvatar(
             backgroundColor: Colors.grey[100],
             child:Image(  
               fit: BoxFit.fitWidth, 
               image: AssetImage('assets/images/kartlogo.png'),
             ),
-            radius: 50.0,
-          )),
+            radius: 50.0, 
+          )
+      ),
     );
   }
 }
