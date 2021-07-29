@@ -75,6 +75,7 @@ class KitchenDrawer extends StatelessWidget {
                       child: MaterialButton(
                         onPressed: () {
                           Navigator.of(context).pop();
+                          _Signout(context);
                         },
                         color: Theme.of(context).scaffoldBackgroundColor,
                         child: Text(
@@ -110,6 +111,11 @@ class KitchenDrawer extends StatelessWidget {
           );
         });
   }
+}
+
+//@TODO
+void _Signout(BuildContext context) {
+  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
 }
 
 class _DrawClipper extends CustomClipper<Path> {

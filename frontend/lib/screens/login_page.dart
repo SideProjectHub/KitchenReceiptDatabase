@@ -39,7 +39,8 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
           body: Center(
             child: Column(
               children: <Widget>[
-                GlowLogo(),
+                GlowLogo(), 
+                SizedBox(height: 20,),
                 DelayedAnimation(
                   child: Text(
                     "Hi There",
@@ -83,7 +84,7 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                   ),
                   delay: delayedAmount + 3000,
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 60),
                 DelayedAnimation(
                   child: GestureDetector(
                     onTapDown: _onTapDown,
