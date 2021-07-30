@@ -5,6 +5,10 @@ import 'package:project/widgets/custom_app_bar.dart';
 import 'package:project/widgets/kitchen_drawer.dart';
 import 'package:project/widgets/profile_pic.dart';
 
+import 'package:provider/provider.dart';
+import 'package:project/services/rest_api_service.dart';
+import '../../app/models/kartUser.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -62,7 +66,7 @@ class HomePage extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
                     child: FloatingActionButton(
-                        onPressed: _AddFridge,
+                        onPressed: () => _AddFridge(context),
                         backgroundColor: Colors.grey,
                         child: const Icon(Icons.add),
                         mini: true)),
@@ -76,7 +80,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _AddFridge() {
-    return;
+  void _AddFridge(BuildContext context) async {
   }
 }
