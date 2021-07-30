@@ -81,8 +81,5 @@ class HomePage extends StatelessWidget {
   }
 
   void _AddFridge(BuildContext context) async {
-    String uid = Provider.of<kartUser?>(context, listen: false)?.uid ?? "Hello";
-    final response = await RestAPIService().getProfile(uid);
-    print(response.statusCode);
   }
 }
