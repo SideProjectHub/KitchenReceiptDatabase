@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'Components/fridge_menu.dart';
 import 'Components/food_list.dart';
 import 'Components/food_toolbar.dart';
 import 'Components/food_methods.dart';
+import 'package:http/http.dart' as http;
+
+enum food_groups { Fruits, Veggies, Grains, Dairy, Meat, Misc }
 
 class UserFoodPage extends StatefulWidget {
-  const UserFoodPage({Key? key}) : super(key: key);
+  UserFoodPage({Key? key, required Future<http.Response> response})
+      : super(key: key);
 
   final List<List<Food>> foods = const [
     <Food>[
@@ -40,6 +45,15 @@ class UserFoodPage extends StatefulWidget {
 
   @override
   _UserFoodPageState createState() => _UserFoodPageState();
+}
+
+/**
+ * sorts the incoming foods and assigns them to their instance variables. 
+ * @param: response: variable returned from fridge_card that 
+ */
+void sortFoods(Response resp) {
+  List foods = resp.body.
+
 }
 
 class _UserFoodPageState extends State<UserFoodPage> {

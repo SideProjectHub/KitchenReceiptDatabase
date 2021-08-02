@@ -9,26 +9,21 @@ class GlowLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AvatarGlow(
-      endRadius: 90,
-      duration: Duration(seconds: 2),
-      glowColor: Colors.white24,
-      repeat: true,
-      repeatPauseDuration: Duration(seconds: 2),
-      startDelay: Duration(seconds: 1),
-      child:CircleAvatar(  
-        radius: 55, 
-        
-
+        endRadius: 90,
+        duration: Duration(seconds: 2),
+        glowColor: Colors.white24,
+        repeat: true,
+        repeatPauseDuration: Duration(seconds: 2),
+        startDelay: Duration(seconds: 1), 
+        child: CircleAvatar(
+          radius: 70,
+          backgroundColor: Colors.transparent,
+          child: Image(
+            height: 900,
+            width: 900,
+            image: AssetImage('assets/images/kartlogo.png'),
+          ),
           
-          child: CircleAvatar(
-            backgroundColor: Colors.grey[100],
-            child:Image(  
-              fit: BoxFit.fitWidth, 
-              image: AssetImage('assets/images/kartlogo.png'),
-            ),
-            radius: 50.0, 
-          )
-      ),
-    );
+        ));
   }
 }

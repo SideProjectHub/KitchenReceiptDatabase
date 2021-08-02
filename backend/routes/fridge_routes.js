@@ -21,7 +21,7 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
             console.log(data);
             res.send(data);
         } catch{ 
-            res.status(404).send('Cant get data');
+            res.status(404).send('Cant get fridge data');
         };
     }).catch(err => { 
         res.status(404).send('UserProfile currently unavailable ' + err);
