@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project/app/models/Fridge.dart';
 import 'package:project/screens/FoodPage/Components/food_list.dart';
 import 'package:project/screens/FoodPage/user_food_page.dart';
 import 'package:project/services/firebase_auth_service.dart';
@@ -12,6 +13,7 @@ class FridgeCard extends StatelessWidget {
   final String title;
   final int foodAmount;
   final Color color;
+  Fridge fridge; //fridge that will be moved to the user_food_page for sorting
   const FridgeCard({
     Key? key,
     required this.title,
@@ -34,21 +36,14 @@ class FridgeCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.black.withAlpha(30),
         onTap: () {
-          var resp;  
-          RestAPIService restapi = new RestAPIService();
-          // ignore: todo
-          // TODO : replace user uid with fridge uid.
-          String? uid = Provider.of<kartUser?>(context)?.uid;
-          /** here we wait to push the contents of the http request to the second widget **/ 
+          /** here we wait to push the contents of the http request to the second widget **/
           Future.delayed(Duration.zero, () async {
-             resp = await restapi.getFridge(uid ?? 'null_uid');
+            fridge = await Fridge.fetchFridge(context);
           });
 
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (BuildContext context) {
-            return UserFoodPage(
-              response: resp,
-            );
+            return UserFoodPage(fridge: fridge);
           }));
         },
         child: SizedBox(
