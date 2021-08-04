@@ -13,7 +13,6 @@ class FridgeCard extends StatelessWidget {
   final String title;
   final int foodAmount;
   final Color color;
-  Fridge fridge; //fridge that will be moved to the user_food_page for sorting
   const FridgeCard({
     Key? key,
     required this.title,
@@ -36,9 +35,11 @@ class FridgeCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.black.withAlpha(30),
         onTap: () {
+          var fridge; //potential error here 
           /** here we wait to push the contents of the http request to the second widget **/
           Future.delayed(Duration.zero, () async {
-            fridge = await Fridge.fetchFridge(context);
+            String? uid = Provider.of<kartUser?>(context, listen: false)?.uid;
+            fridge = await Fridge.fetchFridge(context, uid);
           });
 
           Navigator.of(context)

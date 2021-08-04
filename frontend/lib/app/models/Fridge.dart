@@ -15,7 +15,8 @@ class Fridge {
   //here this should be renamed <FOOD>
   final List<FoodObj> foodList;
 
-  Fridge({
+  const Fridge({ 
+    
     required this.fridgeName,
     required this.fridgeCount,
     required this.cardColor,
@@ -37,9 +38,8 @@ class Fridge {
    * fetches fridge from Database and parses JSON into a Dart Class 
    * @param: context, used for grabbing the kartUser's uid for the fridge via the MultiProvider<KartUser?> 
    */
-  static Future<Fridge> fetchFridge(BuildContext context) async {
+  static Future<Fridge> fetchFridge(BuildContext context, String? uid) async {
     RestAPIService restapi = new RestAPIService();
-    String? uid = Provider.of<kartUser?>(context)?.uid;
     if (uid == null) {
       throw Exception('failed to fetch uid in fetchFridge');
     }
@@ -51,7 +51,6 @@ class Fridge {
     }
   }
 }
-
 
 /**
  * FoodObj: instance of FoodList, implemented from foodSchema 
@@ -73,6 +72,6 @@ class FoodObj {
         quantity: json['quantity'],
         foodName: json['foodName'],
         description: json['description'],
-        category: json['category']); 
+        category: json['category']);
   }
 }
