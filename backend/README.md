@@ -19,8 +19,18 @@ The *routes* folder also allows routes to be created in a modular fashion, and u
 
 The *schema* folder adds schema validation on certain collections. This is done through mongoose. 
 
+### Testing: 
+
+Testing backend server requires **Mocha** and **Axios** to be installed with npm: 
+- `npm install --global mocha` --> installs globally to your system 
+- `npm install axios`  
+
+In order to run the test, the server must also be running in series. Simply navigate to the backend directory and run `mocha` to intialize the test. You can also comment out imported test modules to run specific tests. 
+
 ### Docuementation: 
 
 - NodeJS: https://nodejs.dev/learn/introduction-to-nodejs
 - MongooseJS: https://mongoosejs.com/docs/guide.html
 - Javascript driver for mongodb: https://docs.mongodb.com/drivers/node/current/
+- Axios: https://www.npmjs.com/package//axios
+- Mocha: https://mochajs.org/
