@@ -50,8 +50,10 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                         fontSize: 35.0,
                         color: color),
                   ),
+            
                   delay: delayedAmount + 1000,
                 ),
+                SizedBox(height: 10), 
                 DelayedAnimation(
                   child: Text(
                     "I'm Kart",
@@ -63,7 +65,7 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                   delay: delayedAmount + 2000,
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 120.0,
                 ),
                 DelayedAnimation(
                   child: Text(
@@ -85,7 +87,7 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                   ),
                   delay: delayedAmount + 3000,
                 ),
-                SizedBox(height: 60),
+                SizedBox(height: 120),
                 DelayedAnimation(
                   child: GestureDetector(
                     onTapDown: _onTapDown,
@@ -97,9 +99,7 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                   ),
                   delay: delayedAmount + 4000,
                 ),
-                SizedBox(
-                  height: 50.0,
-                ),
+               
               ],
             ),
           )),

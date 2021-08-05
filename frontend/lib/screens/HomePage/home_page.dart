@@ -9,10 +9,13 @@ import 'package:project/widgets/profile_pic.dart';
 import 'package:provider/provider.dart';
 import '../../app/models/kartUser.dart';
 
-
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
+import 'package:project/services/rest_api_service.dart';
+import '../../app/models/kartUser.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -71,9 +74,7 @@ class HomePage extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
                     child: FloatingActionButton(
-                        onPressed: () {
-                          _AddFridge(context);
-                        },
+                        onPressed: () => _AddFridge(context),
                         backgroundColor: Colors.grey,
                         child: const Icon(Icons.add),
                         mini: true)),
@@ -87,9 +88,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void postFridge(context, fridgeName) async
-  {
-    var uid = Provider.of<kartUser?>(context, listen:false)?.uid;
+  void postFridge(context, fridgeName) async {
+    var uid = Provider.of<kartUser?>(context, listen: false)?.uid;
     print(fridgeName.toString());
     Map<String, dynamic> body = {
       "fridgeName": fridgeName.toString(),
@@ -106,34 +106,35 @@ class HomePage extends StatelessWidget {
   }
 
   void _AddFridge(context) {
-    showModalBottomSheet(context: context, builder: (BuildContext bc){ 
-      TextEditingController fridgeName = new TextEditingController();
-      return Container(
-        child: StatefulBuilder(
-          builder: (BuildContext context, StateSetter stateSetter){
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:[
-                TextField(
-                  controller: fridgeName,
-                  decoration: InputDecoration(
-                    fillColor: Colors.blue,
-                    filled: true,
-                    border: OutlineInputBorder(),
-                    hintText: 'Fridge Name'
-                  ),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                  ),
-                  onPressed: () => postFridge(context, fridgeName.text),
-                  child: Text('Submit'),
-                ),
-              ]
-            );
-          }),
-      );
-    });
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          TextEditingController fridgeName = new TextEditingController();
+          return Container(
+            child: StatefulBuilder(
+                builder: (BuildContext context, StateSetter stateSetter) {
+              return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextField(
+                      controller: fridgeName,
+                      decoration: InputDecoration(
+                          fillColor: Colors.blue,
+                          filled: true,
+                          border: OutlineInputBorder(),
+                          hintText: 'Fridge Name'),
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.blue),
+                      ),
+                      onPressed: () => postFridge(context, fridgeName.text),
+                      child: Text('Submit'),
+                    ),
+                  ]);
+            }),
+          );
+        });
   }
 }

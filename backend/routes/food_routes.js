@@ -55,7 +55,8 @@ food_router.post('/addfood', (req, res) => {
     .catch(err => {
         res.json({message:err});
     })
-})  
+}) 
+
 
 //TODO Delete food from the fridge  
 //
@@ -64,7 +65,6 @@ food_router.delete('/deleteFood', (req, res) => {
     //sendin the food_id 
     //lookup the corresponding fridge 
     //inside that fridge I would delete a foodschema or an index of that fridge 
-
     console.log(req.body); 
     var foodId = req.body.foodId;  
     var fridgeId = req.body.fridgeId;  

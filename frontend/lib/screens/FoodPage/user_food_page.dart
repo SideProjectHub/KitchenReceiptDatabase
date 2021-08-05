@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:project/app/models/Fridge.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'Components/fridge_menu.dart';
 import 'Components/food_list.dart';
 import 'Components/food_toolbar.dart';
 import 'Components/food_methods.dart';
+import 'package:http/http.dart' as http;
+
+enum food_groups { Fruits, Veggies, Grains, Dairy, Meat, Misc }
 
 class UserFoodPage extends StatefulWidget {
-  const UserFoodPage({Key? key}) : super(key: key);
+  UserFoodPage({Key? key, required Fridge fridge}) : super(key: key);
 
-  final List<List<Food>> foods = const [
+   List<List<Food>> foods = const [
     <Food>[
       const Food(name: 'Apples'),
       const Food(name: 'Oranges'),
@@ -39,8 +44,47 @@ class UserFoodPage extends StatefulWidget {
   ];
 
   @override
-  _UserFoodPageState createState() => _UserFoodPageState();
+  _UserFoodPageState createState() => _UserFoodPageState(); 
+
+  /**
+   * Sorts Foods in the fridge 
+   * @param: fridge assumed to be non-null, populates instance variables necessary 
+   */
+  void sortFoods(Fridge fridge) { 
+  List fridgeList = fridge.foodList; 
+  for(int i = 0; i < foods.length; i++) {
+    var foodName = fridgeList[i].category; 
+    switch(foodName) { 
+
+      case "Fruits" : 
+        foods[food_groups.Fruits.index].insert(0,fridgeList[i]);  
+        break; 
+      case "Veggies" : 
+        foods[food_groups.Veggies.index].insert(0,fridgeList[i]); 
+        break; 
+      case "Grains": 
+        foods[food_groups.Grains.index].insert(0,fridgeList[i]); 
+        break; 
+      case "Dairy": 
+        foods[food_groups.Dairy.index].insert(0,fridgeList[i]);  
+        break; 
+      case "Meat": 
+        foods[food_groups.Meat.index].insert(0,fridgeList[i]); 
+        break;
+      case "Misc": 
+        foods[food_groups.Misc.index].insert(0,fridgeList[i]); 
+        break; 
+
+      }
+    }
+  }
 }
+
+/**
+ * sorts the incoming foods and assigns them to their instance variables. 
+ * @param: response: variable returned from fridge_card that 
+ */
+
 
 class _UserFoodPageState extends State<UserFoodPage> {
   //Keys to get the height of each tab in the food page
@@ -64,14 +108,18 @@ class _UserFoodPageState extends State<UserFoodPage> {
     Colors.brown,
     Colors.grey
   ];
-  final List<String> foodGroup = [
+  static const List<String> foodGroup = [
     "Fruits",
     "Veggies",
     "Grains",
     "Diary",
     "Meat",
     "Misc"
-  ];
+  ]; 
+
+
+  
+  
 
   @override
   void initState() {
