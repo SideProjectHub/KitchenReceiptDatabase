@@ -1,9 +1,18 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:project/screens/HomePage/components/fridge_card.dart';
 import 'package:project/screens/HomePage/components/fridge_dashboard.dart';
 import 'package:project/widgets/custom_app_bar.dart';
 import 'package:project/widgets/kitchen_drawer.dart';
 import 'package:project/widgets/profile_pic.dart';
+import 'package:provider/provider.dart';
+import '../../app/models/kartUser.dart';
+
+
+import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,7 +71,9 @@ class HomePage extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
                     child: FloatingActionButton(
-                        onPressed: _AddFridge,
+                        onPressed: () {
+                          _AddFridge(context);
+                        },
                         backgroundColor: Colors.grey,
                         child: const Icon(Icons.add),
                         mini: true)),
@@ -76,7 +87,53 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _AddFridge() {
-    return;
+  void postFridge(context, fridgeName) async
+  {
+    var uid = Provider.of<kartUser?>(context, listen:false)?.uid;
+    print(fridgeName.toString());
+    Map<String, dynamic> body = {
+      "fridgeName": fridgeName.toString(),
+    };
+    final response = await http.post(
+      Uri.parse("http://localhost:4000/routes/addfridge/$uid"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json.encode(body),
+    );
+    print(response.body);
+  }
+
+  void _AddFridge(context) {
+    showModalBottomSheet(context: context, builder: (BuildContext bc){ 
+      TextEditingController fridgeName = new TextEditingController();
+      return Container(
+        child: StatefulBuilder(
+          builder: (BuildContext context, StateSetter stateSetter){
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children:[
+                TextField(
+                  controller: fridgeName,
+                  decoration: InputDecoration(
+                    fillColor: Colors.blue,
+                    filled: true,
+                    border: OutlineInputBorder(),
+                    hintText: 'Fridge Name'
+                  ),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                  ),
+                  onPressed: () => postFridge(context, fridgeName.text),
+                  child: Text('Submit'),
+                ),
+              ]
+            );
+          }),
+      );
+    });
   }
 }

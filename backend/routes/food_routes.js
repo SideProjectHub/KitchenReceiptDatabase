@@ -26,6 +26,7 @@ food_router.get('/getFood/:id', (req, res) => {
 // Route for addition of food item to food items in database
 food_router.post('/addfood', (req, res) => {
     console.log(req.body);
+    fridgeID = req.params.fridgeID // NOTE-> TO DO: pass in the fridge id of individual fridge you want to add to
     const food = new Food.Model({
         quantity: req.body.quantity, 
         foodName: req.body.foodName,
@@ -35,6 +36,20 @@ food_router.post('/addfood', (req, res) => {
 
     food.save()
     .then(data => {
+        // MUST DO:
+        // Increment fridgeCount by 1 (NOT YET added)
+        // Loop through fridge's users and increment their foodCount by 1 (Added to Code)
+        // Add food to fridge's food list (Done, BUT some questions about the way we are storing it)
+        Fridge.updateOne(
+            {
+                _id: fridgeID
+            }, 
+            {
+                $push: { foodList: data },
+                $inc: { fridgeCount: 1 },
+            }, 
+            function(err, count) {}
+        )
         res.json(data);
     })
     .catch(err => {

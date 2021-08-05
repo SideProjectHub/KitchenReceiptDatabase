@@ -80,7 +80,7 @@ class FoodMethods extends InheritedWidget {
                     TextField(
                       controller: foodNameVal,
                       decoration: InputDecoration(
-                          fillColor: Colors.blueGrey,
+                          fillColor: Colors.blue,
                           filled: true,
                           border: OutlineInputBorder(),
                           hintText: 'Food Name'),
@@ -88,7 +88,7 @@ class FoodMethods extends InheritedWidget {
                     TextField(
                       controller: quantityVal,
                       decoration: InputDecoration(
-                          fillColor: Colors.blueGrey,
+                          fillColor: Colors.blue,
                           filled: true,
                           border: OutlineInputBorder(),
                           hintText: 'Quantity'),
@@ -96,7 +96,7 @@ class FoodMethods extends InheritedWidget {
                     TextField(
                       controller: descriptionVal,
                       decoration: InputDecoration(
-                          fillColor: Colors.blueGrey,
+                          fillColor: Colors.blue,
                           filled: true,
                           border: OutlineInputBorder(),
                           hintText: 'Description'),
@@ -104,7 +104,7 @@ class FoodMethods extends InheritedWidget {
                     Container(
                       padding: EdgeInsets.only(left: 5),
                       child: DropdownButton(
-                        dropdownColor: Colors.blueGrey,
+                        dropdownColor: Colors.blue,
                         items: dropDownList.map((itemName) {
                           return DropdownMenuItem(
                               value: itemName, child: Text(itemName));

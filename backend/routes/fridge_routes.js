@@ -12,31 +12,56 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
         return; 
     }
 
-    var data = [];
     //Intialize json list to hold fridge
-    User.findOne({uid: uid}, '_id fridgeList')
+    User.findOne({uid: uid}, '-_id fridgeList')
     .then(async function(user){ 
-        console.log((user._id.toString()));
-        console.log(user.fridgeList[1].toString());
-        Object.entries(user.fridgeList).forEach(async function(ele) { 
-            await Fridge.findOne({_id: ele[1].toString()}, '-foodList')
-            .then(fridgeEle => { 
-                data.push(fridgeEle); 
-            }).catch(err =>{ 
-                res.status(404).send(err);
-            });
-        });
-    }).then(() => { 
-        console.log(data); 
-        res.send(data);
+        try{
+            console.log(user.fridgeList);
+            var data = await Fridge.find({_id : {$in: user.fridgeList}});
+            console.log(data);
+            res.send(data);
+        } catch{ 
+            res.status(404).send('Cant get data');
+        };
     }).catch(err => { 
         res.status(404).send('UserProfile currently unavailable ' + err);
     });
 }); 
 
 //TODO: Adds a new fridge to user's fridge list 
-fridge_router.post('/addFridge', (req, res) => {  
+fridge_router.post('/addfridge/:uid', (req, res) => {  
+    console.log(req.body);
 
+    var uid = req.params.uid
+    if (uid == null || uid == undefined){ 
+        res.status(400).send('Missing User UID')
+        return; 
+    }
+
+    const fridge = new Fridge({
+        fridgeName: req.body.fridgeName, 
+        cardColor: "pink",
+        userList: [uid],
+    });
+
+    fridge.save()
+    .then(data => {
+        console.log(data._id.toString());
+        User.updateOne(
+            {
+                uid: uid
+            }, 
+            {
+                $push: { fridgeList: data._id.toString() },
+                $inc: { fridgeTotal: 1 },
+            }, 
+            function(err, count) {}
+        )
+        res.json(data);
+    })
+    .catch(err => {
+        res.json({message:err});
+    })
 });
 
-module.exports = fridge_router; 
+module.exports = fridge_router;
