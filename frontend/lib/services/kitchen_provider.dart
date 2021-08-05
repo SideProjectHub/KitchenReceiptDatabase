@@ -1,8 +1,5 @@
-import 'dart:js';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
-import 'package:project/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
 import 'package:project/services/firebase_auth_service.dart';
 

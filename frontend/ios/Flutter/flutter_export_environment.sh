@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=F:\flutter-win"
-export "FLUTTER_APPLICATION_PATH=F:\Project\KitchenReceiptDatabase\frontend"
+export "FLUTTER_ROOT=C:\Users\Nick\Downloads\flutter_windows_2.2.3-stable\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\Nick\Desktop\Kitch\KitchenReceiptDatabase\frontend"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"

@@ -76,9 +76,9 @@ class FirebaseAuthService {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       },
-      body: jsonBody,
+      body: json.encode(body),
     );
     print('printing response');
-    print(response.statusCode);
+    print(response.body);
   }
 }

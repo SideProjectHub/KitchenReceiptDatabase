@@ -111,8 +111,28 @@ module.exports = function suite() {
   });
 
   describe("Testing DEL_FOOD_API", function() {
-    //Delete food1 from user1 
-    //Check FridgeCount for User's Fridge1
+    //Delete food1 from user1
+    it('Test DEL for User1\'s Fridge1 foodList', async function() { 
+      const user_query = await this.db.collection("users").findOne({
+        uid: "user1"
+      });
+      const fridge_query = await this.db.collection("fridges").findOne({
+        _id: user_query.fridgeList[0]
+      }); 
+
+      axios = common.standardInstance(); 
+      var response = await axios.get('/routes/deleteFood/' + fridge_query._id, {
+        foodID: fridge_query.foodList[0]._id
+      }); 
+
+      const result = await this.db.collection("fridges").findOne({
+        _id: user_query.fridgeList[0]
+      }); 
+      assert.strictEqual(result.foodList[0].foodName, "Orange")
+      assert.strictEqual(response.status, 200); 
+    
+    }); 
+    //Check Food totals for User's Fridge1
     it('Check FridgeCount for User\'s Fridge1', async function() {
       const user_query = await this.db.collection("users").findOne({
         uid: "user1"
