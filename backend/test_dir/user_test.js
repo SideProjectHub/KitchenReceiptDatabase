@@ -1,6 +1,5 @@
 var common = require('./common');
 var assert = require('assert');
-const { default: axios } = require('axios');
 
 module.exports = function suite() { 
   //Intialize testing environment
@@ -39,14 +38,14 @@ module.exports = function suite() {
     it('Test GET for User1', async function() { 
       axios = common.standardInstance(); 
       var response = await axios.get('/routes/getProfile/user1', {}); 
-      assert.strictEqual(response.data.uid, 'user1');
+      assert.strictEqual(response.data.fridgeTotal, 0);
       assert.strictEqual(response.status, 200); 
     }); 
 
     it('Test GET for User2', async function() { 
       axios = common.standardInstance(); 
       var response = await axios.get('/routes/getProfile/user2', {}); 
-      assert.strictEqual(response.data.uid, 'user2');
+      assert.strictEqual(response.data.fridgeTotal, 0);
       assert.strictEqual(response.status, 200); 
     }); 
   });

@@ -1,8 +1,6 @@
 var common = require('./common');
 var assert = require('assert');
-const {
-  default: axios
-} = require('axios');
+var ObjectId = require('mongodb').ObjectId
 
 module.exports = function suite() {
   describe("Testing POST_FOOD_API", function() {
@@ -13,7 +11,7 @@ module.exports = function suite() {
         uid: "user1"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       })
 
       axios = common.standardInstance();
@@ -24,7 +22,7 @@ module.exports = function suite() {
       });
 
       const result = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       });
       assert.strictEqual(result.foodList[0].foodName, "Apple");
     });
@@ -34,7 +32,7 @@ module.exports = function suite() {
         uid: "user1"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       })
 
       axios = common.standardInstance();
@@ -46,11 +44,12 @@ module.exports = function suite() {
       });
 
       const result = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       });
+      
+      
       assert.strictEqual(result.foodList[0].foodName, "Apple");
       assert.strictEqual(result.foodList[1].foodName, "Oranges");
-      assert.strictEqual(result.foodList[2].foodName, "Oranges");
     });
     //Check Foodcount for user 1
     it('Check Foodcount for user 1', async function() {
@@ -65,7 +64,7 @@ module.exports = function suite() {
         uid: "user1"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       });
       assert.strictEqual(fridge_query.fridgeCount, 3);
     });
@@ -76,7 +75,7 @@ module.exports = function suite() {
         uid: "user2"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       })
 
       axios = common.standardInstance();
@@ -87,7 +86,7 @@ module.exports = function suite() {
       });
 
       const result = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       });
       assert.strictEqual(result.foodList[0].foodName, "Apple");
     });
@@ -99,12 +98,12 @@ module.exports = function suite() {
         uid: "user1"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       }); 
 
       axios = common.standardInstance(); 
       var response = await axios.get('/routes/getFood/' + fridge_query._id, {}); 
-      assert.strictEqual(response.data[0].foodName, 'Apples');
+      assert.strictEqual(response.data[0].foodName, 'Apple');
       assert.strictEqual(response.data[1].foodName, 'Oranges');
       assert.strictEqual(response.status, 200); 
     }); 
@@ -117,32 +116,32 @@ module.exports = function suite() {
         uid: "user1"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       }); 
 
       axios = common.standardInstance(); 
-      var response = await axios.get('/routes/deleteFood/' + fridge_query._id, {
-        foodID: fridge_query.foodList[0]._id
-      }); 
+      var response = await axios.delete('/routes/deleteFood/' + fridge_query._id + '/' 
+        + fridge_query.foodList[0]._id, {}); 
 
       const result = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       }); 
-      assert.strictEqual(result.foodList[0].foodName, "Orange")
+
+      assert.strictEqual(result.foodList[0].foodName, "Oranges")
       assert.strictEqual(response.status, 200); 
     
     }); 
     //Check Food totals for User's Fridge1
-    it('Check FridgeCount for User\'s Fridge1', async function() {
+    it('Check FridgeCount for User1\'s Fridge1', async function() {
       const user_query = await this.db.collection("users").findOne({
         uid: "user1"
       });
       const fridge_query = await this.db.collection("fridges").findOne({
-        _id: user_query.fridgeList[0]
+        _id: new ObjectId(user_query.fridgeList[0])
       });
-      assert.strictEqual(fridge_query.fridgeCount, 2);
-      assert.strictEqual(user_query.foodTotal, 2);
-      assert.strictEqual(user_query.eatenTotal, 1);
+      assert.strictEqual(fridge_query.fridgeCount, 2, "Checks fridge count");
+      assert.strictEqual(user_query.foodTotal, 2, "Checks food Total");
+      assert.strictEqual(user_query.eatenTotal, 1, "Checks food eaten");
     });
   });
 }

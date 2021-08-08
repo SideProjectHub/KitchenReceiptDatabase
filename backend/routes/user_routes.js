@@ -4,7 +4,7 @@ const User = require('../schemas/userSchema');
 
 //Gets User profile with UID needed as parameter
 user_router.get('/getProfile/:uid', (req, res) => { 
-    var uid = req.params.uid;  
+    let uid = req.params.uid;  
     if (uid == null || uid == undefined){ 
         res.status(400).send('Missing User UID')
         return; 
@@ -21,7 +21,7 @@ user_router.get('/getProfile/:uid', (req, res) => {
 //Adds new User with Firebase credentials. 
 user_router.post('/addUser', (req, res) => { 
     console.log(req.body); 
-    const user = new User({ 
+    let user = new User({ 
         uid: req.body.uid, 
         displayName:  req.body.displayName, 
         email: req.body.email, 
