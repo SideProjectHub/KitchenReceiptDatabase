@@ -16,6 +16,7 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:project/services/rest_api_service.dart';
 import '../../app/models/kartUser.dart';
+import 'package:project/app/models/UserData.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -88,28 +89,37 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void postFridge(context, fridgeName) async {
-    var uid = Provider.of<kartUser?>(context, listen: false)?.uid;
-    print(fridgeName.toString());
+  void postFridge(context, fridgeName, descriptionVal, color) async {
+    String? uid = Provider.of<kartUser?>(context, listen: false)?.uid;
     Map<String, dynamic> body = {
       "fridgeName": fridgeName.toString(),
+      "descriptionVal": descriptionVal.toString(),
+      "color": color.toString()
     };
-    final response = await http.post(
-      Uri.parse("http://localhost:4000/routes/addfridge/$uid"),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: json.encode(body),
-    );
+    if (uid == null) {
+      throw ("uid is false");
+    }
+    final response = await RestAPIService().addFridge(uid, body);
     print(response.body);
+    Navigator.pop(context);
   }
 
-  void _AddFridge(context) {
+  final List<String> dropDownList = const [
+    "Red",
+    "Orange",
+    "Yellow",
+    "Green",
+    "Blue",
+    "Purple"
+  ];
+
+  void _AddFridge(parentContext) {
     showModalBottomSheet(
-        context: context,
+        context: parentContext,
         builder: (BuildContext bc) {
+          String? dropDownValue = null;
           TextEditingController fridgeName = new TextEditingController();
+          TextEditingController descriptionVal = new TextEditingController();
           return Container(
             child: StatefulBuilder(
                 builder: (BuildContext context, StateSetter stateSetter) {
@@ -124,12 +134,36 @@ class HomePage extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Fridge Name'),
                     ),
+                    TextField(
+                      controller: descriptionVal,
+                      decoration: InputDecoration(
+                          fillColor: Colors.blue,
+                          filled: true,
+                          border: OutlineInputBorder(),
+                          hintText: 'Description'),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 5),
+                      child: DropdownButton(
+                        dropdownColor: Colors.blue,
+                        items: dropDownList.map((itemName) {
+                          return DropdownMenuItem(
+                              value: itemName, child: Text(itemName));
+                        }).toList(),
+                        onChanged: (String? newVal) {
+                          stateSetter(() => dropDownValue = newVal);
+                        },
+                        value: dropDownValue,
+                        hint: Text("Select Color"),
+                      ),
+                    ),
                     TextButton(
                       style: ButtonStyle(
                         foregroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
                       ),
-                      onPressed: () => postFridge(context, fridgeName.text),
+                      onPressed: () => postFridge(parentContext,
+                          fridgeName.text, descriptionVal.text, dropDownValue),
                       child: Text('Submit'),
                     ),
                   ]);

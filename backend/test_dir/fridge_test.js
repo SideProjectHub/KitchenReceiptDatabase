@@ -6,7 +6,7 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports = function suite() { 
   //Intialize testing environment
   before('ClearDatabase for testing', async function start() { 
-    this.db.collection("fridges").drop(function(err, log){ 
+    this.db.collection("fridges").remove({}, function(err, log){ 
       if (err) console.log("Error in dropping database");
       if (log) console.log("Intialized Fridge Collection");
     });

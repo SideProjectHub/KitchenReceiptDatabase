@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:project/services/rest_api_service.dart';
 import '../../app/models/kartUser.dart';
 import 'package:project/widgets/kitchen_drawer.dart';
 import 'package:project/widgets/profile_pic.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/custom_app_bar.dart';
+import 'package:project/app/models/UserData.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -61,11 +59,13 @@ class ProfilePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    _mainBar("Fridges", 0),
+                    _mainBar(
+                        "Fridges", Provider.of<UserData>(context).fridgeTotal),
                     _dividers(),
-                    _mainBar("Foods", 0),
+                    _mainBar("Foods", Provider.of<UserData>(context).foodTotal),
                     _dividers(),
-                    _mainBar("Eaten", 0),
+                    _mainBar(
+                        "Eaten", Provider.of<UserData>(context).eatenTotal),
                   ],
                 ),
               ),

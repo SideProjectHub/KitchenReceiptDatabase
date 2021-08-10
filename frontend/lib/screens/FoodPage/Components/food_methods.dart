@@ -45,7 +45,7 @@ class FoodMethods extends InheritedWidget {
 
   var dropDownList = ["Fruit", "Dairy", "Vegie", "Grain", "Meat", "Misc"];
 
-  void postData(quantity, foodName, description, category) async {
+  void postData(context, quantity, foodName, description, category) async {
     Map<String, dynamic> body = {
       "quantity": quantity.toString(),
       "foodName": foodName.toString(),
@@ -63,9 +63,9 @@ class FoodMethods extends InheritedWidget {
     print(response.body);
   }
 
-  void inputModal(context) {
+  void inputModal(parentContext) {
     showModalBottomSheet(
-        context: context,
+        context: parentContext,
         builder: (BuildContext bc) {
           String? dropDownValue = null;
           TextEditingController quantityVal = new TextEditingController();
@@ -121,7 +121,7 @@ class FoodMethods extends InheritedWidget {
                         foregroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
                       ),
-                      onPressed: () => postData(quantityVal.text,
+                      onPressed: () => postData(parentContext, quantityVal.text,
                           foodNameVal.text, descriptionVal.text, dropDownValue),
                       child: Text('Submit'),
                     ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:project/app/models/kartUser.dart';
+import 'package:project/services/firebase_auth_service.dart';
 import 'package:project/widgets/glow_logo.dart';
 import 'package:project/widgets/sign_in_google_button.dart';
 
 import '../delayed_animation.dart';
 import '../main.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
   final int delayedAmount = 500;
@@ -30,6 +33,10 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    print("Building LoginPage");
+    print(Provider.of<FirebaseAuthService>(context).firebaseAuth.currentUser);
+    print("Printing UID");
+    print(Provider.of<kartUser?>(context)?.uid);
     final color = Colors.white;
     _scale = 1 - _controller.value;
     return MaterialApp(
@@ -39,9 +46,10 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
           body: Center(
             child: Column(
               children: <Widget>[
-                GlowLogo(), 
+                GlowLogo(),
                 SizedBox(
-                  height: 20,),
+                  height: 20,
+                ),
                 DelayedAnimation(
                   child: Text(
                     "Hi There",
@@ -50,10 +58,9 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                         fontSize: 35.0,
                         color: color),
                   ),
-            
                   delay: delayedAmount + 1000,
                 ),
-                SizedBox(height: 10), 
+                SizedBox(height: 10),
                 DelayedAnimation(
                   child: Text(
                     "I'm Kart",
@@ -99,7 +106,6 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
                   ),
                   delay: delayedAmount + 4000,
                 ),
-               
               ],
             ),
           )),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project/app/models/Fridge.dart';
+import 'package:project/app/models/UserData.dart';
 import 'package:project/screens/FoodPage/Components/food_list.dart';
 import 'package:project/screens/FoodPage/user_food_page.dart';
 import 'package:project/services/firebase_auth_service.dart';
@@ -35,7 +36,7 @@ class FridgeCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.black.withAlpha(30),
         onTap: () {
-          var fridge; //potential error here 
+          var fridge; //potential error here
           /** here we wait to push the contents of the http request to the second widget **/
           Future.delayed(Duration.zero, () async {
             String? uid = Provider.of<kartUser?>(context, listen: false)?.uid;

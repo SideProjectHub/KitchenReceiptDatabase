@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/services/firebase_auth_service.dart';
+import 'package:provider/provider.dart';
 
 class KitchenDrawer extends StatelessWidget {
   const KitchenDrawer({Key? key}) : super(key: key);
@@ -32,6 +34,9 @@ class KitchenDrawer extends StatelessWidget {
                   DrawerItem(
                     text: "Signout",
                     onPressed: () {
+                      Provider.of<FirebaseAuthService>(context, listen: false)
+                          .firebaseAuth
+                          .signOut();
                       Navigator.of(context).pop();
                       _openSignOutDrawer(context);
                     },

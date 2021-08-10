@@ -4,7 +4,7 @@ var assert = require('assert');
 module.exports = function suite() { 
   //Intialize testing environment
   before('ClearDatabase for testing', async function start() { 
-      this.db.collection("users").drop(function(err, log){ 
+      this.db.collection("users").remove({}, function(err, log){ 
         if (err) console.log("Error in dropping database");
         if (log) console.log("Intialized User Collection");
       });
