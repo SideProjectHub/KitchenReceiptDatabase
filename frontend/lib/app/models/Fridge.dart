@@ -1,12 +1,7 @@
 import 'dart:convert';
-import 'dart:js';
 
 import 'package:flutter/cupertino.dart';
-import 'package:project/screens/FoodPage/Components/food_list.dart';
 import 'package:project/services/rest_api_service.dart';
-import 'package:provider/provider.dart';
-
-import 'kartUser.dart';
 
 class Fridge {
   final String fridgeName;
@@ -15,8 +10,7 @@ class Fridge {
   //here this should be renamed <FOOD>
   final List<FoodObj> foodList;
 
-  const Fridge({ 
-    
+  const Fridge({
     required this.fridgeName,
     required this.fridgeCount,
     required this.cardColor,

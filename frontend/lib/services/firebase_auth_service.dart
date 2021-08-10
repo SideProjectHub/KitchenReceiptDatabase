@@ -27,7 +27,7 @@ class FirebaseAuthService {
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignin ?? GoogleSignIn();
 
-  kartUser _userFromFirebase(User? user) {
+  kartUser userFromFirebase(User? user) {
     if (user == null) {
       return kartUser();
     }
@@ -45,7 +45,7 @@ class FirebaseAuthService {
   }
 
   Stream<kartUser> get onAuthStateChanged {
-    inUser.addStream(_firebaseAuth.authStateChanges().map(_userFromFirebase));
+    inUser.addStream(_firebaseAuth.authStateChanges().map(userFromFirebase));
     return _userController.stream;
   }
 
@@ -60,7 +60,7 @@ class FirebaseAuthService {
       idToken: googleAuth.idToken,
     );
     final authResult = await _firebaseAuth.signInWithCredential(credential);
-    var user = _userFromFirebase(authResult.user);
+    var user = userFromFirebase(authResult.user);
     print(user.email);
     print(user.displayName);
     print(user.uid);

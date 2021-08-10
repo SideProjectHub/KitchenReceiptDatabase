@@ -6,10 +6,17 @@ import 'package:project/widgets/glow_logo.dart';
 import 'package:project/widgets/sign_in_google_button.dart';
 
 import '../delayed_animation.dart';
-import '../main.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
+class LoginPage extends StatefulWidget {
+  @override
+  LoginPage({Key? key}) : super(key: key);
+
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   final int delayedAmount = 500;
   double _scale = 0.0;
   late AnimationController _controller;
@@ -39,77 +46,72 @@ class LoginPage extends State<MyApp> with SingleTickerProviderStateMixin {
     print(Provider.of<kartUser?>(context)?.uid);
     final color = Colors.white;
     _scale = 1 - _controller.value;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          backgroundColor: Color(0xFF9575CD),
-          body: Center(
-            child: Column(
-              children: <Widget>[
-                GlowLogo(),
-                SizedBox(
-                  height: 20,
+    return Scaffold(
+        backgroundColor: Color(0xFF9575CD),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              GlowLogo(),
+              SizedBox(
+                height: 20,
+              ),
+              DelayedAnimation(
+                child: Text(
+                  "Hi There",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35.0,
+                      color: color),
                 ),
-                DelayedAnimation(
-                  child: Text(
-                    "Hi There",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35.0,
-                        color: color),
+                delay: delayedAmount + 1000,
+              ),
+              SizedBox(height: 10),
+              DelayedAnimation(
+                child: Text(
+                  "I'm Kart",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35.0,
+                      color: color),
+                ),
+                delay: delayedAmount + 2000,
+              ),
+              SizedBox(
+                height: 120.0,
+              ),
+              DelayedAnimation(
+                child: Text(
+                  "Your New Personal",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: color),
+                ),
+                delay: delayedAmount + 3000,
+              ),
+              DelayedAnimation(
+                child: Text(
+                  "Kitchen Inventory",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20, color: color),
+                ),
+                delay: delayedAmount + 3000,
+              ),
+              SizedBox(height: 120),
+              DelayedAnimation(
+                child: GestureDetector(
+                  onTapDown: _onTapDown,
+                  onTapUp: _onTapUp,
+                  child: Transform.scale(
+                    scale: _scale,
+                    child: GoogleSignInButton(),
                   ),
-                  delay: delayedAmount + 1000,
                 ),
-                SizedBox(height: 10),
-                DelayedAnimation(
-                  child: Text(
-                    "I'm Kart",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35.0,
-                        color: color),
-                  ),
-                  delay: delayedAmount + 2000,
-                ),
-                SizedBox(
-                  height: 120.0,
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "Your New Personal",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: color),
-                  ),
-                  delay: delayedAmount + 3000,
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "Kitchen Inventory",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: color),
-                  ),
-                  delay: delayedAmount + 3000,
-                ),
-                SizedBox(height: 120),
-                DelayedAnimation(
-                  child: GestureDetector(
-                    onTapDown: _onTapDown,
-                    onTapUp: _onTapUp,
-                    child: Transform.scale(
-                      scale: _scale,
-                      child: GoogleSignInButton(),
-                    ),
-                  ),
-                  delay: delayedAmount + 4000,
-                ),
-              ],
-            ),
-          )),
-    );
+                delay: delayedAmount + 4000,
+              ),
+            ],
+          ),
+        ));
   }
 
   void _onTapDown(TapDownDetails details) {

@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:project/screens/HomePage/components/fridge_card.dart';
 import 'package:project/screens/HomePage/components/fridge_dashboard.dart';
@@ -9,14 +7,7 @@ import 'package:project/widgets/profile_pic.dart';
 import 'package:provider/provider.dart';
 import '../../app/models/kartUser.dart';
 
-import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-import 'package:provider/provider.dart';
 import 'package:project/services/rest_api_service.dart';
-import '../../app/models/kartUser.dart';
-import 'package:project/app/models/UserData.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

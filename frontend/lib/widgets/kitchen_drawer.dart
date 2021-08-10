@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/screens/login_page.dart';
 import 'package:project/services/firebase_auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -121,6 +122,9 @@ class KitchenDrawer extends StatelessWidget {
 //@TODO
 void _Signout(BuildContext context) {
   Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+  Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
+    return LoginPage();
+  }));
 }
 
 class _DrawClipper extends CustomClipper<Path> {
