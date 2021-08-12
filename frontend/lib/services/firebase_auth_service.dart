@@ -21,7 +21,7 @@ class FirebaseAuthService {
       StreamController<kartUser>.broadcast();
 
   Stream<kartUser> get outUser => _userController.stream;
-  StreamSink<kartUser> get inUser => _userController.sink;
+  Sink<kartUser> get inUser => _userController.sink;
 
   FirebaseAuthService({FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignin})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
@@ -45,8 +45,10 @@ class FirebaseAuthService {
   }
 
   Stream<kartUser> get onAuthStateChanged {
-    inUser.addStream(_firebaseAuth.authStateChanges().map(userFromFirebase));
-    return _userController.stream;
+    _firebaseAuth.authStateChanges().map(userFromFirebase).listen((event) {
+      inUser.add(event);
+    });
+    return outUser;
   }
 
   Future<kartUser?> signInWithGoogle(BuildContext context) async {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/app/models/Fridge.dart';
+import 'package:project/app/models/UserData.dart';
 import 'package:project/screens/HomePage/components/fridge_card.dart';
 import 'package:project/screens/HomePage/components/fridge_dashboard.dart';
 import 'package:project/widgets/custom_app_bar.dart';
@@ -9,19 +11,18 @@ import '../../app/models/kartUser.dart';
 
 import 'package:project/services/rest_api_service.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
-  final List<FridgeCard> cards = const [
-    const FridgeCard(title: "Fridge 1", foodAmount: 10, color: Colors.red),
-    const FridgeCard(title: "Fridge 2", foodAmount: 20, color: Colors.green),
-    const FridgeCard(title: "Fridge 3", foodAmount: 30, color: Colors.blue),
-  ];
 
   static Route<dynamic> route() => MaterialPageRoute(
         builder: (context) => HomePage(),
       );
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,12 +73,48 @@ class HomePage extends StatelessWidget {
                         mini: true)),
               ],
             ),
-            FridgeDashBoard(cards: cards),
+            FridgeDashBoard(
+                cards:
+                    getFridgeList(Provider.of<UserData>(context).fridgeList)),
           ],
         ),
       ),
       endDrawer: KitchenDrawer(),
     );
+  }
+
+  List<FridgeCard> getFridgeList(List<Fridge> fridgeData) {
+    return fridgeData.map((data) {
+      var color;
+      switch (data.cardColor) {
+        case "Red":
+          color = Colors.red;
+          break;
+        case "Orange":
+          color = Colors.orange;
+          break;
+        case "Yellow":
+          color = Colors.yellow;
+          break;
+        case "Green":
+          color = Colors.green;
+          break;
+        case "Blue":
+          color = Colors.blue;
+          break;
+        case "Purple":
+          color = Colors.purple;
+          break;
+        default:
+          color = Colors.red;
+      }
+      return FridgeCard(
+        fridgeID: data.fridgeID,
+        title: data.fridgeName,
+        foodAmount: data.fridgeCount,
+        color: color,
+      );
+    }).toList();
   }
 
   void postFridge(context, fridgeName, descriptionVal, color) async {
@@ -91,6 +128,7 @@ class HomePage extends StatelessWidget {
       throw ("uid is false");
     }
     final response = await RestAPIService().addFridge(uid, body);
+    Provider.of<UserData>(context).update(uid);
     print(response.body);
     Navigator.pop(context);
   }

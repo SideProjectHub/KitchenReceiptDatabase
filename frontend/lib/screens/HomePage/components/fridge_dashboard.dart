@@ -11,21 +11,31 @@ class FridgeDashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ListView(
-        children: <Widget>[
-          CarouselSlider(
-              options: CarouselOptions(
-                height: 125.0,
-                enlargeCenterPage: true,
-                autoPlayCurve: Curves.fastOutSlowIn,
-                viewportFraction: 0.8,
-                enableInfiniteScroll: true,
-              ),
-              items: cards)
-        ],
-      ),
-    );
+    if (cards == []) {
+      return SizedBox(
+        height: 200,
+        child: Container(
+          alignment: Alignment.center,
+          child: Text("Please Add Fridges"),
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: 200,
+        child: ListView(
+          children: <Widget>[
+            CarouselSlider(
+                options: CarouselOptions(
+                  height: 125.0,
+                  enlargeCenterPage: true,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  viewportFraction: 0.8,
+                  enableInfiniteScroll: true,
+                ),
+                items: cards)
+          ],
+        ),
+      );
+    }
   }
 }

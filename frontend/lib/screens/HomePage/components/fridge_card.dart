@@ -1,21 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project/app/models/Fridge.dart';
-import 'package:project/app/models/UserData.dart';
-import 'package:project/screens/FoodPage/Components/food_list.dart';
 import 'package:project/screens/FoodPage/user_food_page.dart';
-import 'package:project/services/firebase_auth_service.dart';
-import 'package:project/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
 import 'package:project/app/models/kartUser.dart';
-import 'package:http/http.dart' as http;
 
 class FridgeCard extends StatelessWidget {
+  final String fridgeID;
   final String title;
   final int foodAmount;
   final Color color;
   const FridgeCard({
     Key? key,
+    required this.fridgeID,
     required this.title,
     required this.foodAmount,
     required this.color,

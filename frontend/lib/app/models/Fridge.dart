@@ -8,13 +8,13 @@ class Fridge {
   final int fridgeCount;
   final String cardColor;
   //here this should be renamed <FOOD>
-  final List<FoodObj> foodList;
+  final String fridgeID;
 
   const Fridge({
     required this.fridgeName,
     required this.fridgeCount,
     required this.cardColor,
-    required this.foodList,
+    required this.fridgeID,
   });
 
   //TODO: potential issue w/ foodList since list of type Food Schema, add a potential class?
@@ -24,7 +24,7 @@ class Fridge {
       fridgeName: json['fridgeName'],
       fridgeCount: json['fridgeCount'],
       cardColor: json['cardColor'],
-      foodList: json['foodList'],
+      fridgeID: json['_id'],
     );
   }
 

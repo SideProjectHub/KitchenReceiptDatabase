@@ -17,7 +17,7 @@ fridge_router.get('/getFridge/:uid', async function(req, res) {
     .then(async function(user){ 
         try{
             console.log(user.fridgeList);
-            let data = await Fridge.find({_id : {$in: user.fridgeList}});
+            let data = await Fridge.find({_id : {$in: user.fridgeList}}, '-foodList');
             console.log(data);
             res.send(data);
         } catch{ 
