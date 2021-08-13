@@ -21,6 +21,8 @@ class UserData with ChangeNotifier {
       Map<String, dynamic> userData, List<dynamic> fridgeData) {
     List<Fridge> fridgeList =
         fridgeData.map((value) => Fridge.fromJson(value)).toList();
+    print("Hello");
+    print(fridgeList);
     return UserData(
       fridgeTotal: userData['fridgeTotal'],
       foodTotal: userData['foodTotal'],

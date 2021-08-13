@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
       throw ("uid is false");
     }
     final response = await RestAPIService().addFridge(uid, body);
-    Provider.of<UserData>(context).update(uid);
+    Provider.of<UserData>(context, listen: false).update(uid);
     print(response.body);
     Navigator.pop(context);
   }
