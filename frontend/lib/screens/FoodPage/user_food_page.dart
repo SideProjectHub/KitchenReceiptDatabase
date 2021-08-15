@@ -10,70 +10,14 @@ import 'Components/food_methods.dart';
 enum food_groups { Fruits, Veggies, Grains, Dairy, Meat, Misc }
 
 class UserFoodPage extends StatefulWidget {
-  UserFoodPage({Key? key, required Fridge fridge}) : super(key: key);
+  UserFoodPage({Key? key, required this.fridge, required this.fridgeID})
+      : super(key: key);
 
-  List<List<Food>> foods = const [
-    <Food>[
-      const Food(name: 'Apples'),
-      const Food(name: 'Oranges'),
-    ],
-    <Food>[
-      const Food(name: 'Lettece'),
-      const Food(name: 'Zucchini'),
-    ],
-    <Food>[
-      const Food(name: 'Apples'),
-      const Food(name: 'Oranges'),
-      const Food(name: 'Apples'),
-      const Food(name: 'Oranges'),
-    ],
-    <Food>[
-      const Food(name: 'Lettece'),
-      const Food(name: 'Zucchini'),
-    ],
-    <Food>[
-      const Food(name: 'Apples'),
-      const Food(name: 'Oranges'),
-    ],
-    <Food>[
-      const Food(name: 'Lettece'),
-      const Food(name: 'Zucchini'),
-    ],
-  ];
+  final FoodObjList fridge;
+  final String fridgeID;
 
   @override
   _UserFoodPageState createState() => _UserFoodPageState();
-
-  /**
-   * Sorts Foods in the fridge 
-   * @param: fridge assumed to be non-null, populates instance variables necessary 
-   */
-  void sortFoods(Fridge fridge) {
-    List fridgeList = [[]];
-    for (int i = 0; i < foods.length; i++) {
-      var foodName = fridgeList[i].category;
-      switch (foodName) {
-        case "Fruits":
-          foods[food_groups.Fruits.index].insert(0, fridgeList[i]);
-          break;
-        case "Veggies":
-          foods[food_groups.Veggies.index].insert(0, fridgeList[i]);
-          break;
-        case "Grains":
-          foods[food_groups.Grains.index].insert(0, fridgeList[i]);
-          break;
-        case "Dairy":
-          foods[food_groups.Dairy.index].insert(0, fridgeList[i]);
-          break;
-        case "Meat":
-          foods[food_groups.Meat.index].insert(0, fridgeList[i]);
-          break;
-        case "Misc":
-          foods[food_groups.Misc.index].insert(0, fridgeList[i]);
-          break;
-      }
-    }
-  }
 }
 
 /**
@@ -82,6 +26,9 @@ class UserFoodPage extends StatefulWidget {
  */
 
 class _UserFoodPageState extends State<UserFoodPage> {
+  //Contains the state fridgeList
+  List<List<Food>> foods = [[]];
+
   //Keys to get the height of each tab in the food page
   final List<GlobalKey<FoodListState>> tabKeys =
       List<GlobalKey<FoodListState>>.generate(
@@ -114,6 +61,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
 
   @override
   void initState() {
+    sortFoods(widget.fridge);
     WidgetsBinding.instance?.addPostFrameCallback((_) => setHeight());
     super.initState();
   }
@@ -124,6 +72,11 @@ class _UserFoodPageState extends State<UserFoodPage> {
           (tabKeys[i - 1].currentContext?.size?.height ?? height[i - 1]) +
               height[i - 1];
     }
+    setState(() {});
+  }
+
+  updateList(FoodObjList fridge) {
+    sortFoods(fridge);
     setState(() {});
   }
 
@@ -148,6 +101,8 @@ class _UserFoodPageState extends State<UserFoodPage> {
         title: Text("My Fridge"),
       ),
       body: FoodMethods(
+        fridgeID: widget.fridgeID,
+        updateList: updateList,
         child: Stack(
           children: [
             FridgeMenu(
@@ -198,5 +153,42 @@ class _UserFoodPageState extends State<UserFoodPage> {
         ),
       ),
     );
+  }
+
+  /**
+   * Sorts Foods in the fridge 
+   * @param: fridge assumed to be non-null, populates instance variables necessary 
+   */
+  void sortFoods(FoodObjList fridge) {
+    List<FoodObj> fridgeList = fridge.foodList;
+    for (int i = 0; i < foods.length; i++) {
+      var foodName = fridgeList[i].category;
+      switch (foodName) {
+        case "Fruits":
+          foods[food_groups.Fruits.index].insert(0,
+              Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
+          break;
+        case "Veggies":
+          foods[food_groups.Veggies.index].insert(0,
+              Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
+          break;
+        case "Grains":
+          foods[food_groups.Grains.index].insert(0,
+              Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
+          break;
+        case "Dairy":
+          foods[food_groups.Dairy.index].insert(0,
+              Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
+          break;
+        case "Meat":
+          foods[food_groups.Meat.index]
+              .insert(0, Food(name: fridgeList[i].foodName));
+          break;
+        case "Misc":
+          foods[food_groups.Misc.index]
+              .insert(0, Food(name: fridgeList[i].foodName));
+          break;
+      }
+    }
   }
 }

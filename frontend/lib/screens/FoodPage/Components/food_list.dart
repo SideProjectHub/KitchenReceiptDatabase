@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:project/screens/FoodPage/Components/food_methods.dart';
+import 'package:project/services/rest_api_service.dart';
 
 /*Food List */
 /************************************************* */
@@ -12,20 +13,29 @@ class FoodList extends StatefulWidget {
   }) : super(key: key);
 
   //Takes in list of foods
-  List<Food> foods;
-  String category;
-  Color color;
+  final List<Food> foods;
+  final String category;
+  final Color color;
 
   @override
   FoodListState createState() => FoodListState();
 }
 
 class FoodListState extends State<FoodList> {
-  @override
-  void _handleFoodList(Food food) {
-    setState(() {
-      widget.foods.remove(food);
-    });
+  void _handleFoodList(Food food, BuildContext context) {
+    String? fridgeID =
+        context.dependOnInheritedWidgetOfExactType<FoodMethods>()?.fridgeID;
+    var response;
+    if (fridgeID != null) {
+      response = RestAPIService().deleteFood(fridgeID);
+      if (response.status == 200) {
+        setState(() {
+          widget.foods.remove(food);
+        });
+      }
+    } else {
+      throw Exception("FridgeID is Null");
+    }
   }
 
   Widget build(BuildContext context) {
@@ -69,7 +79,7 @@ class FoodListState extends State<FoodList> {
   }
 }
 
-typedef void FoodChanged(Food food);
+typedef void FoodChanged(Food food, BuildContext context);
 
 /*UI for each individual Food*/
 /************************************************* */
@@ -90,7 +100,7 @@ class FoodListItem extends StatelessWidget {
         Dismissible(
             key: ObjectKey(food),
             onDismissed: (direction) {
-              onFoodListChange(food);
+              onFoodListChange(food, context);
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${food.name} deleted')));
             },
@@ -111,7 +121,8 @@ class FoodListItem extends StatelessWidget {
 /*Specific Food Class*/
 /************************************************* */
 class Food {
-  const Food({required this.name});
+  const Food({required this.name, required this.foodID});
+  final String foodID;
   final String name;
   //@todo: Additional attributes maybe added here (e.g. quantity)
 }

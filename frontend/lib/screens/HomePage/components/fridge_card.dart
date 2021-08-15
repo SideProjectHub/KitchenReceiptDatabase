@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/app/models/Fridge.dart';
 import 'package:project/screens/FoodPage/user_food_page.dart';
+import 'package:project/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
 import 'package:project/app/models/kartUser.dart';
 
@@ -31,17 +32,17 @@ class FridgeCard extends StatelessWidget {
       elevation: 5,
       child: InkWell(
         splashColor: Colors.black.withAlpha(30),
-        onTap: () {
-          var fridge; //potential error here
-          /** here we wait to push the contents of the http request to the second widget **/
-          Future.delayed(Duration.zero, () async {
-            String? uid = Provider.of<kartUser?>(context, listen: false)?.uid;
-            fridge = await Fridge.fetchFridge(context, uid);
-          });
-
+        onTap: () async {
+          var fridge;
+          try {
+            fridge = await RestAPIService().getFood(this.fridgeID);
+          } catch (error) {
+            print(error);
+            fridge = FoodObjList(foodList: []);
+          }
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (BuildContext context) {
-            return UserFoodPage(fridge: fridge);
+            return UserFoodPage(fridge: fridge, fridgeID: fridgeID);
           }));
         },
         child: SizedBox(

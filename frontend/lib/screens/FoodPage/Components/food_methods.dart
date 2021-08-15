@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:project/Screens/FoodPage/Components/food_list.dart';
 
 import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:project/app/models/Fridge.dart';
+import 'package:project/services/rest_api_service.dart';
 
 class FoodMethods extends InheritedWidget {
   FoodMethods({
     Key? key,
     required Widget child,
+    required this.fridgeID,
+    required this.updateList,
   }) : super(key: key, child: child);
 
+  final String fridgeID; //FridgeID
+  final Function updateList;
   final ImagePicker _picker = ImagePicker(); //Intialize ImagePicker API
 
   static FoodMethods of(BuildContext context) {
@@ -52,14 +55,25 @@ class FoodMethods extends InheritedWidget {
       "description": description.toString(),
       "category": category.toString(),
     };
-    final response = await http.post(
-      Uri.parse("http://localhost:4000/routes/addfood"),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: json.encode(body),
-    );
+    final response = await RestAPIService().addFood(fridgeID, body);
+    if (response.statusCode == 200) {
+      FoodObjList fridgeList = FoodObjList(foodList: [
+        FoodObj(
+            quantity: quantity,
+            foodName: foodName,
+            description: description,
+            category: category)
+      ]);
+      updateList(fridgeList);
+    }
+    // final response = await http.post(
+    //   Uri.parse("http://localhost:4000/routes/addfood"),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json'
+    //   },
+    //   body: json.encode(body),
+    // );
     print(response.body);
   }
 

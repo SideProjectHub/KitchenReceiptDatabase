@@ -46,11 +46,37 @@ class Fridge {
   }
 }
 
+class FoodObjList {
+  final List<FoodObj> foodList;
+
+  FoodObjList({required this.foodList});
+
+  factory FoodObjList.fromJson(List<dynamic> json) {
+    return FoodObjList(
+      foodList: json.map((value) => FoodObj.fromJson(value)).toList(),
+    );
+  }
+
+  static Future<FoodObjList> fetchFoodList(String? fridgeID) async {
+    RestAPIService restapi = new RestAPIService();
+    if (fridgeID == null) {
+      throw Exception('failed to fetch fridgeID in fetchFridge');
+    }
+    final response = await restapi.getFridge(fridgeID);
+    if (response.statusCode == 200) {
+      return FoodObjList.fromJson(jsonDecode(response.body) as List);
+    } else {
+      throw Exception('failed to fetch Fridge with $fridgeID ');
+    }
+  }
+}
+
 /**
- * FoodObj: instance of FoodList, implemented from foodSchema 
+ * FoodObj: instance of Food, implemented from foodSchema 
  */
 class FoodObj {
   final int quantity;
+  final String foodID;
   final String foodName;
   final String description;
   final String category;
@@ -59,11 +85,13 @@ class FoodObj {
       {required this.quantity,
       required this.foodName,
       required this.description,
-      required this.category});
+      required this.category,
+      required this.foodID});
 
   factory FoodObj.fromJson(Map<String, dynamic> json) {
     return FoodObj(
         quantity: json['quantity'],
+        foodID: json['_id'],
         foodName: json['foodName'],
         description: json['description'],
         category: json['category']);
