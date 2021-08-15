@@ -48,8 +48,9 @@ class FoodMethods extends InheritedWidget {
 
   var dropDownList = ["Fruit", "Dairy", "Vegie", "Grain", "Meat", "Misc"];
 
-  void postData(context, quantity, foodName, description, category) async {
-    Map<String, dynamic> body = {
+  void postData(foodID, context, quantity, foodName, description, category) async {
+    Map<String, dynamic> body = { 
+      "foodID" : foodID.toString(),
       "quantity": quantity.toString(),
       "foodName": foodName.toString(),
       "description": description.toString(),
@@ -58,7 +59,8 @@ class FoodMethods extends InheritedWidget {
     final response = await RestAPIService().addFood(fridgeID, body);
     if (response.statusCode == 200) {
       FoodObjList fridgeList = FoodObjList(foodList: [
-        FoodObj(
+        FoodObj( 
+            foodID : foodID, 
             quantity: quantity,
             foodName: foodName,
             description: description,

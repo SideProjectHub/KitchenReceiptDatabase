@@ -138,7 +138,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
                             .map<Widget>((index) {
                           return FoodList(
                             key: tabKeys[index],
-                            foods: widget.foods[index],
+                            foods: foods[index], //issue here, widget for some reason doesn't have foods as an instance variable?
                             category: foodGroup[index],
                             color: colors[index],
                           );
@@ -182,11 +182,11 @@ class _UserFoodPageState extends State<UserFoodPage> {
           break;
         case "Meat":
           foods[food_groups.Meat.index]
-              .insert(0, Food(name: fridgeList[i].foodName));
+              .insert(0, Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Misc":
           foods[food_groups.Misc.index]
-              .insert(0, Food(name: fridgeList[i].foodName));
+              .insert(0, Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
       }
     }
