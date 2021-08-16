@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -48,19 +50,21 @@ class FoodMethods extends InheritedWidget {
 
   var dropDownList = ["Fruit", "Dairy", "Vegie", "Grain", "Meat", "Misc"];
 
-  void postData(foodID, context, quantity, foodName, description, category) async {
-    Map<String, dynamic> body = { 
-      "foodID" : foodID.toString(),
+  void postData(context, quantity, foodName, description, category) async {
+    Map<String, dynamic> body = {
       "quantity": quantity.toString(),
       "foodName": foodName.toString(),
       "description": description.toString(),
       "category": category.toString(),
     };
+
     final response = await RestAPIService().addFood(fridgeID, body);
-    if (response.statusCode == 200) {
+
+    if (response.statusCode == 200) { 
+      Map js = json.decode(response.body); 
       FoodObjList fridgeList = FoodObjList(foodList: [
-        FoodObj( 
-            foodID : foodID, 
+        FoodObj(
+            foodID: js['foodId'],  //how am i going to get the foodID?
             quantity: quantity,
             foodName: foodName,
             description: description,

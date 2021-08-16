@@ -26,12 +26,12 @@ food_router.get('/getFood/:id', (req, res) => {
 food_router.post('/addfood/:fridgeID', async function(req, res) {
     console.log(req.body);
     let fridgeID = req.params.fridgeID 
-    let food = new Food.Model({
+    let food = new Food.Model({    
         quantity: req.body.quantity, 
         foodName: req.body.foodName,
         description: req.body.description,
         category: req.body.category
-    });
+    });  
 
     // MUST DO:
         // Loop through fridge's users and increment their foodCount by 1 (Added to Code)
@@ -57,7 +57,8 @@ food_router.post('/addfood/:fridgeID', async function(req, res) {
                 $inc: { foodTotal: req.body.quantity }
             }
          )
-        res.json(data);
+
+        res.json({data : data, foodId : food._id});    
     } catch (err) {
         res.json({message:err});
     };
