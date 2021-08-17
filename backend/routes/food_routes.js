@@ -21,7 +21,6 @@ food_router.get('/getFood/:id', (req, res) => {
 });
 
 
-// TODO: Refractor for fridge
 // Route for addition of food item to food items in database
 food_router.post('/addfood/:fridgeID', async function(req, res) {
     console.log(req.body);
@@ -64,14 +63,18 @@ food_router.post('/addfood/:fridgeID', async function(req, res) {
     };
 }) 
 
+//Route which processes foods from receipt,
+//Validates food items, and stores in database 
+food_router.post('/addReceipt/:fridgeID', async function(req, res) { 
+    //TODO Parse text from receipt 
+    //TODO Clean data for relevant text 
+    //TODO Validate items 
+    //TODO Store in Database
+});
 
-//TODO Delete food from the fridge  
-//
+
+//Delete food from the fridge  
 food_router.delete('/deleteFood/:fridgeID/:foodId', async function(req, res) {   
-    //grab the user id  
-    //sendin the food_id 
-    //lookup the corresponding fridge 
-    //inside that fridge I would delete a foodschema or an index of that fridge 
 
     let foodId = req.params.foodId.toString();  
     let fridgeId = req.params.fridgeID;  

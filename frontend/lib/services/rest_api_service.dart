@@ -109,6 +109,22 @@ class RestAPIService {
     );
   }
 
+  /** 
+   * Adds food to database
+   * @param fridgeID: fridge ID from database 
+   * @param body: body json with 
+   *      @required: <File>receipt
+   * @return Response type
+   */
+  Future<http.Response> addReceipt(
+      String fridgeID, Map<String, dynamic> body) async {
+    return await http.post(
+      Uri.parse(APIPath.host() + APIPath.addReceipt(fridgeID)),
+      headers: APIPath.standardHeader(),
+      body: (jsonEncode(body)),
+    );
+  }
+
   /************ Delete APIs ***************** */
 
   /** 

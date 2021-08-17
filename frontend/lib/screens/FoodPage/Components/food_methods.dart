@@ -1,6 +1,7 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'dart:async';
@@ -31,17 +32,34 @@ class FoodMethods extends InheritedWidget {
 
   Future<void> getReceiptPic() async {
     try {
+      print("Trying");
       final PickedFile? pickedFile =
           await _picker.getImage(source: ImageSource.camera);
-      _handleImage(pickedFile);
+      await _handleImage(pickedFile);
     } catch (e) {
+      print(e);
       _handleError("Error");
     }
   }
 
   //@TODO
-  void _handleImage(PickedFile? file) {
-    return;
+  Future<void> _handleImage(PickedFile? pickedFile) async {
+    if (pickedFile == null) {
+      throw Exception("File is of Null type");
+    }
+    File file = File(pickedFile.path);
+
+    // TODO Deal with Response (Needs to change with dio package for sending images)
+    // Map<String, dynamic> body = {
+    //   "receipt": file,
+    // };
+    // var response = await RestAPIService().addReceipt(fridgeID, body);
+
+    // Google ML not working with web services
+    // InputImage inputImage = InputImage.fromFile(file);
+    // TextDetector textDetector = GoogleMlKit.vision.textDetector();
+    // RecognisedText visionText = await textDetector.processImage(inputImage);
+    // print(visionText.text);
   }
 
   void _handleError(String? error) {
