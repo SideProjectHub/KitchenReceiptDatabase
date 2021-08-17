@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/app/models/Fridge.dart';
+import 'package:project/app/models/UserData.dart';
+import 'package:project/app/models/kartUser.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'Components/fridge_menu.dart';
@@ -27,7 +30,7 @@ class UserFoodPage extends StatefulWidget {
 
 class _UserFoodPageState extends State<UserFoodPage> {
   //Contains the state fridgeList
-  List<List<Food>> foods = [[]];
+  List<List<Food>> foods = [[], [], [], [], [], []];
 
   //Keys to get the height of each tab in the food page
   final List<GlobalKey<FoodListState>> tabKeys =
@@ -98,6 +101,14 @@ class _UserFoodPageState extends State<UserFoodPage> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () {
+            String? uid = Provider.of<kartUser?>(context, listen: false)?.uid;
+            Provider.of<UserData>(context, listen: false).update(uid);
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text("My Fridge"),
       ),
       body: FoodMethods(
@@ -138,7 +149,8 @@ class _UserFoodPageState extends State<UserFoodPage> {
                             .map<Widget>((index) {
                           return FoodList(
                             key: tabKeys[index],
-                            foods: foods[index], //issue here, widget for some reason doesn't have foods as an instance variable?
+                            foods: foods[
+                                index], //issue here, widget for some reason doesn't have foods as an instance variable?
                             category: foodGroup[index],
                             color: colors[index],
                           );
@@ -161,18 +173,18 @@ class _UserFoodPageState extends State<UserFoodPage> {
    */
   void sortFoods(FoodObjList fridge) {
     List<FoodObj> fridgeList = fridge.foodList;
-    for (int i = 0; i < foods.length; i++) {
+    for (int i = 0; i < fridgeList.length; i++) {
       var foodName = fridgeList[i].category;
       switch (foodName) {
-        case "Fruits":
+        case "Fruit":
           foods[food_groups.Fruits.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
-        case "Veggies":
+        case "Veggie":
           foods[food_groups.Veggies.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
-        case "Grains":
+        case "Grain":
           foods[food_groups.Grains.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
@@ -181,12 +193,12 @@ class _UserFoodPageState extends State<UserFoodPage> {
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Meat":
-          foods[food_groups.Meat.index]
-              .insert(0, Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
+          foods[food_groups.Meat.index].insert(0,
+              Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Misc":
-          foods[food_groups.Misc.index]
-              .insert(0, Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
+          foods[food_groups.Misc.index].insert(0,
+              Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
       }
     }

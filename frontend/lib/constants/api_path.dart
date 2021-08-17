@@ -12,5 +12,6 @@ class APIPath {
   static String addFood(String fridgeID) => 'routes/addFood/$fridgeID';
   static String addFridge(String uid) => 'routes/addFridge/$uid';
 
-  static String deleteFood(String fridgeID) => 'routes/deleteFrood/$fridgeID';
+  static String deleteFood(String fridgeID, String foodID) =>
+      'routes/deleteFood/$fridgeID/$foodID';
 }

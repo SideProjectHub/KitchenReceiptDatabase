@@ -48,7 +48,7 @@ class FoodMethods extends InheritedWidget {
     print(error);
   }
 
-  var dropDownList = ["Fruit", "Dairy", "Vegie", "Grain", "Meat", "Misc"];
+  var dropDownList = ["Fruit", "Dairy", "Veggie", "Grain", "Meat", "Misc"];
 
   void postData(context, quantity, foodName, description, category) async {
     Map<String, dynamic> body = {
@@ -60,17 +60,18 @@ class FoodMethods extends InheritedWidget {
 
     final response = await RestAPIService().addFood(fridgeID, body);
 
-    if (response.statusCode == 200) { 
-      Map js = json.decode(response.body); 
+    if (response.statusCode == 200) {
+      Map js = json.decode(response.body);
       FoodObjList fridgeList = FoodObjList(foodList: [
         FoodObj(
-            foodID: js['foodId'],  //how am i going to get the foodID?
-            quantity: quantity,
+            foodID: js['foodId'], //how am i going to get the foodID?
+            quantity: int.parse(quantity),
             foodName: foodName,
             description: description,
             category: category)
       ]);
       updateList(fridgeList);
+      Navigator.pop(context);
     }
     // final response = await http.post(
     //   Uri.parse("http://localhost:4000/routes/addfood"),

@@ -116,9 +116,9 @@ class RestAPIService {
    * @param fridgeID: fridge ID from database 
    * @return Response type
    */
-  Future<http.Response> deleteFood(String fridgeID) async {
+  Future<http.Response> deleteFood(String fridgeID, String foodID) async {
     return await http.delete(
-      Uri.parse(APIPath.host() + APIPath.deleteFood(fridgeID)),
+      Uri.parse(APIPath.host() + APIPath.deleteFood(fridgeID, foodID)),
       headers: APIPath.standardHeader(),
     );
   }

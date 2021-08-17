@@ -1,9 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:project/app/models/Fridge.dart';
 import 'package:project/screens/FoodPage/user_food_page.dart';
 import 'package:project/services/rest_api_service.dart';
-import 'package:provider/provider.dart';
-import 'package:project/app/models/kartUser.dart';
 
 class FridgeCard extends StatelessWidget {
   final String fridgeID;
@@ -35,7 +35,10 @@ class FridgeCard extends StatelessWidget {
         onTap: () async {
           var fridge;
           try {
-            fridge = await RestAPIService().getFood(this.fridgeID);
+            var response = await RestAPIService().getFood(this.fridgeID);
+            print(response.body);
+            fridge = FoodObjList.fromJson(jsonDecode(response.body) as List);
+            print(fridge);
           } catch (error) {
             print(error);
             fridge = FoodObjList(foodList: []);

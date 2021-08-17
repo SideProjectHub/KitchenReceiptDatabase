@@ -11,8 +11,8 @@ food_router.get('/getFood/:id', (req, res) => {
         res.status(400).send('Missing Fridge ID')
         return; 
     }
-    Fridge.findOne({_id: id}, '-_id')
-    .then(user => { 
+    Fridge.findOne({_id: id})
+    .then(user => {
         res.send(user.foodList);
     }).catch(err => {
         res.status(400).send('UserProfile currently unavailable ' + err);
@@ -75,6 +75,8 @@ food_router.delete('/deleteFood/:fridgeID/:foodId', async function(req, res) {
 
     let foodId = req.params.foodId.toString();  
     let fridgeId = req.params.fridgeID;  
+    console.log(foodId);
+    console.log(fridgeId);
     if(fridgeId == null || fridgeId == undefined) { 
         res.status(400).send('Missing Fridge ID'); 
         return; 

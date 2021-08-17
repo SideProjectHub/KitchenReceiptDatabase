@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:project/screens/FoodPage/Components/food_methods.dart';
 import 'package:project/services/rest_api_service.dart';
 
@@ -22,13 +23,13 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
-  void _handleFoodList(Food food, BuildContext context) {
+  Future<void> _handleFoodList(Food food, BuildContext context) async {
     String? fridgeID =
         context.dependOnInheritedWidgetOfExactType<FoodMethods>()?.fridgeID;
-    var response;
+    Response response;
     if (fridgeID != null) {
-      response = RestAPIService().deleteFood(fridgeID);
-      if (response.status == 200) {
+      response = await RestAPIService().deleteFood(fridgeID, food.foodID);
+      if (response.statusCode == 200) {
         setState(() {
           widget.foods.remove(food);
         });
@@ -79,7 +80,7 @@ class FoodListState extends State<FoodList> {
   }
 }
 
-typedef void FoodChanged(Food food, BuildContext context);
+typedef Future<void> FoodChanged(Food food, BuildContext context);
 
 /*UI for each individual Food*/
 /************************************************* */
@@ -99,8 +100,8 @@ class FoodListItem extends StatelessWidget {
       children: <Widget>[
         Dismissible(
             key: ObjectKey(food),
-            onDismissed: (direction) {
-              onFoodListChange(food, context);
+            onDismissed: (direction) async {
+              await onFoodListChange(food, context);
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${food.name} deleted')));
             },

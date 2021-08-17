@@ -30,9 +30,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     var signInUser = Provider.of<FirebaseAuthService>(context);
     var currentUser = signInUser.firebaseAuth.currentUser;
-    print("FridgeList");
-    print(Provider.of<kartUser?>(context)?.displayName);
-    print(Provider.of<UserData>(context).fridgeList);
     Widget homePage;
     if (currentUser != null) {
       var data = signInUser.userFromFirebase(currentUser);

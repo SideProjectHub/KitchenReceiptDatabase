@@ -21,8 +21,6 @@ class UserData with ChangeNotifier {
       Map<String, dynamic> userData, List<dynamic> fridgeData) {
     List<Fridge> fridgeList =
         fridgeData.map((value) => Fridge.fromJson(value)).toList();
-    print("Hello");
-    print(fridgeList);
     return UserData(
       fridgeTotal: userData['fridgeTotal'],
       foodTotal: userData['foodTotal'],
@@ -45,17 +43,12 @@ class UserData with ChangeNotifier {
   }
 
   static Future<UserData> fetchUserData(String? uid) async {
-    print(uid);
     if (uid == null) {
       throw Exception("no known UID");
     }
     final response = await RestAPIService().getProfile(uid);
     final fridgeList = await RestAPIService().getFridge(uid);
-    print(fridgeList.body);
-    print(response.statusCode);
     if (response.statusCode == 200 && fridgeList.statusCode == 200) {
-      print("In the response");
-      print(response.body);
       return UserData.fromJson(
           jsonDecode(response.body), jsonDecode(fridgeList.body) as List);
     } else {

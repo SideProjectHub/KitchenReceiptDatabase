@@ -40,7 +40,7 @@ fridge_router.post('/addfridge/:uid', async function(req, res) {
 
     let fridge = new Fridge({
         fridgeName: req.body.fridgeName, 
-        cardColor: "pink",
+        cardColor: req.body.color,
         userList: [uid],
     });
 
