@@ -66,6 +66,7 @@ food_router.post('/addfood/:fridgeID', async function(req, res) {
 //Route which processes foods from receipt,
 //Validates food items, and stores in database 
 food_router.post('/addReceipt/:fridgeID', async function(req, res) { 
+    console.log(req);
     //TODO Parse text from receipt 
     //TODO Clean data for relevant text 
     //TODO Validate items 

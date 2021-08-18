@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:io' as io;
+import 'dart:typed_data';
 
+import 'package:http_parser/http_parser.dart';
 import 'package:project/constants/api_path.dart';
 import 'package:http/http.dart' as http;
 
@@ -116,13 +119,18 @@ class RestAPIService {
    *      @required: <File>receipt
    * @return Response type
    */
-  Future<http.Response> addReceipt(
-      String fridgeID, Map<String, dynamic> body) async {
-    return await http.post(
-      Uri.parse(APIPath.host() + APIPath.addReceipt(fridgeID)),
-      headers: APIPath.standardHeader(),
-      body: (jsonEncode(body)),
-    );
+  Future<http.StreamedResponse> addReceipt(
+      String fridgeID, io.File file) async {
+    var url = Uri.parse(APIPath.host() + APIPath.addReceipt(fridgeID));
+    var request = new http.MultipartRequest("POST", url);
+    Uint8List _bytesData =
+        Base64Decoder().convert(file.toString().split(",").last);
+    List<int> _selectedFile = _bytesData;
+
+    request.files.add(http.MultipartFile.fromBytes('file', _selectedFile,
+        contentType: new MediaType('application', 'octet-stream'),
+        filename: 'img'));
+    return request.send();
   }
 
   /************ Delete APIs ***************** */
