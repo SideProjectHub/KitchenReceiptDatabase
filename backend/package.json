@@ -20,8 +20,12 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.14",
+<<<<<<< HEAD
     "multer": "^1.4.3",
     "node-tesseract-ocr": "^2.2.1"
+=======
+    "multer": "^1.4.3" 
+>>>>>>> aab2d8a2e4a54b5c507a0e3449f994c967161478
   },
   "bugs": {
     "url": "https://github.com/SideProjectHub/KitchenReceiptDatabase/issues"
