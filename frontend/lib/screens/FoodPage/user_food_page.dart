@@ -149,8 +149,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
                             .map<Widget>((index) {
                           return FoodList(
                             key: tabKeys[index],
-                            foods: foods[
-                                index], //issue here, widget for some reason doesn't have foods as an instance variable?
+                            foods: foods[index],
                             category: foodGroup[index],
                             color: colors[index],
                           );

@@ -71,6 +71,8 @@ food_router.post('/addfood/:fridgeID', async function(req, res) {
 //Validates food items, and stores in database 
 food_router.post('/addReceipt/:fridgeID', upload.single('image'), async function(req, res) { 
     console.log(req.file.originalname);
+    
+    // Parse text from receipt 
     const config = {
         lang: "eng",
         oem: 1,
@@ -78,14 +80,13 @@ food_router.post('/addReceipt/:fridgeID', upload.single('image'), async function
       }
     
     tesseract.recognize(req.file.buffer, config).then((text) => { 
+        //TODO Clean data for relevant text 
         console.log("Result:", text);
     }).catch((error) => { 
         console.log(error.message);
     });
 
-    // tesseract.recognize()
-    //TODO Parse text from receipt 
-    //TODO Clean data for relevant text 
+    
     //TODO Validate items 
     //TODO Store in Database
     res.send("Hello");
