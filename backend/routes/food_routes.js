@@ -2,7 +2,11 @@ const express = require('express');
 const food_router = express.Router(); 
 const Food = require('../schemas/foodSchema.js');
 const Fridge = require('../schemas/fridgeSchema');
-const User = require('../schemas/userSchema')
+const User = require('../schemas/userSchema'); 
+const multer = require('multer'); 
+const upload = multer(); 
+const tesseract = require("node-tesseract-ocr");
+const fs = require('fs');
 
 //Get the food page for the fridge
 food_router.get('/getFood/:id', (req, res) => { 
@@ -65,12 +69,26 @@ food_router.post('/addfood/:fridgeID', async function(req, res) {
 
 //Route which processes foods from receipt,
 //Validates food items, and stores in database 
-food_router.post('/addReceipt/:fridgeID', async function(req, res) { 
-    console.log(req);
+food_router.post('/addReceipt/:fridgeID', upload.single('image'), async function(req, res) { 
+    console.log(req.file.originalname);
+    const config = {
+        lang: "eng",
+        oem: 1,
+        psm: 3,
+      }
+    
+    tesseract.recognize(req.file.buffer, config).then((text) => { 
+        console.log("Result:", text);
+    }).catch((error) => { 
+        console.log(error.message);
+    });
+
+    // tesseract.recognize()
     //TODO Parse text from receipt 
     //TODO Clean data for relevant text 
     //TODO Validate items 
     //TODO Store in Database
+    res.send("Hello");
 });
 
 

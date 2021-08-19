@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'dart:async';
@@ -49,7 +47,8 @@ class FoodMethods extends InheritedWidget {
       throw Exception("File is of Null type");
     }
     File file = File(pickedFile.path);
-    var response = await RestAPIService().addReceipt(fridgeID, file);
+    print(file.toString());
+    var response = await RestAPIService().addReceipt(fridgeID, pickedFile);
 
     // Google ML not working with web services
     // InputImage inputImage = InputImage.fromFile(file);

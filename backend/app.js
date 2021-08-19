@@ -1,4 +1,3 @@
-
 //Express is a framework that simplifies core features of a server
 const express = require('express');
 const mongoose = require('mongoose');

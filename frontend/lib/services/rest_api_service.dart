@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:io' as io;
-import 'dart:typed_data';
+import 'dart:ui';
 
-import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart' as path;
+import 'package:image_picker/image_picker.dart';
 import 'package:project/constants/api_path.dart';
 import 'package:http/http.dart' as http;
 
@@ -120,16 +120,16 @@ class RestAPIService {
    * @return Response type
    */
   Future<http.StreamedResponse> addReceipt(
-      String fridgeID, io.File file) async {
-    var url = Uri.parse(APIPath.host() + APIPath.addReceipt(fridgeID));
-    var request = new http.MultipartRequest("POST", url);
-    Uint8List _bytesData =
-        Base64Decoder().convert(file.toString().split(",").last);
-    List<int> _selectedFile = _bytesData;
+      String fridgeID, PickedFile file) async {
+    String url = APIPath.host() + APIPath.addReceipt(fridgeID);
+    String filename = path.basename(file.path.split('/').last);
+    print(filename);
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    var imagebytes = await file.readAsBytes();
+    List<int> listData = imagebytes.cast();
+    request.files.add(
+        http.MultipartFile.fromBytes('image', listData, filename: filename));
 
-    request.files.add(http.MultipartFile.fromBytes('file', _selectedFile,
-        contentType: new MediaType('application', 'octet-stream'),
-        filename: 'img'));
     return request.send();
   }
 

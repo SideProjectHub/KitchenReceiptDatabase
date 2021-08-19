@@ -52,7 +52,7 @@ dependencies:
   provider: ^5.0.0 
   mongo_dart: ^0.3.4
   google_ml_kit: ^0.7.0
-  http_parser: ^4.0.0 
+  path: ^1.7.0
 
 dev_dependencies:
   flutter_test:
