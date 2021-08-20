@@ -121,9 +121,11 @@ class RestAPIService {
    */
   Future<http.StreamedResponse> addReceipt(
       String fridgeID, PickedFile file) async {
+    //Intialize constants for API call
     String url = APIPath.host() + APIPath.addReceipt(fridgeID);
     String filename = path.basename(file.path.split('/').last);
-    print(filename);
+
+    //Request call
     var request = http.MultipartRequest('POST', Uri.parse(url));
     var imagebytes = await file.readAsBytes();
     List<int> listData = imagebytes.cast();

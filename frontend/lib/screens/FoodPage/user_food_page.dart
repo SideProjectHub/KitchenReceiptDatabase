@@ -64,7 +64,7 @@ class _UserFoodPageState extends State<UserFoodPage> {
 
   @override
   void initState() {
-    sortFoods(widget.fridge);
+    updateList(widget.fridge);
     WidgetsBinding.instance?.addPostFrameCallback((_) => setHeight());
     super.initState();
   }
@@ -78,9 +78,11 @@ class _UserFoodPageState extends State<UserFoodPage> {
     setState(() {});
   }
 
-  updateList(FoodObjList fridge) {
-    sortFoods(fridge);
+  List<List<Food>> updateList(FoodObjList fridge) {
+    List<List<Food>> tempFoods = sortFoods(fridge);
+    addFoods(tempFoods);
     setState(() {});
+    return tempFoods;
   }
 
   void scrollEffect(int index) {
@@ -170,36 +172,42 @@ class _UserFoodPageState extends State<UserFoodPage> {
    * Sorts Foods in the fridge 
    * @param: fridge assumed to be non-null, populates instance variables necessary 
    */
-  void sortFoods(FoodObjList fridge) {
+  List<List<Food>> sortFoods(FoodObjList fridge) {
     List<FoodObj> fridgeList = fridge.foodList;
+    List<List<Food>> tempFoods = [[], [], [], [], [], []];
     for (int i = 0; i < fridgeList.length; i++) {
       var foodName = fridgeList[i].category;
       switch (foodName) {
         case "Fruit":
-          foods[food_groups.Fruits.index].insert(0,
+          tempFoods[food_groups.Fruits.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Veggie":
-          foods[food_groups.Veggies.index].insert(0,
+          tempFoods[food_groups.Veggies.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Grain":
-          foods[food_groups.Grains.index].insert(0,
+          tempFoods[food_groups.Grains.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Dairy":
-          foods[food_groups.Dairy.index].insert(0,
+          tempFoods[food_groups.Dairy.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Meat":
-          foods[food_groups.Meat.index].insert(0,
+          tempFoods[food_groups.Meat.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
         case "Misc":
-          foods[food_groups.Misc.index].insert(0,
+          tempFoods[food_groups.Misc.index].insert(0,
               Food(name: fridgeList[i].foodName, foodID: fridgeList[i].foodID));
           break;
       }
     }
+    return tempFoods;
+  }
+
+  void addFoods(List<List<Food>> fridge) {
+    fridge.asMap().entries.map((e) => foods[e.key].addAll(e.value));
   }
 }

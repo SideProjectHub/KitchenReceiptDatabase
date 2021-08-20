@@ -11,6 +11,9 @@ In order to start the server run the following commands:
 
 `npm run start` - Starts the server with the listed `address:port` in *app.js*. 
 
+*Note*: In order to use tesseract you must for image-to-text recognition you need to install the engine on your terminal. For Debian/Ubuntu use: 
+`apt-get install tessseract-ocr`. 
+
 ### File Structure 
 
 The NodeJS server depends on the *.env* file listed in root folder to take in database connection address and any other private forms of data. 
@@ -34,3 +37,4 @@ In order to run the test, the server must also be running in series. Simply navi
 - Javascript driver for mongodb: https://docs.mongodb.com/drivers/node/current/
 - Axios: https://www.npmjs.com/package//axios
 - Mocha: https://mochajs.org/
+- Tesseract: https://www.npmjs.com/package/node-tesseract-ocr
