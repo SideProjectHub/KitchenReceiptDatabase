@@ -33,20 +33,20 @@ class FoodMethods extends InheritedWidget {
   Future<void> getReceiptPic(BuildContext context) async {
     try {
       print("Trying");
-      // final PickedFile? pickedFile =
-      //     await _picker.getImage(source: ImageSource.camera);
-      // FoodObjList list =
-      //     FoodObjList.fromJson(await _handleImage(pickedFile) as List);
-      // var addedList = updateList(list);
+      final PickedFile? pickedFile =
+          await _picker.getImage(source: ImageSource.camera);
+      FoodObjList list =
+          FoodObjList.fromJson(await _handleImage(pickedFile) as List);
+      var addedList = updateList(list);
 
-      List<List<Food>> addedList = [
-        [Food(name: "Apples", foodID: "2123")],
-        [Food(name: "Apples", foodID: "2123")],
-        [Food(name: "Apples", foodID: "2123")],
-        [Food(name: "Apples", foodID: "2123")],
-        [Food(name: "Apples", foodID: "2123")],
-        [Food(name: "Apples", foodID: "2123")]
-      ];
+      // List<List<Food>> addedList = [
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")]
+      // ];
       await createReceiptDialog(context, addedList);
     } catch (e) {
       print(e);
