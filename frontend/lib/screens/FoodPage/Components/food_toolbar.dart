@@ -15,7 +15,7 @@ class FoodToolbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildButtonColumn(color, Icons.camera_alt, 'ADD RECEIPT',
-              FoodMethods.of(context).getReceiptPic),
+              () => FoodMethods.of(context).getReceiptPic(context)),
           _buildButtonColumn(color, Icons.food_bank, 'ADD FOOD',
               () => FoodMethods.of(context).inputModal(context)),
         ],

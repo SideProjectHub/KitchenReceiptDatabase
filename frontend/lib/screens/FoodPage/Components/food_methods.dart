@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'dart:async';
 import 'package:project/app/models/Fridge.dart';
+import 'package:project/screens/FoodPage/Components/food_list.dart';
+import 'package:project/screens/FoodPage/Components/receipt_popup.dart';
 import 'package:project/services/rest_api_service.dart';
 
 class FoodMethods extends InheritedWidget {
@@ -29,12 +30,24 @@ class FoodMethods extends InheritedWidget {
   @override
   bool updateShouldNotify(FoodMethods old) => old != this;
 
-  Future<void> getReceiptPic() async {
+  Future<void> getReceiptPic(BuildContext context) async {
     try {
       print("Trying");
       final PickedFile? pickedFile =
           await _picker.getImage(source: ImageSource.camera);
-      await _handleImage(pickedFile);
+      FoodObjList list =
+          FoodObjList.fromJson(await _handleImage(pickedFile) as List);
+      var addedList = updateList(list);
+
+      // List<List<Food>> addedList = [
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")],
+      //   [Food(name: "Apples", foodID: "2123")]
+      // ];
+      await createReceiptDialog(context, addedList);
     } catch (e) {
       print(e);
       _handleError("Error");
@@ -42,19 +55,19 @@ class FoodMethods extends InheritedWidget {
   }
 
   //@TODO
-  Future<void> _handleImage(PickedFile? pickedFile) async {
+  Future<String> _handleImage(PickedFile? pickedFile) async {
     if (pickedFile == null) {
       throw Exception("File is of Null type");
     }
-    File file = File(pickedFile.path);
-    print(file.toString());
-    var response = await RestAPIService().addReceipt(fridgeID, pickedFile);
 
+    var response = await RestAPIService().addReceipt(fridgeID, pickedFile);
     // Google ML not working with web services
     // InputImage inputImage = InputImage.fromFile(file);
     // TextDetector textDetector = GoogleMlKit.vision.textDetector();
     // RecognisedText visionText = await textDetector.processImage(inputImage);
     // print(visionText.text);
+
+    return response.stream.bytesToString();
   }
 
   void _handleError(String? error) {
@@ -164,4 +177,17 @@ class FoodMethods extends InheritedWidget {
           );
         });
   }
+}
+
+//Creates popup after backend parses receipt
+//@return <bool> -> User acknowledgement of new foodList
+Future<dynamic> createReceiptDialog(
+    BuildContext context, List<List<Food>> foodList) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ReceiptPopup(
+          foodList: foodList,
+        );
+      });
 }
