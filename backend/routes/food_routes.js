@@ -6,7 +6,7 @@ const User = require('../schemas/userSchema');
 const multer = require('multer'); 
 const upload = multer(); 
 const tesseract = require("node-tesseract-ocr");
-const fs = require('fs');
+const foodGroup = require('../schemas/foodDataSchema');
 
 //Get the food page for the fridge
 food_router.get('/getFood/:id', (req, res) => { 
@@ -80,8 +80,11 @@ food_router.post('/addReceipt/:fridgeID', upload.single('image'), async function
       }
     
     tesseract.recognize(req.file.buffer, config).then((text) => { 
+        let re = /([A-Za-z]+\s)+?(?=\$)/gm;
         //TODO Clean data for relevant text 
-        console.log("Result:", text);
+        for (line in text.split(re)){ 
+            foodGroup(line)
+        }
     }).catch((error) => { 
         console.log(error.message);
     });
