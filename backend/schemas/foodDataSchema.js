@@ -1,3 +1,4 @@
+const axios = require('axios');
 
 //Hides private variables in .env file
 require("dotenv").config({path: '../.env'});
@@ -21,17 +22,24 @@ const grains = [
 const diary = [ 
     "Dairy and Egg Products"
 ]; 
-const other = [ 
-    "Spices and Herbs", "Baby Foods", "Fats and Oils", "Soups, Sauces, and Gravies", "Beverages", "Baked Products", 
-    "Sweets", "Fast Foods", "Meals, Entrees, and Side Dishes", "Snacks", "American Indian/Alaska Native Foods", 
-    "Restaurant Foods", "Branded Food Products Database", "Quality Control Materials", "Alcoholic Beverages"
-];
+// const other = [ 
+//     "Spices and Herbs", "Baby Foods", "Fats and Oils", "Soups, Sauces, and Gravies", "Beverages", "Baked Products", 
+//     "Sweets", "Fast Foods", "Meals, Entrees, and Side Dishes", "Snacks", "American Indian/Alaska Native Foods", 
+//     "Restaurant Foods", "Branded Food Products Database", "Quality Control Materials", "Alcoholic Beverages"
+// ];
 
-//Create template for API call 
+/**
+ * Food_Request validates and checks the food category of the requested food entry against 
+ * Food Central's Database under the USDA. It will check foods typed as Foundation as SR Legacy, 
+ * and will be further categorized to the groups listed above
+ * @param {String} query 
+ * @returns 
+ *      null -> Request error -> Sends timeout message back to client 
+ *      "None" -> Food is invalid 
+ *      <FoodGoups> -> Food Group that will be used by client 
+ */
 const food_request = async (query) => {
-    const response = await fetch(SITE + "foods/search?api_key=" + API_KEY, {
-        method: 'POST', 
-        body: {
+    const response = await axios.post(SITE + "foods/search?api_key=" + API_KEY, { 
             "query": query,
             "dataType": [
                 "Foundation",
@@ -42,26 +50,36 @@ const food_request = async (query) => {
             "sortBy": "score",
             "sortOrder": "desc", 
             "requireAllWords": false
-            },
-        headers: { 
-            'Content-Type': 'application/json',
-        }
-    });
+            }
+        );
 
     //Throw error if response is not 200 
-    if(!response.ok){ 
+    if(response.status != 200){ 
         return null;
     } 
 
     //logic for looking up the category 
-    let result = response.json(); 
+    let result = response.data; 
     
     //Return none if total hits is zero 
     if(result.totalHits = 0){ 
         return "None";
     } 
 
-    return result.foods[0].foodCategory; 
+    //Logic for checking food category
+    let foodCategory = result.foods[0].foodCategory; 
+    if (fruits.includes(foodCategory))
+        return "Fruits"; 
+    else if (vegetables.includes(foodCategory))
+        return "Vegetables"; 
+    else if (diary.includes(foodCategory)) 
+        return "Diary"; 
+    else if (meat.includes(foodCategory)) 
+        return "Meat"; 
+    else if (grains.includes(foodCategory)) 
+        return "Grains"; 
+    else 
+        return "Other"; 
 }
 
-//Create logic for sending the category back 
+exports.food_request = food_request;

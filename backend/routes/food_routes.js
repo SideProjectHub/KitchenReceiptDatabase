@@ -6,7 +6,7 @@ const User = require('../schemas/userSchema');
 const multer = require('multer'); 
 const upload = multer(); 
 const tesseract = require("node-tesseract-ocr");
-const foodGroup = require('../schemas/foodDataSchema');
+const foodGroup = require('../schemas/foodDataSchema').food_request;
 
 //Get the food page for the fridge
 food_router.get('/getFood/:id', (req, res) => { 
@@ -71,7 +71,7 @@ food_router.post('/addfood/:fridgeID', async function(req, res) {
 //Validates food items, and stores in database 
 food_router.post('/addReceipt/:fridgeID', upload.single('image'), async function(req, res) { 
     console.log(req.file.originalname);
-    
+
     // Parse text from receipt 
     const config = {
         lang: "eng",
@@ -79,18 +79,24 @@ food_router.post('/addReceipt/:fridgeID', upload.single('image'), async function
         psm: 3,
       }
     
-    tesseract.recognize(req.file.buffer, config).then((text) => { 
-        let re = /([A-Za-z]+\s)+?(?=\$)/gm;
-        //TODO Clean data for relevant text 
-        for (line in text.split(re)){ 
-            foodGroup(line)
+    tesseract.recognize(req.file.buffer, config).then(async (text) => { 
+        let re = /(?:[A-Za-z]+\s)+?(?=\$\d+.\d+)/gm;
+        console.log(text); 
+        console.log(text.match(re));
+        //Stores key value pairs of categories 
+        let foodToCategory = [];
+        let foods = text.match(re);
+        // Clean data for relevant text 
+        for (index in foods){ 
+            console.log(foods[index])
+            let category = await foodGroup(foods[index]);
+            foodToCategory[foods[index]] = category;
         }
+        console.log(foodToCategory);
     }).catch((error) => { 
         console.log(error.message);
     });
 
-    
-    //TODO Validate items 
     //TODO Store in Database
     res.send("Hello");
 });

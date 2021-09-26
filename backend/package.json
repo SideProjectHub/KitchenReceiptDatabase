@@ -14,13 +14,14 @@
   "author": "The SideProject Hub",
   "license": "GNU GENERAL PUBLIC LICENSE",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.14",
     "multer": "^1.4.3",
+    "node-fetch": "^3.0.0",
     "node-tesseract-ocr": "^2.2.1"
   },
   "bugs": {
